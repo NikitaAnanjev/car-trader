@@ -1,7 +1,13 @@
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
+import Link from 'next/link'
 import useSWR from 'swr'
-import {SingleCarItem, SingleCarItemInner} from "../../src/components/Cars/SingleCarElement/styles";
-import {CarImage} from "../../src/components/Cars/SingleCarElement/CarImage";
+import {
+    CarImageContainer,
+    SingleCarItem,
+    SinglePageContainer,
+    CarContent
+} from "@/components/Cars/SingleCarElement/styles";
+import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 
 const fetcher = async (url) => {
     const res = await fetch(url)
@@ -16,8 +22,10 @@ const fetcher = async (url) => {
 export default function SingleCarPage() {
 
 
-    const { query } = useRouter()
-    const { data, error } = useSWR(
+    const {query} = useRouter()
+
+
+    const {data, error} = useSWR(
         () => query.id && `/api/cars/${query.id}`,
         fetcher
     )
@@ -42,25 +50,30 @@ export default function SingleCarPage() {
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
 
 
-
     return (
         <SingleCarItem>
-            {console.log(data)}
-            <SingleCarItemInner href={`cars/${carTitle}`}>
-            {/*<SingleCarItemInner href={`cars/${carDetails.id}`}>*/}
-                <CarImage images={carDetails.pictures}/>
+            <Link href="/"> BACK to homepage</Link>
 
 
-                <h2> TITLE: {carTitle} </h2>
-                <p> ID: {carDetails.id} </p>
-                <p> MILEAGE: {carDetails.mileage} </p>
-                <p> Year: {carDetails.make} </p>
-                <p> Year: {carDetails.model} </p>
-                <p> Year: {carDetails.variant} </p>
-                <p> Year: {carDetails.motor} </p>
-                <p> Year: {carDetails.fueltype} </p>
-            </SingleCarItemInner>
+            <SinglePageContainer>
+                <CarImageContainer>
+                    <CarImage images={carDetails.pictures}/>
 
+                </CarImageContainer>
+
+                <CarContent>
+
+
+                    <h2> TITLE: {carTitle} </h2>
+                    <p> ID: {carDetails.id} </p>
+                    <p> MILEAGE: {carDetails.mileage} </p>
+                    <p> Year: {carDetails.make} </p>
+                    <p> Year: {carDetails.model} </p>
+                    <p> Year: {carDetails.variant} </p>
+                    <p> Year: {carDetails.motor} </p>
+                    <p> Year: {carDetails.fueltype} </p>
+                </CarContent>
+            </SinglePageContainer>
 
 
         </SingleCarItem>

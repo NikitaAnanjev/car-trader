@@ -1,53 +1,21 @@
 import Head from 'next/head'
-import {Cars} from '../src/components/Cars'
-import axios from "axios";
+import {Cars} from '@/components/Cars'
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
+export default function Home() {
+
+    const {data, error} = useSWR('/api/cars', fetcher)
 
 
-export default function Home({data}) {
+    if (error) return <div>Failed to load</div>
+    if (!data) return <div>Loading...</div>
 
-
-console.log('data',data.Vehicles)
     return (
         <div>
             <Head/>
-
-
-            <Cars data={data.Vehicles}/>
-
-
-            hej
+            <Cars data={data}/>
         </div>
-
     )
 }
-
-
-
-
-export const getServerSideProps  = async () => {
-    const username =  process.env.BIlBASEN_API_LOGIN
-    const password =  process.env.BIlBASEN_API_PASS
-    const url = process.env.BIlBASEN_API_URL
-
-    const response = await axios.get(url, {
-        auth: {
-            username: username,
-            password: password
-        }
-
-    })
-        // .then((r) => {
-        //     const cars = r.data.reduce((acc, value) => {
-        //         acc[id] = value
-        //         return acc
-        //     }, {})
-        // })
-
-    const {data} = await response;
-
-    return {
-        props: {
-            data,
-        },
-    };
-};

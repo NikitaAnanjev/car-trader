@@ -1,6 +1,6 @@
 import {SingleCarItem, SingleCarItemInner} from './styles'
 import {CarImage} from "./CarImage";
-
+import Link from 'next/link'
 export const SingleCarElement = ({car}) => {
     const carDetails = {
         id: car['Id'],
@@ -19,9 +19,8 @@ export const SingleCarElement = ({car}) => {
 
     return (
         <SingleCarItem>
-            <SingleCarItemInner href={`cars/${carDetails.id}`}>
-                <CarImage images={carDetails.pictures}/>
-
+            <CarImage images={carDetails.pictures}/>
+            <SingleCarItemInner>
 
                 <h2> TITLE: {carTitle} </h2>
                 <p> ID: {carDetails.id} </p>
@@ -32,6 +31,9 @@ export const SingleCarElement = ({car}) => {
                 <p> Year: {carDetails.motor} </p>
                 <p> Year: {carDetails.fueltype} </p>
             </SingleCarItemInner>
+            <Link href="/cars/[id]" as={`/cars/${carDetails.id}`}>
+                Read More
+            </Link>
         </SingleCarItem>
     );
 };
