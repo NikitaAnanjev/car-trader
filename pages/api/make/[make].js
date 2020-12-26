@@ -3,7 +3,7 @@ import {encode} from "base-64";
 export default async function handler(req, res) {
 
     const {
-        query: {id},
+        query: {make},
     } = req
 
     const username = process.env.BIlBASEN_API_LOGIN
@@ -21,12 +21,12 @@ export default async function handler(req, res) {
     });
     const data = await response.json();
 
-    const filtered = data.Vehicles.filter((p) => p["Id"] === id)
+    const filtered = data.Vehicles.filter((p) => p["Make"] === make)
 
     // User with id exists
     if (filtered.length > 0) {
-        res.status(200).json(filtered[0])
+        res.status(200).json(filtered)
     } else {
-        res.status(404).json({ message: `User with id: ${id} not found.` })
+        res.status(404).json({ message: `User with make: ${make} not found.` })
     }
 }
