@@ -1,6 +1,8 @@
 import {SingleCarItem, SingleCarItemInner} from './styles'
 import {CarImage} from "./CarImage";
 import Link from 'next/link'
+import slugify from 'react-slugify';
+
 export const SingleCarElement = ({car}) => {
     const carDetails = {
         id: car['Id'],
@@ -15,7 +17,8 @@ export const SingleCarElement = ({car}) => {
     }
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
-
+    const slug = slugify(carTitle)
+    const slugMake = slugify(carDetails.make)
 
     return (
         <SingleCarItem>
@@ -31,7 +34,7 @@ export const SingleCarElement = ({car}) => {
                 <p> Year: {carDetails.motor} </p>
                 <p> Year: {carDetails.fueltype} </p>
             </SingleCarItemInner>
-            <Link href="/cars/[id]" as={`/cars/${carDetails.id}`}>
+            <Link href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                 Read More
             </Link>
         </SingleCarItem>

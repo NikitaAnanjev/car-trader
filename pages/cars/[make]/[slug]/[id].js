@@ -24,9 +24,8 @@ export default function SingleCarPage() {
 
     const {query} = useRouter()
 
-
     const {data, error} = useSWR(
-        () => query.id && `/api/cars/${query.id}`,
+        () => query.id && `/api/cars/${query.make}/${query.slug}/${query.id}`,
         fetcher
     )
 
@@ -62,8 +61,6 @@ export default function SingleCarPage() {
                 </CarImageContainer>
 
                 <CarContent>
-
-
                     <h2> TITLE: {carTitle} </h2>
                     <p> ID: {carDetails.id} </p>
                     <p> MILEAGE: {carDetails.mileage} </p>
