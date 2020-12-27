@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import {Box} from "@chakra-ui/react"
-
+import {Form} from "formik";
 export const SearchPanelContainer = styled(Box)`
     display: flex;
     width: 100%;
@@ -9,7 +9,7 @@ export const SearchPanelContainer = styled(Box)`
     border: 1px solid black;
 `
 
-export const Form = styled('form')`
+export const FormikForm = styled(Form)`
     display: flex;
     width: 80%;
     justify-content: space-between;
