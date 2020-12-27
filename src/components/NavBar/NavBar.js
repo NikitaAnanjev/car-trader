@@ -21,7 +21,11 @@ export const NavBar = () => {
             <Flex bg="black" w="100%" p={4} color="white"  justifyContent="space-between">
                 <Flex mr={5}>
                     <NavBarLogo>
-                        <img src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"  />
+                        <Link href="/">
+
+
+                            <img src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"  />
+                        </Link>
                     </NavBarLogo>
                 </Flex>
                 <Box display={{ base: "flex", md: "none" }} onClick={handleToggle}>

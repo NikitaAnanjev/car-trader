@@ -4,6 +4,10 @@ import {encode} from "base-64";
 
 export default async (req, res) => {
 
+
+
+
+
     const username =  process.env.BIlBASEN_API_LOGIN
     const password =  process.env.BIlBASEN_API_PASS
     const url = process.env.BIlBASEN_API_URL
@@ -16,8 +20,10 @@ export default async (req, res) => {
         }),
 
     });
+
+
     const json = await response.json();
 
 
-    res.json(json.Vehicles)
+    res.json( json.Vehicles)
 }

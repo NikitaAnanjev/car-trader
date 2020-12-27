@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import 'react-awesome-slider/dist/styles.css';
 import {ChakraProvider,extendTheme} from "@chakra-ui/react"
+import {NavBar} from "@/components/NavBar";
 
 // import { extendTheme } from "@chakra-ui/core"
 
@@ -27,6 +28,7 @@ function MyApp({Component, pageProps}) {
 
     return    (
         <ChakraProvider  theme={customTheme}>
+            <NavBar/>
             <Component {...pageProps} />
         </ChakraProvider>
     )
