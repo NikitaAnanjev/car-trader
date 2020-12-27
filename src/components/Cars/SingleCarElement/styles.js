@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-
+import Link from 'next/link'
 export const SingleCarItem = styled('div')`
 display: flex;
 margin:16px 16px 0 16px ;
@@ -32,3 +32,5 @@ export const CarImageContainer = styled('div')`
 display: flex;
 width: 40%;
 `
+
+export const CarLink = styled(Link)``

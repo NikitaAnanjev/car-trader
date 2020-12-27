@@ -19,6 +19,7 @@
     "react": "16.13.1",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "16.13.1",
+    "react-number-format": "^4.4.1",
     "react-slugify": "^2.0.3",
     "swr": "^0.3.11"
   }

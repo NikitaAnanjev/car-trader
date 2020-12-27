@@ -42,8 +42,9 @@ export default function SingleCarPage() {
         model: car['Model'],
         variant: car['Variant'],
         motor: car['Motor'],
-        fueltype: car['Propellant'],
-        pictures: car['Pictures']
+        fuel: car['Propellant'],
+        pictures: car['Pictures'],
+        price: car['Price']
     }
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
@@ -62,13 +63,13 @@ export default function SingleCarPage() {
 
                 <CarContent>
                     <h2> TITLE: {carTitle} </h2>
-                    <p> ID: {carDetails.id} </p>
+                    <p> ID: {carDetails.price} DKK </p>
                     <p> MILEAGE: {carDetails.mileage} </p>
-                    <p> Year: {carDetails.make} </p>
-                    <p> Year: {carDetails.model} </p>
-                    <p> Year: {carDetails.variant} </p>
-                    <p> Year: {carDetails.motor} </p>
-                    <p> Year: {carDetails.fueltype} </p>
+                    <p> Mark: {carDetails.make} </p>
+                    <p> Model: {carDetails.model} </p>
+                    <p> Variant: {carDetails.variant} </p>
+                    <p> Motor: {carDetails.motor} </p>
+                    <p> Fuel: {carDetails.fuel} </p>
                 </CarContent>
             </SinglePageContainer>
 
