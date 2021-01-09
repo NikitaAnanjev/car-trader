@@ -8,9 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.2",
     "@chakra-ui/react": "^1.0.3",
     "@emotion/react": "^11.1.2",
     "@emotion/styled": "^11.0.0",
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "axios": "^0.21.1",
     "base-64": "^1.0.0",
     "formik": "^2.2.6",
@@ -20,8 +22,12 @@
     "react": "16.13.1",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "16.13.1",
+    "react-icons": "^4.1.0",
     "react-number-format": "^4.4.1",
+    "react-player": "^2.7.2",
+    "react-responsive-carousel": "^3.2.11",
     "react-slugify": "^2.0.3",
+    "react-text-truncate": "^0.16.0",
     "swr": "^0.3.11"
   }
 }

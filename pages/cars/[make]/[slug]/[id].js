@@ -7,6 +7,8 @@ import {
     SinglePageContainer,
     CarContent
 } from "@/components/Cars/SingleCarElement/styles";
+import { CircularProgress,Heading } from "@chakra-ui/react"
+import {LoadingIconWrap} from "@/components/styles"
 import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 
 const fetcher = async (url) => {
@@ -20,17 +22,13 @@ const fetcher = async (url) => {
 }
 
 export default function SingleCarPage() {
-
-
     const {query} = useRouter()
-
     const {data, error} = useSWR(
         () => query.id && `/api/cars/${query.make}/${query.slug}/${query.id}`,
         fetcher
     )
-
     if (error) return <div>{error.message}</div>
-    if (!data) return <div>Loading...</div>
+    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.600" /></LoadingIconWrap>
 
     const car = data
 
@@ -44,25 +42,22 @@ export default function SingleCarPage() {
         motor: car['Motor'],
         fuel: car['Propellant'],
         pictures: car['Pictures'],
-        price: car['Price']
+        video: car['Video'],
+        price: car['Price'],
+        vehicleSourceId: car['VehicleSourceId'],
     }
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
-
-
     return (
         <SingleCarItem>
             <Link href="/"> BACK to homepage</Link>
-
-
             <SinglePageContainer>
                 <CarImageContainer>
-                    <CarImage images={carDetails.pictures}/>
-
+                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
                 </CarImageContainer>
 
                 <CarContent>
-                    <h2> TITLE: {carTitle} </h2>
+                    <Heading>TITLE: {carTitle} </Heading>
                     <p> ID: {carDetails.price} DKK </p>
                     <p> MILEAGE: {carDetails.mileage} </p>
                     <p> Mark: {carDetails.make} </p>
@@ -72,8 +67,6 @@ export default function SingleCarPage() {
                     <p> Fuel: {carDetails.fuel} </p>
                 </CarContent>
             </SinglePageContainer>
-
-
         </SingleCarItem>
     )
 }

@@ -1,7 +1,13 @@
 import '../styles/globals.css'
-import 'react-awesome-slider/dist/styles.css';
-import {ChakraProvider,extendTheme} from "@chakra-ui/react"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {Button, ChakraProvider, CircularProgress, extendTheme} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
+import {Footer} from "@/components/Footer";
+import {SearchPanel} from "@/components/SearchPanel";
+import useSWR from "swr";
+import {LoadingIconWrap} from "@/components/styles";
+import {useState} from "react";
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 // import { extendTheme } from "@chakra-ui/core"
 
@@ -16,20 +22,34 @@ const colors = {
     },
 }
 
-const customTheme = extendTheme({ colors })
-
-
+const customTheme = extendTheme({colors})
 
 
 function MyApp({Component, pageProps}) {
 
+    const [state,setState] = useState(true)
+    const priceTypeOnClick = () => {
+        setState(!state)
+    }
+    const {data, error} = useSWR('/api/cars', fetcher)
+    if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
+    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
 
 
-
-    return    (
-        <ChakraProvider  theme={customTheme}>
-            <NavBar/>
-            <Component {...pageProps} />
+    return (
+        <ChakraProvider theme={customTheme} resetCSS>
+            <NavBar>
+                <SearchPanel data={data} isFixed>
+                    <Button
+                        colorScheme={state ? 'red' : 'green'}
+                        minW='120px'
+                        mr={3}
+                        onClick={priceTypeOnClick}
+                    >{state ? 'Retail' : 'Leasing'} </Button>
+                </SearchPanel>
+            </NavBar>
+            <Component {...pageProps} priceTypeProps={state}/>
+            <Footer/>
         </ChakraProvider>
     )
 

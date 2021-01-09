@@ -1,46 +1,58 @@
+import {useState} from "react";
 import Head from 'next/head'
 import {Cars} from '@/components/Cars'
-import {NavBar} from '@/components/NavBar'
 import {SearchPanel} from '@/components/SearchPanel'
 import {getAsString} from "../helper/getAsString";
 import slugify from "react-slugify";
-
+import {CircularProgress, Button,Heading} from "@chakra-ui/react"
+import {LoadingIconWrap} from "@/components/styles"
 import useSWR from 'swr'
 import {encode} from "base-64";
-
+import {PageLayout} from "@/components/Cars/styles";
+import {TopBanner} from "@/components/TopBanner";
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
-export default function Home({cars}) {
+export default function Home(props) {
+    const {cars, priceTypeProps} = props
 
-
+    const [state,setState] = useState(true)
+    const priceTypeOnClick = () => {
+        setState(!state)
+    }
 
 
     const {data, error} = useSWR('/api/cars', fetcher)
-
-    if (error) return <div>Failed to load</div>
-    if (!data) return <div>Loading...</div>
-
+    if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
+    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
 
     return (
-        <div>
+        <PageLayout>
             <Head/>
-            <SearchPanel data={ data}/>
-            <Cars data={cars ? cars : data}/>
-        </div>
+            <TopBanner>
+                <Heading maxW={{sm:"100%", md:'60%', lg: "50%"}} p={3} textAlign='center' mb={10} fontSize='3rem' color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
+                <SearchPanel data={data}>
+                    <Button
+                        colorScheme={state ? 'red' : 'green'}
+                        minW='120px'
+                        mr={3}
+                        onClick={priceTypeOnClick}
+                    >{state ? 'Retail' : 'Leasing'} </Button>
+              </SearchPanel>
+            </TopBanner>
+            <Cars data={cars ? cars : data}
+                  priceType={priceTypeProps ? priceTypeProps : state}
+            />
+            {/*<Cars data={cars ? cars : data} />*/}
+        </PageLayout>
     )
 }
-
-
 
 export const getServerSideProps = async (ctx) => {
     const make = getAsString(ctx.query.make);
     // const year = getAsString(ctx.query.year);
-
-
     const username =  process.env.BIlBASEN_API_LOGIN
     const password =  process.env.BIlBASEN_API_PASS
     const url = process.env.BIlBASEN_API_URL
-
     const response = await fetch(url, {
         method: 'GET',
         headers: new Headers({
@@ -52,19 +64,11 @@ export const getServerSideProps = async (ctx) => {
 
     const json = await response.json();
 
-    const filtered =
-                         make  ? json.Vehicles.filter((p) => slugify(p["Make"]) === make ) :
+    const filtered = make  ? json.Vehicles.filter((p) => slugify(p["Make"]) === make ) :
                          // year  ? json.Vehicles.filter((p) => slugify(p["Year"]) === year):
                              json.Vehicles
-
-
-
-
     const [cars] = await Promise.all([
         filtered ? filtered : json.Vehicles,
-
     ])
-
-
     return { props: {cars } };
 };

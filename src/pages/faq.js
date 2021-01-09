@@ -6,9 +6,7 @@ export const Faq = ({data}) => {
 
     return (
         <div>
-            {console.log(data)}
-
-            FAQ
+c            FAQ
         </div>
     );
 };

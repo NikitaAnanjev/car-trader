@@ -1,34 +1,51 @@
-import { Box ,Flex,Button} from "@chakra-ui/react"
-import {NavBarLogo} from './styles'
+import {useRef,useState,useEffect} from 'react'
+import {Box, Flex, Image} from "@chakra-ui/react"
+import {NavBarLogo,NavBarContainer,SearchNavBar} from './styles'
 import Link from 'next/link'
-
-const MenuItems = ({ children ,href}) => (
-    <Box mt={{ base: 4, md: 0 }} mr={6}>
-        <Link  display="block" href={href ? href : '#'}>
+import {DrawerBar} from "@/components/NavBar/DrawerBar/DrawerBar";
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+const MenuItems = ({children, href}) => (
+    <Box mt={{base: 4, md: 0}} mr={6}>
+        <Link display="block" href={href ? href : '#'}>
             {children}
         </Link>
     </Box>
 );
 
-export const NavBar = () => {
+export const NavBar = ({children}) => {
 
-    const [show, setShow] = React.useState(false);
+    const [isSticky, setSticky] = useState(false);
+
+
+
+    useScrollPosition(({ prevPos, currPos }) => {
+
+      if (currPos.y < -410) {
+          setSticky(true)
+      }else {
+
+          setSticky(false)
+      }
+
+    })
+    const [show, setShow] = useState(false);
     const handleToggle = () => setShow(!show);
 
 
-    return (
 
-            <Flex bg="black" w="100%" p={4} color="white"  justifyContent="space-between">
+
+    return (
+        <>
+            <NavBarContainer p={4}  position={isSticky && 'fixed'}  >
+
                 <Flex mr={5}>
                     <NavBarLogo>
                         <Link href="/">
-
-
-                            <img src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"  />
+                            <Image src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"/>
                         </Link>
                     </NavBarLogo>
                 </Flex>
-                <Box display={{ base: "flex", md: "none" }} onClick={handleToggle}>
+                <Box display={{base: "flex", md: "none"}} onClick={handleToggle}>
                     <svg
                         fill="white"
                         width="30px"
@@ -36,37 +53,42 @@ export const NavBar = () => {
                         xmlns="http://www.w3.org/2000/svg"
                     >
                         <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
                     </svg>
                 </Box>
-                <Flex direction="row" w='full'  position={{ sm:  "absolute" ,md: "relative" }}  mt={{sm: show && '100px',md: "0"}} >
-                    <Box
 
-                        display={{ sm: show ? "block" : "none", md: "flex" }}
-                        width={{ sm: "full", md: "auto" }}
+
+                {isSticky &&  <SearchNavBar>{children}</SearchNavBar> }
+
+                <Flex direction="row" w='30%'>
+                    <Flex
+                        justifyContent="flex-end"
+                        display={{sm: "none", md: "flex"}}
+                        width={{sm: "full", md: "auto"}}
                         alignItems="center"
                         flexGrow={1}
                     >
 
-                        <MenuItems>Examples</MenuItems>
-                        <MenuItems href="/equipment">UDSTYR</MenuItems>
-                        <MenuItems href="/faq">FAQ</MenuItems>
-                    </Box>
+                        <MenuItems href="/udstyr">UDSTYR</MenuItems>
+                        <MenuItems href="/omos">OmOs</MenuItems>
+                    </Flex>
 
                     <Flex
-                        position={{ sm: show ? "absolute" : "" }}
-                        display={{ sm: show ? "block" : "none", md: "flex" }}
-                        mt={{ base: 4, md: 0 }}
+                        position={{sm: show ? "absolute" : ""}}
+                        display={{sm: show ? "block" : "none", md: "flex"}}
+                        mt={{base: 4, md: 0}}
+                        alignItems="center"
+
                     >
-                        <Button bg="transparent" border="1px">
-                            Kontakt
-                        </Button>
+
+                        <DrawerBar/>
                     </Flex>
 
                 </Flex>
 
-            </Flex>
+            </NavBarContainer>
 
+        </>
     );
 };
 

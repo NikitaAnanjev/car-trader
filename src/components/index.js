@@ -1,3 +1,6 @@
 export * from './Cars'
 export * from './NavBar'
 export * from './SearchPanel'
+export * from './TopBanner'
+export * from './Footer'
+export * from './EquipmentItem'

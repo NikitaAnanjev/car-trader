@@ -5,8 +5,6 @@ import {
     Button,
     Select,
     FormControl,
-    FormLabel,
-
 } from "@chakra-ui/react"
 
 // local libs
@@ -15,7 +13,7 @@ import router, {useRouter} from "next/router";
 import slugify from "react-slugify";
 
 
-export const SearchPanel = ({data}) => {
+export const SearchPanel = ({data, children, isFixed}) => {
     const {query} = useRouter()
 
     const initialValues = {
@@ -38,75 +36,29 @@ export const SearchPanel = ({data}) => {
         return Object.entries(count)
     }
 
-
     return (
-        <SearchPanelContainer w="100%" justifyContent='center'>
+        <SearchPanelContainer isFixed={isFixed} justifyContent='flex-end' w={{sm:"100%", md:'60%', lg: "50%"}}>
             <Formik initialValues={initialValues} onSubmit={(values) => {
               router.push( {pathname: '/',
                     query: {...values}} , undefined,{shallow: false})
             }}>
-
                 {({values}) =>
                     <FormikForm>
-                        <FormControl id="make" mr={10}>
-                            <FormLabel>Make</FormLabel>
-                            <Field as={Select} name="make" placeholder="Select cars brand">
-
+                        <FormControl id="make" mr={10} bg='gray.700'>
+                            <Field as={Select} name="make" placeholder="Select cars brand" color="white">
                                 {getAllMakes('Make').map((make, index) =>
-                                    <option key={index + make[1] + make[0]}
+                                    <option style={{color: '#111111'}} key={index + make[1] + make[0]}
                                             value={slugify(make[0])}>{make[0]} ( {make[1]} )</option>
                                 )}
 
                             </Field>
                         </FormControl>
-
-                        {/*<FormControl id="year" mr={10}>*/}
-                        {/*    <FormLabel>Year</FormLabel>*/}
-                        {/*    <Field as={Select} name="year" placeholder="Select a year">*/}
-
-                        {/*        {getAllMakes('Year').map((year, index) =>*/}
-                        {/*            <option key={index + year[1] + year[0]}*/}
-                        {/*                    value={slugify(year[0])}>{year[0]} ( {year[1]} )</option>*/}
-                        {/*        )}*/}
-                        {/*    </Field>*/}
-                        {/*</FormControl>*/}
-
-                        <Button type="submit" w='full' mt={7}> Search</Button>
+                        <Button type="submit"  colorScheme="blue" w="150px" size="md" mr={10}> Search</Button>
+                        {children}
                     </FormikForm>
                 }
             </Formik>
+
         </SearchPanelContainer>
     );
 };
-
-
-
-// export function ModelSelect({years, make, ...props }) {
-//     const { setFieldValue } = useFormikContext();
-//     const [field] = useField({
-//         name: props.name,
-//     });
-//
-//     const { data } = useSWR('/api/cars?make=' + make, {
-//         onSuccess: (newValues) => {
-//             if (!newValues.map((a) => a.years).includes(field.value)) {
-//                 setFieldValue('model', 'all');
-//             }
-//         },
-//     });
-//     const newModels = data || years;
-//
-//     return (
-//         <FormControl id="year" mr={10}>
-//             <FormLabel>Make</FormLabel>
-//             <Select name="year" placeholder="Select a year">
-//
-//                 {getAllMakes('Year').map((year, index) =>
-//                     <option key={index + year[1] + year[0]}
-//                             value={slugify(year[0])}>{year[0]} ( {year[1]} )</option>
-//                 )}
-//
-//             </Select>
-//         </FormControl>
-//     );
-// }
