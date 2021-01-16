@@ -29,5 +29,8 @@
     "react-slugify": "^2.0.3",
     "react-text-truncate": "^0.16.0",
     "swr": "^0.3.11"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^1.0.6"
   }
 }
