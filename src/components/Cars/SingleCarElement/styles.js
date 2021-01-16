@@ -9,6 +9,7 @@ margin:16px 16px 0 16px ;
 flex-grow: 1;
 flex-direction: column;
 flex-basis: 25%;
+padding: 0 10%;
 
 `
 export const SingleCarItemInner = styled('div')`
@@ -30,11 +31,16 @@ flex-direction: row;
 export const CarContent = styled('div')`
 display: flex;
 flex-direction: column;
+width: 50%;
+`
+export const EquipmentList = styled('div')`
+display: flex;
 `
 
 export const CarImageContainer = styled('div')`
 display: flex;
-width: 40%;
+position: relative;
+width: 50%;
 `
 export const EuroNormBadge = styled('div')`
 position: absolute;

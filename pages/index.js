@@ -13,17 +13,15 @@ import {TopBanner} from "@/components/TopBanner";
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home(props) {
-    const {cars, priceTypeProps} = props
+    const {cars, priceTypeProps,priceTypeOnClick} = props
 
-    const [state,setState] = useState(true)
-    const priceTypeOnClick = () => {
-        setState(!state)
-    }
 
 
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
+
+
 
     return (
         <PageLayout>
@@ -32,15 +30,15 @@ export default function Home(props) {
                 <Heading maxW={{sm:"100%", md:'60%', lg: "50%"}} p={3} textAlign='center' mb={10} fontSize='3rem' color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
                     <Button
-                        colorScheme={state ? 'red' : 'green'}
+                        colorScheme={priceTypeProps ? 'red' : 'green'}
                         minW='120px'
                         mr={3}
                         onClick={priceTypeOnClick}
-                    >{state ? 'Retail' : 'Leasing'} </Button>
+                    >{priceTypeProps ? 'Retail' : 'Leasing'} </Button>
               </SearchPanel>
             </TopBanner>
             <Cars data={cars ? cars : data}
-                  priceType={priceTypeProps ? priceTypeProps : state}
+                  priceType={priceTypeProps}
             />
             {/*<Cars data={cars ? cars : data} />*/}
         </PageLayout>

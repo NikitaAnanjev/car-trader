@@ -18,9 +18,9 @@ import {
 
 export const Footer = () => {
     return (
-        <FooterContainer>
+        <FooterContainer direction={{ sm: "column", md: "row"}} >
 
-            <FooterItem maxW="25%">
+            <FooterItem basis={{ sm: "100%", md: "50%", lg: "25%"}}>
                 <Image src="/piralux-logo.png"/>
                 <Divider/>
                 <Box p={5}>
@@ -29,8 +29,7 @@ export const Footer = () => {
                 </Box>
             </FooterItem>
 
-
-            <FooterItem>
+            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}>
                 <Heading as='h3' size="md" fontWeight='normal'> KONTAKT</Heading>
                 <Divider maxW="3rem" my={3} borderColor="red.500"/>
                 <List spacing={3}>
@@ -49,7 +48,7 @@ export const Footer = () => {
                     </ListItem>
                 </List>
             </FooterItem>
-            <FooterItem>
+            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}>
                 <Heading as='h3' size="md" fontWeight='normal'> ØKONOMISK INFORMATION</Heading>
                 <Divider maxW="3rem" my={3} borderColor="red.500"/>
                 <List spacing={3}>
@@ -74,7 +73,7 @@ export const Footer = () => {
                         <span>Swiftadresse: KRONDK22</span>
                     </ListItem>
                 </List></FooterItem>
-            <FooterItem><Image w="80%" src="/trustpilot.JPG"/></FooterItem>
+            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}><Image w="80%" src="/trustpilot.JPG"/></FooterItem>
         </FooterContainer>
     );
 };

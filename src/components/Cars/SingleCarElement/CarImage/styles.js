@@ -5,6 +5,10 @@ display: flex;
 padding: 16px;
 flex-grow: 1;
 flex-basis: 25%;
+position: relative;
+.thumbs-wrapper {
+ max-width: 700px;
+}
 `
 export const SingleCarItemInner = styled('a')`
 display: flex;

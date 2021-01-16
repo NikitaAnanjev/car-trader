@@ -2,7 +2,7 @@ import {EquipmentItem} from "@/components/EquipmentItem";
 import {
     Box, Image, Text, Heading,Flex
 } from "@chakra-ui/react"
-
+import { Wrap, WrapItem } from "@chakra-ui/react"
 import {EquipmentList} from "@/components/EquipmentItem/styles"
 
 const equipmentsData = {
@@ -41,9 +41,15 @@ const equipmentsData = {
 export const Equipments = () => {
     return (
         <EquipmentList bg="gray.900">
+
+            <Wrap spacing="30px">
             {Object.values(equipmentsData.entities).map((item) =>
+                <WrapItem>
                 <EquipmentItem key={item.id} {...item}/>
+                </WrapItem>
             )}
+
+            </Wrap>
         </EquipmentList>
     );
 };

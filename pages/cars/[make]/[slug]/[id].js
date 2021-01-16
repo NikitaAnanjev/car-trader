@@ -5,11 +5,15 @@ import {
     CarImageContainer,
     SingleCarItem,
     SinglePageContainer,
-    CarContent
+    CarContent,
+    EquipmentList
 } from "@/components/Cars/SingleCarElement/styles";
-import { CircularProgress,Heading } from "@chakra-ui/react"
+import {CircularProgress, Heading, Box,List, ListItem, ListIcon} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
+import {
+    MdInfo
+} from "react-icons/md";
 
 const fetcher = async (url) => {
     const res = await fetch(url)
@@ -28,7 +32,7 @@ export default function SingleCarPage() {
         fetcher
     )
     if (error) return <div>{error.message}</div>
-    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.600" /></LoadingIconWrap>
+    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.600"/></LoadingIconWrap>
 
     const car = data
 
@@ -45,6 +49,7 @@ export default function SingleCarPage() {
         video: car['Video'],
         price: car['Price'],
         vehicleSourceId: car['VehicleSourceId'],
+        equipmentList: car['EquipmentList'],
     }
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
@@ -52,9 +57,6 @@ export default function SingleCarPage() {
         <SingleCarItem>
             <Link href="/"> BACK to homepage</Link>
             <SinglePageContainer>
-                <CarImageContainer>
-                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
-                </CarImageContainer>
 
                 <CarContent>
                     <Heading>TITLE: {carTitle} </Heading>
@@ -65,8 +67,28 @@ export default function SingleCarPage() {
                     <p> Variant: {carDetails.variant} </p>
                     <p> Motor: {carDetails.motor} </p>
                     <p> Fuel: {carDetails.fuel} </p>
-                </CarContent>
+                 </CarContent>
+
+                <CarImageContainer>
+                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
+                </CarImageContainer>
+
+
             </SinglePageContainer>
+
+            <Box w="100%" my={10}>
+                <EquipmentList>
+                    <List spacing={2} w="100%" d="flex" flexDirection="column" flexWrap="wrap" maxH="500px">
+                        {carDetails.equipmentList.map((item) =>
+                            <ListItem mr={10}>
+                                <ListIcon as={MdInfo} color="green.500"/>
+                                {item}
+                            </ListItem>
+                        )}
+                    </List>
+                </EquipmentList>
+            </Box>
+
         </SingleCarItem>
     )
 }

@@ -9,6 +9,7 @@ import {LoadingIconWrap} from "@/components/styles";
 import {useState} from "react";
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
+import { useRouter } from 'next/router'
 // import { extendTheme } from "@chakra-ui/core"
 
 // 2. Extend the theme to include custom colors, fonts, etc.
@@ -26,6 +27,9 @@ const customTheme = extendTheme({colors})
 
 
 function MyApp({Component, pageProps}) {
+
+
+
 
     const [state,setState] = useState(true)
     const priceTypeOnClick = () => {
@@ -48,7 +52,7 @@ function MyApp({Component, pageProps}) {
                     >{state ? 'Retail' : 'Leasing'} </Button>
                 </SearchPanel>
             </NavBar>
-            <Component {...pageProps} priceTypeProps={state}/>
+            <Component {...pageProps} priceTypeProps={state} priceTypeOnClick={priceTypeOnClick}/>
             <Footer/>
         </ChakraProvider>
     )

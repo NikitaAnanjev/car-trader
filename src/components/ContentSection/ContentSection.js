@@ -1,12 +1,12 @@
-import {ContentSectionContainer,ContentSectionRow} from './styles'
+import {ContentSectionContainer, ContentSectionRow} from './styles'
 
-export const ContentSection = ({children}) => {
+export const ContentSection = ({children, reverse, light}) => {
 
     return (
-        <ContentSectionContainer>
-        <ContentSectionRow>
-            {children}
-        </ContentSectionRow>
+        <ContentSectionContainer light={light}>
+            <ContentSectionRow direction={{sm: 'column', md: reverse ? "row-reverse" : 'row'}}>
+                {children}
+            </ContentSectionRow>
         </ContentSectionContainer>
     );
 };

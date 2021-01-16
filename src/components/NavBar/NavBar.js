@@ -1,9 +1,11 @@
-import {useRef,useState,useEffect} from 'react'
-import {Box, Flex, Image} from "@chakra-ui/react"
-import {NavBarLogo,NavBarContainer,SearchNavBar} from './styles'
+import {useState} from 'react'
+import {Box, Flex, Image, Spacer} from "@chakra-ui/react"
+import {NavBarLogo, NavBarContainer, SearchNavBar} from './styles'
 import Link from 'next/link'
 import {DrawerBar} from "@/components/NavBar/DrawerBar/DrawerBar";
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import {useScrollPosition} from '@n8tb1t/use-scroll-position'
+import {useRouter} from "next/router";
+
 const MenuItems = ({children, href}) => (
     <Box mt={{base: 4, md: 0}} mr={6}>
         <Link display="block" href={href ? href : '#'}>
@@ -17,26 +19,26 @@ export const NavBar = ({children}) => {
     const [isSticky, setSticky] = useState(false);
 
 
+    useScrollPosition(({prevPos, currPos}) => {
 
-    useScrollPosition(({ prevPos, currPos }) => {
+        if (currPos.y < -410) {
+            setSticky(true)
+        } else {
 
-      if (currPos.y < -410) {
-          setSticky(true)
-      }else {
-
-          setSticky(false)
-      }
+            setSticky(false)
+        }
 
     })
     const [show, setShow] = useState(false);
     const handleToggle = () => setShow(!show);
 
+    const router = useRouter()
 
 
 
     return (
         <>
-            <NavBarContainer p={4}  position={isSticky && 'fixed'}  >
+            <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={{sm: 'wrap', md: "no-wrap"}}>
 
                 <Flex mr={5}>
                     <NavBarLogo>
@@ -57,9 +59,9 @@ export const NavBar = ({children}) => {
                     </svg>
                 </Box>
 
-
-                {isSticky &&  <SearchNavBar>{children}</SearchNavBar> }
-
+                <Spacer/>
+                {router.pathname === '/' && isSticky && <SearchNavBar>{children}</SearchNavBar>}
+                <Spacer/>
                 <Flex direction="row" w='30%'>
                     <Flex
                         justifyContent="flex-end"
