@@ -28,12 +28,15 @@ const customTheme = extendTheme({colors})
 
 function MyApp({Component, pageProps}) {
 
+    const [state,setState] = useState(null)
+    const [allcars,setAllCars] = useState(true)
 
-
-
-    const [state,setState] = useState(true)
     const priceTypeOnClick = () => {
         setState(!state)
+    }
+    const showAllCars = () => {
+        setAllCars(true)
+        setState(null)
     }
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
@@ -45,6 +48,12 @@ function MyApp({Component, pageProps}) {
             <NavBar>
                 <SearchPanel data={data} isFixed>
                     <Button
+                        colorScheme='green'
+                        minW='120px'
+                        mr={3}
+                        onClick={showAllCars}
+                    >All</Button>
+                    <Button
                         colorScheme={state ? 'red' : 'green'}
                         minW='120px'
                         mr={3}
@@ -52,7 +61,7 @@ function MyApp({Component, pageProps}) {
                     >{state ? 'Retail' : 'Leasing'} </Button>
                 </SearchPanel>
             </NavBar>
-            <Component {...pageProps} priceTypeProps={state} priceTypeOnClick={priceTypeOnClick}/>
+            <Component {...pageProps} priceTypeProps={state} showAllCars={showAllCars} allcars={allcars} priceTypeOnClick={priceTypeOnClick}/>
             <Footer/>
         </ChakraProvider>
     )

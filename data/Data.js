@@ -1,6 +1,7 @@
 import {encode} from "base-64";
 
 export const Data = ({cars}) => {return cars}
+// export const getStaticProps = async () => {
 export const getServerSideProps = async () => {
 
     const username =  process.env.BIlBASEN_API_LOGIN
