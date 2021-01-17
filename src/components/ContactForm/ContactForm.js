@@ -30,13 +30,16 @@ export const ContactForm = () => {
 
     const sendEmail =(e) => {
         e.preventDefault();
-        emailjs.sendForm('service_6y44txc', 'service_6y44txc', e.target, 'YOUR_USER_ID')
+        emailjs.sendForm('service_6y44txc', 'template_3mrc3ml', e.target, 'user_6gxi4XejgEsVRHpYzh70z')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
                 console.log(error.text);
             });
+
+        e.target.reset()
     }
+
 
     return (
         <>
@@ -63,33 +66,34 @@ export const ContactForm = () => {
 
                             <Stack spacing="24px">
                                 <Box>
-                                    <FormLabel htmlFor="username">Name</FormLabel>
+                                    <FormLabel htmlFor="from_name">Name</FormLabel>
                                     <Input
+                                        name="from_name"
                                         ref={firstField}
-                                        id="username"
+                                        id="from_name"
                                         placeholder="Please enter user name"
                                     />
                                 </Box>
 
                                 <Box>
-                                    <FormControl id="email">
+                                    <FormControl >
                                         <FormLabel>Email address</FormLabel>
-                                        <Input type="email" />
+                                        <Input type="email" name="email"/>
                                         <FormHelperText>We'll never share your email.</FormHelperText>
                                     </FormControl>
                                 </Box>
 
                                 <Box>
-                                    <FormLabel htmlFor="owner">Select Owner</FormLabel>
-                                    <Select id="owner" defaultValue="segun">
-                                        <option value="segun">Segun Adebayo</option>
-                                        <option value="kola">Kola Tioluwani</option>
-                                    </Select>
+                                    <FormControl  >
+                                        <FormLabel>Phone Number</FormLabel>
+                                        <Input type="tel" id="phone_number" name="phone_number" />
+                                        <FormHelperText>We'll never share your email.</FormHelperText>
+                                    </FormControl>
                                 </Box>
 
                                 <Box>
-                                    <FormLabel htmlFor="desc">Description</FormLabel>
-                                    <Textarea id="desc" />
+                                    <FormLabel htmlFor="message">Description</FormLabel>
+                                    <Textarea id="message" name="message" />
                                 </Box>
                             </Stack>
 
