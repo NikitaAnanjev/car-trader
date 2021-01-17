@@ -30,12 +30,14 @@ export default function Home(props) {
                          color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
                     <Button
+                        size="sm"
                         colorScheme='green'
-                        minW='120px'
+                        minW='60px'
                         mr={3}
                         onClick={showAllCars}
                     >All</Button>
                     <Button
+                        size="sm"
                         colorScheme={priceTypeProps ? 'red' : 'green'}
                         minW='120px'
                         mr={3}

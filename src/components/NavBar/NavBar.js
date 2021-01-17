@@ -21,7 +21,7 @@ export const NavBar = ({children}) => {
     const [isSticky, setSticky] = useState(false);
 
 
-    const isMobile = useBreakpointValue({base: true, md: false})
+    const isMobile = useBreakpointValue({base: true,sm: true, md: false})
 
     useScrollPosition(({prevPos, currPos}) => {
 
@@ -47,7 +47,7 @@ export const NavBar = ({children}) => {
             >
 
                 <NavDrawer/>
-                <Flex mr={5} width={{base: "50%", md: "100%"}}>
+                <Flex mr={5} width={{base: "50%", md: "200px"}}>
                     <NavBarLogo >
                         <Link href="/">
                             <Image src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"/>
@@ -55,7 +55,7 @@ export const NavBar = ({children}) => {
                     </NavBarLogo>
                 </Flex>
 
-                {router.pathname === '/' && isSticky && <SearchNavBar>{children}</SearchNavBar>}
+                {/*{ !isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
                 {!isMobile &&
                 <Flex direction="row" w='30%'>
                     <Flex
@@ -72,16 +72,11 @@ export const NavBar = ({children}) => {
                 </Flex>
                 }
 
-                <Flex
-                    position={{sm: show ? "absolute" : ""}}
-                    display={{sm: show ? "block" : "none", md: "flex"}}
+                <Flex><DrawerBar/></Flex>
 
-                    alignItems="center"
-                >
-                    <DrawerBar/>
-                </Flex>
+
+                {  router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
             </NavBarContainer>
-
         </>
     );
 };

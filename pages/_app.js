@@ -46,14 +46,17 @@ function MyApp({Component, pageProps}) {
     return (
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
-                <SearchPanel data={data} isFixed>
+                <SearchPanel data={data} isfixed>
                     <Button
-                        colorScheme='green'
+
+                        size="sm"
+                        colorScheme='teal'
                         minW='120px'
                         mr={3}
                         onClick={showAllCars}
                     >All</Button>
                     <Button
+                        size="sm"
                         colorScheme={state ? 'red' : 'green'}
                         minW='120px'
                         mr={3}
