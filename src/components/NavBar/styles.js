@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import {Flex} from "@chakra-ui/react"
 
-export const NavBarLogo = styled('div')`
+export const NavBarLogo = styled(Flex)`
 display: flex;
-width: 200px;
+max-width: 200px;
 &:hover {
 cursor: pointer;
 }
@@ -24,5 +24,6 @@ z-index: 100;
 width: 100%;
 color: white;
 justify-content: space-between;
+align-items: center;
 
 `

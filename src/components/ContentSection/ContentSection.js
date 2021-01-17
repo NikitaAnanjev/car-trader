@@ -4,7 +4,7 @@ export const ContentSection = ({children, reverse, light}) => {
 
     return (
         <ContentSectionContainer light={light}>
-            <ContentSectionRow direction={{sm: 'column', md: reverse ? "row-reverse" : 'row'}}>
+            <ContentSectionRow direction={{base: 'column', md: reverse ? "row-reverse" : 'row'}}>
                 {children}
             </ContentSectionRow>
         </ContentSectionContainer>

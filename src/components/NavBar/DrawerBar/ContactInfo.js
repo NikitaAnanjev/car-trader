@@ -17,7 +17,7 @@ export const ContactInfo = () => {
                     icon={<PhoneIcon/>}
                     mr={3}
                 />
-                <Heading size="lg"> +45 60 24 08 97</Heading>
+                <Heading size={{base: "mb", md: "lg"}}> +45 60 24 08 97</Heading>
             </Flex>
             <Flex direction='row' alignItems="center" mt={5}>
                 <IconButton
@@ -27,7 +27,7 @@ export const ContactInfo = () => {
                     icon={<EmailIcon/>}
                     mr={3}
                 />
-                <Heading size="lg"> info@piraluxauto.dk</Heading>
+                <Heading size={{base: "mb", md: "lg"}}> info@piraluxauto.dk</Heading>
             </Flex>
 
         </Box>

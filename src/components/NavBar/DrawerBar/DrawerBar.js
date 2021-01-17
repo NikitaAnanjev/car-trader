@@ -11,18 +11,23 @@ import {
 
 } from "@chakra-ui/react"
 import {ContactInfo} from './ContactInfo'
-
 import {useDisclosure} from "@chakra-ui/react"
+import { useBreakpointValue } from "@chakra-ui/react"
 
+import {MdContactPhone} from  "react-icons/md"
 export const DrawerBar = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
     const btnRef = React.useRef()
 
+
+    const contactButtonVariants = useBreakpointValue({ base: <MdContactPhone/>, md: "Kontakt" })
+
     return (
         <>
-            <Button border="1px" colorScheme="red" ref={btnRef} onClick={onOpen}>
-                Kontakt
+            <Button border="1px" m={0} colorScheme="red" ref={btnRef} onClick={onOpen}>
+                {contactButtonVariants}
             </Button>
+
             <Drawer
                 isOpen={isOpen}
                 size="xl"
@@ -37,8 +42,8 @@ export const DrawerBar = () => {
 
                         <DrawerBody>
 
-                            <Flex direction={{sm: "column", md: "row"}} justifyContent="space-between">
-                                <Flex w={{sm: "100%", md: "50%"}}>
+                            <Flex direction={{base: "column", md: "row"}} justifyContent="space-between">
+                                <Flex w={{base: "100%", md: "50%"}} mb={{base: "1rem", md: "0"}} >
 
                                     <ContactInfo/>
 
@@ -71,13 +76,10 @@ export const DrawerBar = () => {
                                     aria-hidden="false"
                                     tabIndex="0"/>
                             </Flex>
-                            {/*<Input placeholder="Type here..." />*/}
                         </DrawerBody>
 
                         <DrawerFooter>
-                            <Button variant="outline" mr={3} onClick={onClose}>
-                                Close
-                            </Button>
+
 
                         </DrawerFooter>
                     </DrawerContent>

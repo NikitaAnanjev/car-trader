@@ -13,7 +13,6 @@ background-color: ${({light,theme})=> light ? theme.colors.gray['800'] : theme.c
 `
 
 export const ContentSectionRow = styled(Flex)`
-// flex-direction: ${({reverse})=> reverse ? "row-reverse" : 'row'};
 width: 90%;  
 align-items: center;
 `

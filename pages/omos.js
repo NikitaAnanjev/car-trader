@@ -59,7 +59,7 @@ const Omos = () => {
         <div>
 
             {Object.values(dataAboutUs.entities).map((item)=>
-                <About {...item}/>
+                <About light={item.light} {...item}/>
             )}
 
         </div>
