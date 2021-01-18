@@ -2,7 +2,7 @@ import {CarList} from './styles'
 import {SingleCarElement} from "./SingleCarElement";
 
 // export const Cars = ({data}) => {
-export const Cars = ({data, priceType,allcars}) => {
+export const Cars = ({data, priceType, allcars}) => {
 
     const getValue = ({CashPrice}) => CashPrice && +CashPrice.slice(0) || 0;
     const getLeasingValue = ({LeasingPrice}) => LeasingPrice && +LeasingPrice.slice(0) || 0;

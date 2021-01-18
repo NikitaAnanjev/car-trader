@@ -1,6 +1,5 @@
-
 import emailjs from 'emailjs-com';
-
+import InputMask from 'react-input-mask';
 import {
     Drawer,
     DrawerBody,
@@ -14,21 +13,25 @@ import {
     Stack,
     FormControl,
     FormLabel,
-    FormErrorMessage,
     Button,
     FormHelperText,
     Input,
-    Select,
-    Textarea
+    Textarea,
+    Flex,
+    IconButton,
+    Image,
+    Heading
 } from "@chakra-ui/react"
 
-import { MdDirectionsCar } from "react-icons/md";
-export const ContactForm = () => {
+import {MdDirectionsCar} from "react-icons/md";
+import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+export const ContactForm = ({carDetails, carTitle}) => {
+
+    const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
-    const sendEmail =(e) => {
+    const sendEmail = (e) => {
         e.preventDefault();
         emailjs.sendForm('service_6y44txc', 'template_3mrc3ml', e.target, 'user_6gxi4XejgEsVRHpYzh70z')
             .then((result) => {
@@ -43,69 +46,104 @@ export const ContactForm = () => {
 
     return (
         <>
-            <Button leftIcon={<MdDirectionsCar />} colorScheme="teal" onClick={onOpen}>
-               Get this Car
-            </Button>
+            <IconButton icon={<MdDirectionsCar/>}
+                        fontSize="20px"
+                        aria-label="Book this car" colorScheme="teal" onClick={onOpen}/>
             <Drawer
                 isOpen={isOpen}
                 size='full'
                 placement="top"
                 initialFocusRef={firstField}
                 onClose={onClose}
+                scrollBehavior="inside"
             >
                 <DrawerOverlay>
                     <DrawerContent>
 
-                        <form className="contact-form" onSubmit={sendEmail}>
-                        <DrawerCloseButton />
+                        <DrawerCloseButton/>
                         <DrawerHeader borderBottomWidth="1px">
-                            Create a new account
+                            <Heading>{carTitle}</Heading>
                         </DrawerHeader>
 
                         <DrawerBody>
+                            <Flex direction={{base: 'column', md: 'row'}} bg="gray.700">
 
-                            <Stack spacing="24px">
-                                <Box>
-                                    <FormLabel htmlFor="from_name">Name</FormLabel>
-                                    <Input
-                                        name="from_name"
-                                        ref={firstField}
-                                        id="from_name"
-                                        placeholder="Please enter user name"
-                                    />
-                                </Box>
+                                <CarImageContainer w={{base: '100%', md: '50%'}}>
+                                    <Image src={carDetails.pictures[0]}/>
+                                </CarImageContainer>
 
-                                <Box>
-                                    <FormControl >
-                                        <FormLabel>Email address</FormLabel>
-                                        <Input type="email" name="email"/>
-                                        <FormHelperText>We'll never share your email.</FormHelperText>
-                                    </FormControl>
-                                </Box>
+                                <Flex w={{base: '100%', md: "300px"}} p={6} bg="gray.800">
 
-                                <Box>
-                                    <FormControl  >
-                                        <FormLabel>Phone Number</FormLabel>
-                                        <Input type="tel" id="phone_number" name="phone_number" />
-                                        <FormHelperText>We'll never share your email.</FormHelperText>
-                                    </FormControl>
-                                </Box>
+                                    <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
+                                        <Stack spacing="24px">
+                                            <Box>
+                                                <FormLabel color="white" htmlFor="from_name">Name</FormLabel>
+                                                <Input
+                                                    color="white"
+                                                    type="text"
+                                                    name="from_name"
+                                                    ref={firstField}
+                                                    id="from_name"
+                                                    placeholder="Please enter user name"
+                                                />
+                                            </Box>
 
-                                <Box>
-                                    <FormLabel htmlFor="message">Description</FormLabel>
-                                    <Textarea id="message" name="message" />
-                                </Box>
-                            </Stack>
+                                            <Box color="white">
+                                                <FormControl>
+                                                    <FormLabel>Email address</FormLabel>
+                                                    <Input type="email" name="email"/>
+                                                    <FormHelperText>We'll never share your email.</FormHelperText>
+                                                </FormControl>
+                                            </Box>
 
+                                            <Box color="white">
+                                                <FormControl>
+                                                    <FormLabel htmlFor="user_phone_number">Phone Number</FormLabel>
+
+                                                    <InputMask mask="+4\5 99 99 99 99" maskChar={null}>
+                                                        {(inputProps) => <Input type="tel" {...inputProps}
+                                                                                name="user_phone_number"/>}
+                                                    </InputMask>
+
+                                                    <FormHelperText>Please insert your phone number</FormHelperText>
+                                                </FormControl>
+                                            </Box>
+
+
+                                            <Input d='none' type="text" name="car_details"
+                                                   value={carDetails.mileage + ',' + carDetails.year
+                                                   + ',' + carDetails.make}/>
+                                            <Box color="white">
+                                                <FormLabel htmlFor="message">Description</FormLabel>
+                                                <Textarea id="message" name="message"/>
+                                            </Box>
+
+                                            <Box>
+
+                                                <Button w="100%" colorScheme="blue" type="submit">Submit</Button>
+
+                                            </Box>
+                                        </Stack>
+                                    </form>
+                                </Flex>
+
+
+                                <Flex p={6}>
+                                    <Box color="white">
+                                        <p> {carDetails.mileage}</p>
+                                        <p> {carDetails.year}</p>
+                                        <p> {carDetails.make}</p>
+                                    </Box>
+                                </Flex>
+                            </Flex>
                         </DrawerBody>
 
                         <DrawerFooter borderTopWidth="1px">
                             <Button variant="outline" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme="blue" type="submit">Submit</Button>
                         </DrawerFooter>
-                    </form>
+
                     </DrawerContent>
                 </DrawerOverlay>
             </Drawer>

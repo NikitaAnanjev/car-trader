@@ -102,7 +102,7 @@ export const SingleCarElement = ({car}) => {
 
                     </Flex>
 
-                    <ContactForm car={carDetails} />
+                    <ContactForm carDetails={carDetails}  carTitle={carTitle}/>
 
                     </Flex>
 

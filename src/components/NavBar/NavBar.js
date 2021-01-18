@@ -19,32 +19,21 @@ const MenuItems = ({children, href}) => (
 export const NavBar = ({children}) => {
 
     const [isSticky, setSticky] = useState(false);
-
-
     const isMobile = useBreakpointValue({base: true,sm: true, md: false})
 
     useScrollPosition(({prevPos, currPos}) => {
-
         if (currPos.y < -410) {
             setSticky(true)
         } else {
-
             setSticky(false)
         }
-
     })
-    const [show, setShow] = useState(false);
-
     const router = useRouter()
 
 
     return (
         <>
-            <NavBarContainer p={4}
-                             position={isSticky && 'fixed'}
-                           wrap={router.pathname === '/' && isSticky && 'wrap'}
-
-            >
+            <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'wrap'}>
 
                 <NavDrawer/>
                 <Flex mr={5} width={{base: "50%", md: "200px"}}>
@@ -73,8 +62,6 @@ export const NavBar = ({children}) => {
                 }
 
                 <Flex><DrawerBar/></Flex>
-
-
                 {  router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
             </NavBarContainer>
         </>
