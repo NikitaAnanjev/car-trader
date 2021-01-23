@@ -60,7 +60,7 @@ export const SingleCarElement = ({car}) => {
                     <Box
                         mb={3}
                         fontWeight="semibold"
-                        as="h4"
+
                         lineHeight="tight"
                         isTruncated
                     >

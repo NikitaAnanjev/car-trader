@@ -11,6 +11,7 @@ width: 100%;
 width: 100%;
 }
 `
+
 export const SingleCarItemInner = styled('a')`
 display: flex;
 padding: 10px;
@@ -19,6 +20,7 @@ border: 1px solid gray;
 flex-grow: 1;
 flex-direction: column;
 `
+
 export const CarouselItem = styled('div')`
     display: block;
     position: relative;

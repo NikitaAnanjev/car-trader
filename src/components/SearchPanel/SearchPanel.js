@@ -42,7 +42,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
 
     return (
-        <SearchPanelContainer isfixed={Boolean(isfixed)} justifyContent='flex-end' w={{base: "100%", md: '100%', lg: isfixed ? "80%" : "60%"}}>
+        <SearchPanelContainer isfixed={isfixed } justifyContent='flex-end' w={{base: "100%", md: '100%', lg: isfixed ? "80%" : "60%"}}>
             <Formik initialValues={initialValues} onSubmit={(values) => {
                 router.push({
                     pathname: '/',

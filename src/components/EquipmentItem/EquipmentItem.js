@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react"
 import TextTruncate from 'react-text-truncate';
 import ReactPlayer from 'react-player'
-import {FooterItem} from "@/components/Footer/styles";
 
 export const EquipmentItem = ({title, text, header, url, img}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -34,15 +33,15 @@ export const EquipmentItem = ({title, text, header, url, img}) => {
 
                     <TextTruncate
                         line={1}
-                        element="Text"
+                        element="p"
                         truncateText="…"
                         text={text}
                     />
 
                 </Box>
 
-                <Box bg="gray.800" _hover={{bg: "gray.800"}} _focuse={{bg: "gray.600"}}>
-                    <Flex h="3rem" justifyContent="center" alignItems="center" onClick={onOpen}
+                <Box bg="gray.800" _hover={{bg: "blue.900"}} _focuse={{bg: "gray.600"}}  cursor="pointer">
+                    <Flex h="3rem"  justifyContent="center" alignItems="center" onClick={onOpen}
                     >
                         <Text>Læs mere</Text>
 

@@ -42,11 +42,11 @@ function MyApp({Component, pageProps}) {
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
 
-
+    const isFixed = true
     return (
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
-                <SearchPanel data={data} isfixed={true}>
+                <SearchPanel data={data} isfixed={isFixed ? 1 : 0}>
                     {/*<Button*/}
                     {/*    size="sm"*/}
                     {/*    colorScheme='teal'*/}

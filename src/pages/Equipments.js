@@ -41,15 +41,9 @@ const equipmentsData = {
 export const Equipments = () => {
     return (
         <EquipmentList bg="gray.900">
-
-        
             {Object.values(equipmentsData.entities).map((item) =>
-
                 <EquipmentItem key={item.id} {...item}/>
-
             )}
-
-
         </EquipmentList>
     );
 };
