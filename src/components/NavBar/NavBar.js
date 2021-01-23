@@ -33,7 +33,8 @@ export const NavBar = ({children}) => {
 
     return (
         <>
-            <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'no-wrap'}>
+            <NavBarContainer p={4} position='fixed' wrap='no-wrap'>
+            {/*<NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'no-wrap'}>*/}
 
                 <NavDrawer/>
                 <Flex  width={{base: "50%", md: "200px"}}>
@@ -44,6 +45,7 @@ export const NavBar = ({children}) => {
                     </NavBarLogo>
                 </Flex>
 
+                {/*{!isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
                 {!isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
                 {!isMobile &&
                 <Flex direction="row" maxW='30%'>
@@ -54,7 +56,6 @@ export const NavBar = ({children}) => {
                         alignItems="center"
                         flexGrow={1}
                     >
-
                         <MenuItems href="/udstyr">UDSTYR</MenuItems>
                         <MenuItems href="/omos">OmOs</MenuItems>
                     </Flex>

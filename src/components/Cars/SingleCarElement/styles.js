@@ -4,8 +4,6 @@ import Link from 'next/link'
 import {Box, Flex} from "@chakra-ui/react"
 
 export const SingleCarItem = styled(Flex)`
-
-margin:16px 16px 0 16px ;
 flex-grow: 1;
 flex-direction: column;
 flex-basis: 25%;

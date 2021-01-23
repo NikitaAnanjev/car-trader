@@ -29,27 +29,26 @@ export default function Home(props) {
                 <Heading maxW={{sm: "100%", md: '60%', lg: "50%"}} p={3} textAlign='center' mb={10} fontSize='3rem'
                          color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
-                    <Button
-                        size="sm"
-                        colorScheme='green'
-                        minW='60px'
-                        mr={3}
-                        onClick={showAllCars}
-                    >All</Button>
-                    <Button
-                        size="sm"
-                        colorScheme={priceTypeProps ? 'red' : 'green'}
-                        minW='120px'
-                        mr={3}
-                        onClick={priceTypeOnClick}
-                    >{priceTypeProps ? 'Retail' : 'Leasing'} </Button>
+                    {/*<Button*/}
+                    {/*    size="sm"*/}
+                    {/*    colorScheme='green'*/}
+                    {/*    minW='60px'*/}
+                    {/*    mr={3}*/}
+                    {/*    onClick={showAllCars}*/}
+                    {/*>All</Button>*/}
+                    {/*<Button*/}
+                    {/*    size="sm"*/}
+                    {/*    colorScheme={priceTypeProps ? 'red' : 'green'}*/}
+                    {/*    minW='120px'*/}
+                    {/*    mr={3}*/}
+                    {/*    onClick={priceTypeOnClick}*/}
+                    {/*>{priceTypeProps ? 'Retail' : 'Leasing'} </Button>*/}
                 </SearchPanel>
             </TopBanner>
             <Cars data={cars ? cars : data}
-                  allcars={allcars}
-                  priceType={priceTypeProps}
+                  // allcars={allcars}
+                  // priceType={priceTypeProps}
             />
-            {/*<Cars data={cars ? cars : data} />*/}
         </PageLayout>
     )
 }

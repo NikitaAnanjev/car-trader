@@ -23,12 +23,14 @@ export const SearchPanel = ({data, children, isfixed}) => {
         // year: query.year ,
     }
 
+    const filterRetailPriceOnly =   data.filter((p) => p["PriceType"] !==  "Leasing")
+
     const getAllMakes = (val) => {
-        if (!data) return null
+        if (!filterRetailPriceOnly) return null
         const count = {};
         let array_elements = []
 
-        data.map((makes) =>
+        filterRetailPriceOnly.map((makes) =>
             array_elements.push(makes[val])
         )
         array_elements.sort();
@@ -38,8 +40,9 @@ export const SearchPanel = ({data, children, isfixed}) => {
         return Object.entries(count)
     }
 
+
     return (
-        <SearchPanelContainer isfixed={Boolean(isfixed)} justifyContent='flex-end' w={{base: "100%", md: '100%', lg: "90%"}}>
+        <SearchPanelContainer isfixed={Boolean(isfixed)} justifyContent='flex-end' w={{base: "100%", md: '100%', lg: isfixed ? "80%" : "60%"}}>
             <Formik initialValues={initialValues} onSubmit={(values) => {
                 router.push({
                     pathname: '/',
@@ -47,10 +50,10 @@ export const SearchPanel = ({data, children, isfixed}) => {
                 }, undefined, {shallow: false})
             }}>
                 {({values}) =>
-                    <FormikForm>
+                    <FormikForm name="searchForm">
                         <Flex
-                            direction="column"
-                            // direction={{base: 'column', md: "row-reverse"}}
+                            // direction="column"
+                            direction={{base: 'column', md: isfixed ? 'row' : "column"}}
                               w="100%">
                             <Flex
                                 mb={4}
@@ -63,7 +66,9 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
                             <Flex grow={1}>
                                 <FormControl id="make" bg='gray.700'  >
-                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white" size="lg" borderRadius="0 3px 3px 0" w="100%">
+                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white" size="lg" border={0} borderRadius="0 3px 3px 0" w="100%"
+                                           // onChange={() => searchForm.submit()}
+                                    >
                                         {getAllMakes('Make').map((make, index) =>
                                             <option style={{color: '#111111'}} key={index + make[1] + make[0]}
                                                     value={slugify(make[0])}>{make[0]} ( {make[1]} )</option>
@@ -71,7 +76,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
                                     </Field>
                                 </FormControl>
-                                <Button type="submit" colorScheme="blue" w="150px" size="lg" borderRadius="0 3px 3px 0"  mr={10}> Search</Button>
+                                <Button type="submit" colorScheme="blue" w="150px" size="lg" borderRadius="0 3px 3px 0" > Search</Button>
                             </Flex>
                         </Flex>
                     </FormikForm>

@@ -6,9 +6,9 @@ import {
     SingleCarItem,
     SinglePageContainer,
     CarContent,
-    EquipmentList
 } from "@/components/Cars/SingleCarElement/styles";
-import {CircularProgress, Heading, Box, List, ListItem, ListIcon, Flex} from "@chakra-ui/react"
+// import {carPrice} from "@/helper/carPrice";
+import {CircularProgress, Heading, Box, List, ListItem, ListIcon, Flex,Text} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 import {SingleCarTabs} from "@/components/SingleCarTabs";
@@ -30,8 +30,11 @@ export default function SingleCarPage() {
         () => query.id && `/api/cars/${query.make}/${query.slug}/${query.id}`,
         fetcher
     )
+
+
     if (error) return <div>{error.message}</div>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.600"/></LoadingIconWrap>
+
 
     const car = data
 
@@ -50,16 +53,22 @@ export default function SingleCarPage() {
         vehicleSourceId: car['VehicleSourceId'],
         equipmentList: car['EquipmentList'],
         comment: car['Comment'],
+        priceType: car['PriceType']
     }
-        console.log('data detaols', car)
+
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
     return (
-        <SingleCarItem >
+        <Box w="100%" bg="gray.900" py={10}>
+
+        <SingleCarItem  maxW="90%" color="white" m="auto">
 
             <Link href="/"> BACK to homepage</Link>
             <SinglePageContainer direction="column">
                 <Flex w="100%">
-                    <Heading>TITLE: {carTitle} </Heading>
+                    <Heading color="white">{carTitle} </Heading>
+
+
+
                 </Flex>
 
                 <Flex  direction={{base: "column", lg: "row"}}>
@@ -69,6 +78,7 @@ export default function SingleCarPage() {
 
 
                 <CarContent p={10}  maxW={{base:"100%",md:"50%"}}>
+                    {/*{oppositePrice && <Text color="white"> Leasing Price : <carPrice carId={data['VehicleSourceId']}/>     </Text> }*/}
                     <p> ID: {carDetails.price} DKK </p>
                     <p> MILEAGE: {carDetails.mileage} </p>
                     <p> Mark: {carDetails.make} </p>
@@ -84,5 +94,7 @@ export default function SingleCarPage() {
 
 
         </SingleCarItem>
+
+        </Box>
     )
 }

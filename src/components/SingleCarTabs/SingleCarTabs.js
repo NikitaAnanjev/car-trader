@@ -3,14 +3,14 @@ import {MdInfo} from "react-icons/md";
 
 export const SingleCarTabs = ({carDetails}) => {
     return (
-        <Tabs isFitted variant="enclosed">
+        <Tabs isFitted variant="enclosed" bg="gray.800">
             <TabList mb="1em">
                 <Tab>Beskrivelse</Tab>
                 <Tab>Udstyr</Tab>
             </TabList>
             <TabPanels>
-                <TabPanel>
-                    <Text  style={{columnCount: '2', columnGap: "30px"}}>  {carDetails.comment}</Text>
+                <TabPanel >
+                    <Text  maxW={{base: "100%",md: "70%"}} m="auto"> {carDetails.comment}</Text>
                 </TabPanel>
                 <TabPanel>
                     <Box w="100%" my={10}>

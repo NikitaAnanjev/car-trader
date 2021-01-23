@@ -71,13 +71,7 @@ export const ContactForm = ({carDetails, carTitle}) => {
 
                         <DrawerBody>
                             <Flex direction={{base: 'column', md: 'row'}} bg="gray.700">
-
-                                <CarImageContainer maxW={{base: '100%', md: '70%'}}>
-                                    <Image src={carDetails.pictures[0]}/>
-                                </CarImageContainer>
-
-                                <Flex w={{base: '100%', md: "300px"}} p={6} bg="gray.800">
-
+                                <Flex w={{base: '100%', md: "350px"}} p={6} bg="gray.800">
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
                                         <Stack spacing="24px">
                                             <Box>
@@ -130,8 +124,9 @@ export const ContactForm = ({carDetails, carTitle}) => {
                                         </Stack>
                                     </form>
                                 </Flex>
-
-
+                                <CarImageContainer maxW={{base: '100%'}}>
+                                    <Image src={carDetails.pictures[0]}/>
+                                </CarImageContainer>
                             </Flex>
 
 

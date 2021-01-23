@@ -1,8 +1,10 @@
-import {CarLink, CardContainer, EuroNormBadge} from './styles'
+
 import slugify from 'react-slugify';
 import NumberFormat from 'react-number-format';
 import {Box, Badge, Image, Flex, Text, Heading, Divider} from "@chakra-ui/react"
+import {CarLink, CardContainer, EuroNormBadge} from './styles'
 import {ContactForm} from "@/components/ContactForm";
+import {carPrice} from "@/helper/carPrice";
 
 export const SingleCarElement = ({car}) => {
     const carDetails = {
@@ -19,14 +21,18 @@ export const SingleCarElement = ({car}) => {
         fullPrice: car['CashPrice'],
         purchasePrice: car['PurchasePrice'],
         gear: car['GearType'],
-        euroNorm: car['EuroNorm']
+        euroNorm: car['EuroNorm'],
+        vehicleSourceId: car['VehicleSourceId'],
+        priceType: car['PriceType']
     }
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
     const slug = slugify(carTitle)
     const slugMake = slugify(carDetails.make)
-    const leasingPrice = carDetails.leasingPrice &&
-        <NumberFormat value={carDetails.leasingPrice} displayType={'text'} thousandSeparator={true} prefix={'DKK'}/>
+
+
+    const oppositePrice = carPrice(carDetails.vehicleSourceId, carDetails.priceType)
+    const leasingPrice = oppositePrice && <NumberFormat value={oppositePrice} displayType={'text'} thousandSeparator={true} prefix={'DKK '}/>
     const fullPrice = <NumberFormat value={carDetails.fullPrice} displayType={'text'} thousandSeparator={true}
                                     prefix={'DKK '}/>
     const mileage = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
@@ -36,7 +42,6 @@ export const SingleCarElement = ({car}) => {
         imageAlt: slug,
         title: carTitle,
     }
-
 
     return (
         <>
@@ -82,7 +87,7 @@ export const SingleCarElement = ({car}) => {
                     <Flex direction="row" justifyContent="space-between" alignItems="center">
 
 
-                        <Flex direction="row" p={3} px={5} mt={2} maxW={{base: "60%", md: "80%"}}
+                        <Flex direction="row" p={3} px={5} maxW={{base: "60%", md: "80%"}}
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
 
@@ -91,16 +96,24 @@ export const SingleCarElement = ({car}) => {
                                 <Heading color="white" size={'lg'}>{fullPrice}</Heading>
                             </Box>
                             }
-                            {leasingPrice && <Flex direction="row">
-                                <Heading d='flex' color="white" size={'lg'}> {leasingPrice}</Heading>
+
+                        </Flex>
+                        {leasingPrice && <Flex direction="column">
+                            <Text fontSize="13px" color="white"> Leasing</Text>
+                            <Flex direction="row" borderRadius="8px" border="1px solid white" p={2} px={3}>
+                                <Heading d='flex' color="white" size={'md'}>
+                                    {leasingPrice}
+                                </Heading>
                                 <Box ml={2} as="span" color="gray.100" fontSize="sm" d="flex">
                                     / mdr
                                 </Box>
                             </Flex>
-                            }
-
 
                         </Flex>
+                        }
+
+
+
                         <Flex>
                             <ContactForm carDetails={carDetails} carTitle={carTitle}/>
                         </Flex>

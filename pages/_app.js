@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Button, ChakraProvider, CircularProgress, extendTheme} from "@chakra-ui/react"
+import {Button, ChakraProvider, CircularProgress, extendTheme, Box} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
@@ -27,17 +27,17 @@ const customTheme = extendTheme({colors})
 
 
 function MyApp({Component, pageProps}) {
+    //
+    // const [state,setState] = useState(null)
+    // const [allcars,setAllCars] = useState(true)
 
-    const [state,setState] = useState(null)
-    const [allcars,setAllCars] = useState(true)
-
-    const priceTypeOnClick = () => {
-        setState(!state)
-    }
-    const showAllCars = () => {
-        setAllCars(true)
-        setState(null)
-    }
+    // const priceTypeOnClick = () => {
+    //     setState(!state)
+    // }
+    // const showAllCars = () => {
+    //     setAllCars(true)
+    //     setState(null)
+    // }
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
@@ -47,23 +47,30 @@ function MyApp({Component, pageProps}) {
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
                 <SearchPanel data={data} isfixed={true}>
-                    <Button
-                        size="sm"
-                        colorScheme='teal'
-                        minW='120px'
-                        mr={3}
-                        onClick={showAllCars}
-                    >All</Button>
-                    <Button
-                        size="sm"
-                        colorScheme={state ? 'red' : 'green'}
-                        minW='120px'
-                        mr={3}
-                        onClick={priceTypeOnClick}
-                    >{state ? 'Retail' : 'Leasing'} </Button>
+                    {/*<Button*/}
+                    {/*    size="sm"*/}
+                    {/*    colorScheme='teal'*/}
+                    {/*    minW='120px'*/}
+                    {/*    mr={3}*/}
+                    {/*    onClick={showAllCars}*/}
+                    {/*>All</Button>*/}
+                    {/*<Button*/}
+                    {/*    size="sm"*/}
+                    {/*    colorScheme={state ? 'red' : 'green'}*/}
+                    {/*    minW='120px'*/}
+                    {/*    mr={3}*/}
+                    {/*    onClick={priceTypeOnClick}*/}
+                    {/*>{state ? 'Retail' : 'Leasing'} </Button>*/}
                 </SearchPanel>
             </NavBar>
-            <Component {...pageProps} priceTypeProps={state} showAllCars={showAllCars} allcars={allcars} priceTypeOnClick={priceTypeOnClick}/>
+            <Box pt="92px">
+            <Component {...pageProps}
+                       // priceTypeProps={state}
+                       // showAllCars={showAllCars}
+                       // allcars={allcars}
+                       // priceTypeOnClick={priceTypeOnClick}
+            />
+            </Box>
             <Footer/>
         </ChakraProvider>
     )
