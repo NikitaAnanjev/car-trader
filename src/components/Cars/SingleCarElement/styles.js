@@ -1,15 +1,14 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-import {Box} from "@chakra-ui/react"
+import {Box, Flex} from "@chakra-ui/react"
 
-export const SingleCarItem = styled('div')`
-display: flex;
+export const SingleCarItem = styled(Flex)`
+
 margin:16px 16px 0 16px ;
 flex-grow: 1;
 flex-direction: column;
 flex-basis: 25%;
-padding: 0 10%;
 
 `
 export const SingleCarItemInner = styled('div')`
@@ -21,26 +20,24 @@ border: 1px solid gray;
 flex-grow: 1;
 flex-direction: column;
 `
-export const SinglePageContainer = styled('div')`
-display: flex;
+export const SinglePageContainer = styled(Flex)`
 width: 100%;
-flex-direction: row;
 `
 
 
-export const CarContent = styled('div')`
-display: flex;
+export const CarContent = styled(Flex)`
+
 flex-direction: column;
-width: 50%;
+width: 100%;
 `
 export const EquipmentList = styled('div')`
 display: flex;
 `
 
-export const CarImageContainer = styled('div')`
-display: flex;
+export const CarImageContainer = styled(Flex)`
+
+width: 100%;
 position: relative;
-width: 50%;
 `
 export const EuroNormBadge = styled('div')`
 position: absolute;

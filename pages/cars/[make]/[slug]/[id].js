@@ -8,7 +8,7 @@ import {
     CarContent,
     EquipmentList
 } from "@/components/Cars/SingleCarElement/styles";
-import {CircularProgress, Heading, Box,List, ListItem, ListIcon} from "@chakra-ui/react"
+import {CircularProgress, Heading, Box, List, ListItem, ListIcon, Flex} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 import {
@@ -54,12 +54,21 @@ export default function SingleCarPage() {
 
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
     return (
-        <SingleCarItem>
-            <Link href="/"> BACK to homepage</Link>
-            <SinglePageContainer>
+        <SingleCarItem >
 
-                <CarContent>
+            <Link href="/"> BACK to homepage</Link>
+            <SinglePageContainer direction="column">
+                <Flex w="100%">
                     <Heading>TITLE: {carTitle} </Heading>
+                </Flex>
+
+                <Flex  direction={{base: "column", lg: "row"}}>
+                <CarImageContainer maxW={{base:"100%",md:"50%"}}>
+                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
+                </CarImageContainer>
+
+
+                <CarContent p={10}  maxW={{base:"100%",md:"50%"}}>
                     <p> ID: {carDetails.price} DKK </p>
                     <p> MILEAGE: {carDetails.mileage} </p>
                     <p> Mark: {carDetails.make} </p>
@@ -67,13 +76,9 @@ export default function SingleCarPage() {
                     <p> Variant: {carDetails.variant} </p>
                     <p> Motor: {carDetails.motor} </p>
                     <p> Fuel: {carDetails.fuel} </p>
-                 </CarContent>
+                </CarContent>
 
-                <CarImageContainer>
-                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
-                </CarImageContainer>
-
-
+                </Flex>
             </SinglePageContainer>
 
             <Box w="100%" my={10}>

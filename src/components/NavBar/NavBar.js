@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Box, Flex, Image, Spacer} from "@chakra-ui/react"
+import {Box, Flex, Image} from "@chakra-ui/react"
 import {NavBarLogo, NavBarContainer, SearchNavBar} from './styles'
 import Link from 'next/link'
 import {DrawerBar} from "@/components/NavBar/DrawerBar/DrawerBar";
@@ -36,7 +36,7 @@ export const NavBar = ({children}) => {
             <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'no-wrap'}>
 
                 <NavDrawer/>
-                <Flex mr={5} width={{base: "50%", md: "200px"}}>
+                <Flex  width={{base: "50%", md: "200px"}}>
                     <NavBarLogo >
                         <Link href="/">
                             <Image src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"/>

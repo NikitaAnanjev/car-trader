@@ -25,5 +25,9 @@ width: 100%;
 color: white;
 justify-content: space-between;
 align-items: center;
-
+a {
+  text-transform: uppercase;
+  
+  font-family: 'Open Sans', sans-serif!important;
+}
 `
