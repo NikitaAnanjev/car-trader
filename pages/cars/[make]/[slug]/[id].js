@@ -11,9 +11,8 @@ import {
 import {CircularProgress, Heading, Box, List, ListItem, ListIcon, Flex} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
-import {
-    MdInfo
-} from "react-icons/md";
+import {SingleCarTabs} from "@/components/SingleCarTabs";
+
 
 const fetcher = async (url) => {
     const res = await fetch(url)
@@ -50,8 +49,9 @@ export default function SingleCarPage() {
         price: car['Price'],
         vehicleSourceId: car['VehicleSourceId'],
         equipmentList: car['EquipmentList'],
+        comment: car['Comment'],
     }
-
+        console.log('data detaols', car)
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
     return (
         <SingleCarItem >
@@ -80,19 +80,8 @@ export default function SingleCarPage() {
 
                 </Flex>
             </SinglePageContainer>
+            <SingleCarTabs carDetails={carDetails}/>
 
-            <Box w="100%" my={10}>
-                <EquipmentList>
-                    <List spacing={2} w="100%" d="flex" flexDirection="column" flexWrap="wrap" maxH="500px">
-                        {carDetails.equipmentList.map((item) =>
-                            <ListItem mr={10}>
-                                <ListIcon as={MdInfo} color="green.500"/>
-                                {item}
-                            </ListItem>
-                        )}
-                    </List>
-                </EquipmentList>
-            </Box>
 
         </SingleCarItem>
     )

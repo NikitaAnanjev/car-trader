@@ -1,10 +1,10 @@
-import {SingleCarItem, CarouselItem} from './styles'
+import {SingleCarImgCarousel, CarouselItem} from './styles'
 import {Carousel} from 'react-responsive-carousel';
 
 export const CarImage = ({images, video}) => {
     return (
-        <SingleCarItem>
-            <Carousel showArrows={true} showThumbs={true} useKeyboardArrows={true} swipeable={true} infiniteLoop={true}>
+        <SingleCarImgCarousel>
+            <Carousel showArrows={true} showThumbs={true} useKeyboardArrows={true} swipeable={true} infiniteLoop={true} style={{width: '100%'}}>
                 {/*{video && <CarouselItem>*/}
                 {/*    <iframe style={{margin: '0', height: '100%', width: '100%'}}*/}
                 {/*            frameBorder="0" allowFullScreen allowTransparency="true" mozallowfullscreen*/}
@@ -18,7 +18,7 @@ export const CarImage = ({images, video}) => {
                     </div>
                 )}
             </Carousel>
-        </SingleCarItem>
+      </SingleCarImgCarousel>
     );
 };
 

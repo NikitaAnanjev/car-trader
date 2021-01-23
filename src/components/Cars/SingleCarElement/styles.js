@@ -30,12 +30,8 @@ export const CarContent = styled(Flex)`
 flex-direction: column;
 width: 100%;
 `
-export const EquipmentList = styled('div')`
-display: flex;
-`
 
 export const CarImageContainer = styled(Flex)`
-
 width: 100%;
 position: relative;
 `

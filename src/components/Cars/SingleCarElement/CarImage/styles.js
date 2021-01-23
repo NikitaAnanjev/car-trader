@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
 
-export const SingleCarItem = styled('div')`
+export const SingleCarImgCarousel = styled('div')`
 display: flex;
 padding: 16px;
 flex-grow: 1;
 position: relative;
-.thumbs-wrapper {
- max-width: 700px;
+width: 100%;
+
+.carousel-root {
+width: 100%;
 }
 `
 export const SingleCarItemInner = styled('a')`

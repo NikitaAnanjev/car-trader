@@ -26,7 +26,7 @@ export const SingleCarElement = ({car}) => {
     const slug = slugify(carTitle)
     const slugMake = slugify(carDetails.make)
     const leasingPrice = carDetails.leasingPrice &&
-        <NumberFormat value={carDetails.leasingPrice} displayType={'text'} thousandSeparator={true} prefix={'DKK '}/>
+        <NumberFormat value={carDetails.leasingPrice} displayType={'text'} thousandSeparator={true} prefix={'DKK'}/>
     const fullPrice = <NumberFormat value={carDetails.fullPrice} displayType={'text'} thousandSeparator={true}
                                     prefix={'DKK '}/>
     const mileage = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
@@ -37,8 +37,6 @@ export const SingleCarElement = ({car}) => {
         title: carTitle,
     }
 
-    // const { data, loading, error } = useRemoteData()
-
 
     return (
         <>
@@ -47,6 +45,7 @@ export const SingleCarElement = ({car}) => {
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                     <Image src={property.imageUrl} alt={property.imageAlt}/>
                 </CarLink>
+
                 {carDetails.euroNorm &&
                 <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
 
@@ -83,8 +82,9 @@ export const SingleCarElement = ({car}) => {
                     <Flex direction="row" justifyContent="space-between" alignItems="center">
 
 
-                        <Flex direction="row" p={3} mt={2} bg='green.500' maxW={{base: "60%", md: "50%"}}
-                              justifyContent="center" alignItems="center" borderRadius="50px">
+                        <Flex direction="row" p={3} px={5} mt={2} maxW={{base: "60%", md: "80%"}}
+                              justifyContent="center" alignItems="center" borderRadius="8px"
+                              style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
 
                             {fullPrice &&
                             <Box>
@@ -101,8 +101,10 @@ export const SingleCarElement = ({car}) => {
 
 
                         </Flex>
+                        <Flex>
+                            <ContactForm carDetails={carDetails} carTitle={carTitle}/>
+                        </Flex>
 
-                        <ContactForm carDetails={carDetails} carTitle={carTitle}/>
 
                     </Flex>
 

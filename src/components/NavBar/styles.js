@@ -19,7 +19,8 @@ justify-content: center;
 `
 
 export const NavBarContainer = styled(Flex)`
-background: ${({theme}) => theme.colors.gray["900"]};
+background: linear-gradient(145deg, #000000, #2a3744);
+// background: ${({theme}) => theme.colors.gray["900"]};
 z-index: 100;
 width: 100%;
 color: white;

@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react"
 
 import {MdDirectionsCar} from "react-icons/md";
+import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 
 export const ContactForm = ({carDetails, carTitle}) => {
@@ -46,9 +47,12 @@ export const ContactForm = ({carDetails, carTitle}) => {
 
     return (
         <>
-            <IconButton icon={<MdDirectionsCar/>}
-                        fontSize="20px"
-                        aria-label="Book this car" colorScheme="teal" onClick={onOpen}/>
+            <Button leftIcon={<MdDirectionsCar/>}
+                    rightIcon={<ArrowForwardIcon/>}
+                    variant="link"
+                    color="white"
+                    aria-label="Book this car"
+                    colorScheme="green" onClick={onOpen}> Bestil</Button>
             <Drawer
                 isOpen={isOpen}
                 size='full'
@@ -68,7 +72,7 @@ export const ContactForm = ({carDetails, carTitle}) => {
                         <DrawerBody>
                             <Flex direction={{base: 'column', md: 'row'}} bg="gray.700">
 
-                                <CarImageContainer w={{base: '100%', md: '50%'}}>
+                                <CarImageContainer maxW={{base: '100%', md: '70%'}}>
                                     <Image src={carDetails.pictures[0]}/>
                                 </CarImageContainer>
 
@@ -128,14 +132,16 @@ export const ContactForm = ({carDetails, carTitle}) => {
                                 </Flex>
 
 
-                                <Flex p={6}>
-                                    <Box color="white">
-                                        <p> {carDetails.mileage}</p>
-                                        <p> {carDetails.year}</p>
-                                        <p> {carDetails.make}</p>
-                                    </Box>
-                                </Flex>
                             </Flex>
+
+
+                            {/*<Flex p={6}>*/}
+                            {/*    <Box color="white">*/}
+                            {/*        <p> {carDetails.mileage}</p>*/}
+                            {/*        <p> {carDetails.year}</p>*/}
+                            {/*        <p> {carDetails.make}</p>*/}
+                            {/*    </Box>*/}
+                            {/*</Flex>*/}
                         </DrawerBody>
 
                         <DrawerFooter borderTopWidth="1px">
