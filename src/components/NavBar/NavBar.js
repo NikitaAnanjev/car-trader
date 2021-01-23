@@ -33,7 +33,7 @@ export const NavBar = ({children}) => {
 
     return (
         <>
-            <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'wrap'}>
+            <NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'no-wrap'}>
 
                 <NavDrawer/>
                 <Flex mr={5} width={{base: "50%", md: "200px"}}>
@@ -44,9 +44,9 @@ export const NavBar = ({children}) => {
                     </NavBarLogo>
                 </Flex>
 
-                {/*{ !isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
+                {!isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
                 {!isMobile &&
-                <Flex direction="row" w='30%'>
+                <Flex direction="row" maxW='30%'>
                     <Flex
                         justifyContent="flex-end"
 
@@ -58,11 +58,18 @@ export const NavBar = ({children}) => {
                         <MenuItems href="/udstyr">UDSTYR</MenuItems>
                         <MenuItems href="/omos">OmOs</MenuItems>
                     </Flex>
+
+                    <Flex>
+                        <DrawerBar/>
+                    </Flex>
                 </Flex>
                 }
+                {isMobile &&
+                <Flex>
+                    <DrawerBar/>
+                </Flex>}
 
-                <Flex><DrawerBar/></Flex>
-                {  router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
+                {/*{  router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
             </NavBarContainer>
         </>
     );

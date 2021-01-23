@@ -46,9 +46,8 @@ function MyApp({Component, pageProps}) {
     return (
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
-                <SearchPanel data={data} isfixed>
+                <SearchPanel data={data} isfixed={true}>
                     <Button
-
                         size="sm"
                         colorScheme='teal'
                         minW='120px'

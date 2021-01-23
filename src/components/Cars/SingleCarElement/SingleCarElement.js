@@ -42,13 +42,13 @@ export const SingleCarElement = ({car}) => {
 
     return (
         <>
-            <CardContainer maxW="lg" borderRadius="xs" overflow="hidden" mb={10} cursor="pointer" bg="gray.700">
+            <CardContainer maxW="lg" borderRadius="sm" overflow="hidden" mb={10} cursor="pointer" bg="gray.700">
 
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                     <Image src={property.imageUrl} alt={property.imageAlt}/>
                 </CarLink>
-                    {carDetails.euroNorm &&
-                    <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
+                {carDetails.euroNorm &&
+                <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
 
 
                 <Box p="6">
@@ -83,26 +83,26 @@ export const SingleCarElement = ({car}) => {
                     <Flex direction="row" justifyContent="space-between" alignItems="center">
 
 
-                    <Flex direction="row" p={3} mt={2} bg='green.500' maxW={{base: "60%", md: "50%"}}
-                          justifyContent="center" alignItems="center" borderRadius="50px">
+                        <Flex direction="row" p={3} mt={2} bg='green.500' maxW={{base: "60%", md: "50%"}}
+                              justifyContent="center" alignItems="center" borderRadius="50px">
 
-                        {fullPrice &&
-                        <Box>
-                            <Heading color="white" size={'lg'}>{fullPrice}</Heading>
-                        </Box>
-                        }
-                        {leasingPrice && <Flex direction="row">
-                            <Heading d='flex' color="white" size={'lg'}> {leasingPrice}</Heading>
-                            <Box ml={2} as="span" color="gray.100" fontSize="sm" d="flex">
-                                / mdr
+                            {fullPrice &&
+                            <Box>
+                                <Heading color="white" size={'lg'}>{fullPrice}</Heading>
                             </Box>
+                            }
+                            {leasingPrice && <Flex direction="row">
+                                <Heading d='flex' color="white" size={'lg'}> {leasingPrice}</Heading>
+                                <Box ml={2} as="span" color="gray.100" fontSize="sm" d="flex">
+                                    / mdr
+                                </Box>
+                            </Flex>
+                            }
+
+
                         </Flex>
-                        }
 
-
-                    </Flex>
-
-                    <ContactForm carDetails={carDetails}  carTitle={carTitle}/>
+                        <ContactForm carDetails={carDetails} carTitle={carTitle}/>
 
                     </Flex>
 

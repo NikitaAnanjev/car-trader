@@ -1,11 +1,12 @@
 import {Field, Formik} from "formik";
 
-// Emotion components
+// Chakra components
 import {
     Button,
     Select,
     FormControl,
-    Flex
+    Flex,
+    Text
 } from "@chakra-ui/react"
 
 // local libs
@@ -38,7 +39,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
     }
 
     return (
-        <SearchPanelContainer isfixed={isfixed} justifyContent='flex-end' w={{base: "100%", md: '100%', lg: "50%"}}>
+        <SearchPanelContainer isfixed={Boolean(isfixed)} justifyContent='flex-end' w={{base: "100%", md: '100%', lg: "50%"}}>
             <Formik initialValues={initialValues} onSubmit={(values) => {
                 router.push({
                     pathname: '/',
@@ -47,14 +48,22 @@ export const SearchPanel = ({data, children, isfixed}) => {
             }}>
                 {({values}) =>
                     <FormikForm>
-                        <Flex direction={{base: 'column', md: "row-reverse"}}>
-                            <Flex mb={{base: '1rem', md: "0"}}>
+                        <Flex
+                            direction="column"
+                            // direction={{base: 'column', md: "row-reverse"}}
+                              w="100%">
+                            <Flex
+                                mb={4}
+                                // mb={{base: '1rem', md: "1rem"}}
+                            >
+                                {!isfixed &&  <Text color="gray.200" mr={5}>I am looking for a car</Text> }
+
                                 {children}
                             </Flex>
 
-                            <Flex>
-                                <FormControl id="make" mr={10} bg='gray.700'>
-                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white">
+                            <Flex grow={1}>
+                                <FormControl id="make" bg='gray.700'  >
+                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white" size="lg" borderRadius="0 3px 3px 0" w="100%">
                                         {getAllMakes('Make').map((make, index) =>
                                             <option style={{color: '#111111'}} key={index + make[1] + make[0]}
                                                     value={slugify(make[0])}>{make[0]} ( {make[1]} )</option>
@@ -62,7 +71,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
                                     </Field>
                                 </FormControl>
-                                <Button type="submit" colorScheme="blue" w="150px" size="md" mr={10}> Search</Button>
+                                <Button type="submit" colorScheme="blue" w="150px" size="lg" borderRadius="0 3px 3px 0"  mr={10}> Search</Button>
                             </Flex>
                         </Flex>
                     </FormikForm>

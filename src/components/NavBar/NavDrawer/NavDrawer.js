@@ -7,12 +7,23 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Button,
-    Flex, Text, Box
-
+    Flex, Text, Box,
+    List, ListItem, ListIcon
 } from "@chakra-ui/react"
 import {useDisclosure} from "@chakra-ui/react"
-export const NavDrawer = () => {
+import {useRouter} from "next/router";
+import {MenuItemChakra} from "@/components/NavBar/NavDrawer/styles";
+import Link from "next/link";
 
+
+// const MenuItems = ({ href,children}) =>  (
+//         <MenuItemChakra isActive={Boolean(router.pathname === href)}><Link href={href ? href : '#'} >   {children} </Link></MenuItemChakra>
+//     )
+
+
+
+export const NavDrawer = () => {
+    const router = useRouter()
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const btnRef = React.useRef()
@@ -39,17 +50,23 @@ export const NavDrawer = () => {
                 placement="left"
                 onClose={onClose}
                 finalFocusRef={btnRef}
+
             >
                 <DrawerOverlay>
-                    <DrawerContent>
-                        <DrawerCloseButton/>
-                        <DrawerHeader>Menu</DrawerHeader>
+                    <DrawerContent
+                        bg="gray.900"
+                        maxW="350px"
+                    >
+                        <DrawerCloseButton  color='gray.200'/>
+                        <DrawerHeader color='gray.200' bg="gray.800">Menu</DrawerHeader>
 
-                        <DrawerBody>
-                            <ul>
-                                <li>1</li>
-                                <li>2</li>
-                            </ul>
+                        <DrawerBody color="white" p="0">
+                            <List>
+                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/') } onClick={onClose}><Link href='/' >  Home </Link></MenuItemChakra></ListItem>
+                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/udstyr')} onClick={onClose}><Link href='/udstyr' >  Udstyr </Link></MenuItemChakra></ListItem>
+                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/omos')} onClick={onClose}><Link href='/omos' >  OmOs </Link></MenuItemChakra></ListItem>
+
+                            </List>
                         </DrawerBody>
 
                         <DrawerFooter>
