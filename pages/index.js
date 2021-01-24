@@ -1,20 +1,18 @@
 import Head from 'next/head'
-// import {Cars} from '@/components/Cars'
 import {SearchPanel} from '@/components/SearchPanel'
-import {getAsString} from "../helper/getAsString";
+import {getAsString} from "@/helper/getAsString";
 import slugify from "react-slugify";
-import {CircularProgress, Heading} from "@chakra-ui/react"
+import {CircularProgress, Heading,Flex} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import useSWR from 'swr'
 import {encode} from "base-64";
 import {PageLayout} from "@/components/Cars/styles";
 import {TopBanner} from "@/components/TopBanner";
 import dynamic from "next/dynamic";
+
 const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'))
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-
-
 export default function Home({cars}) {
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
@@ -26,7 +24,7 @@ export default function Home({cars}) {
             <Head/>
             <TopBanner>
                 <Heading maxW={{sm: "100%", md: '70%', lg: "60%"}} textAlign={{base: "center", md: "left"}} mb={10}
-                         fontSize={{base: "2rem", sm: "3rem",md: '3.5rem', lg: '5rem'}}
+                         fontSize={{base: "2rem", sm: "3rem", md: '3.5rem', lg: '5rem'}}
                          p={{base: 3, sm: 2, md: 0}}
                          color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
