@@ -10,5 +10,6 @@ export const LoadingIconWrap = styled('div')`
   justify-content: center;
   align-items: center;
   background-color: #333333;
+  z-index: 5000;
 `
 

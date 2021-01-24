@@ -30,7 +30,7 @@ import {carPrice} from "@/helper/carPrice";
     const slugMake = slugify(carDetails.make)
 
 
-    const oppositePrice = carPrice(carDetails.vehicleSourceId, carDetails.priceType)
+    const oppositePrice = carPrice(carDetails.vehicleSourceId)
     const leasingPrice = oppositePrice && <NumberFormat value={oppositePrice} displayType={'text'} thousandSeparator={true} prefix={'DKK '}/>
     const fullPrice = <NumberFormat value={carDetails.fullPrice} displayType={'text'} thousandSeparator={true}
                                     prefix={'DKK '}/>

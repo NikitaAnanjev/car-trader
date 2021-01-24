@@ -6,8 +6,6 @@ import {Box, Flex} from "@chakra-ui/react"
 export const SingleCarItem = styled(Flex)`
 flex-grow: 1;
 flex-direction: column;
-flex-basis: 25%;
-
 `
 export const SingleCarItemInner = styled('div')`
 display: flex;
@@ -24,7 +22,7 @@ width: 100%;
 
 
 export const CarContent = styled(Flex)`
-
+border-radius: 8px;
 flex-direction: column;
 width: 100%;
 `

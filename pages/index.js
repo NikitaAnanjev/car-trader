@@ -10,7 +10,8 @@ import {PageLayout} from "@/components/Cars/styles";
 import {TopBanner} from "@/components/TopBanner";
 import dynamic from "next/dynamic";
 
-const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'))
+const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'),
+    {loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress isIndeterminate color="red.300"/></Flex>})
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function Home({cars}) {

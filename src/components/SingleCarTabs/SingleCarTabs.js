@@ -2,11 +2,12 @@ import {Tabs, TabList, TabPanels, Tab, TabPanel, Box, Flex, ListItem, ListIcon, 
 import {MdInfo} from "react-icons/md";
 
 export const SingleCarTabs = ({carDetails}) => {
+
     return (
-        <Tabs isFitted variant="enclosed" bg="gray.800">
+        <Tabs isFitted variant="enclosed" bg="gray.800" borderRadius="8px"  colorScheme="gray" isLazy>
             <TabList mb="1em">
-                <Tab>Beskrivelse</Tab>
-                <Tab>Udstyr</Tab>
+                <Tab  _focuse={{background: "gray.700"}} borderRadius="8px 0 8x 0">Beskrivelse</Tab>
+                <Tab borderRadius="8px 0 8x 0">Udstyr</Tab>
             </TabList>
             <TabPanels>
                 <TabPanel >
@@ -16,7 +17,6 @@ export const SingleCarTabs = ({carDetails}) => {
                     <Box w="100%" my={10}>
                         <Flex>
                             <List spacing={2} w="100%"  flexDirection="column" flexWrap="wrap"
-                                  // maxH={{sm: "1000px", md: "900px", lg: "700px"}}
 
                             >
                                 {carDetails.equipmentList.map((item, index) =>

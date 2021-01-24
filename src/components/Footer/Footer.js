@@ -74,6 +74,9 @@ export const Footer = () => {
                     </ListItem>
                 </List></FooterItem>
             <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}><Image w="80%" src="/trustpilot.JPG"/></FooterItem>
+
+
+
         </FooterContainer>
     );
 };

@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 
 export const SingleCarImgCarousel = styled('div')`
 display: flex;
-padding: 16px;
 flex-grow: 1;
 position: relative;
 width: 100%;

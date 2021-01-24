@@ -1,20 +1,8 @@
 import {CarList} from './styles'
 import dynamic from "next/dynamic";
-import { Flex,Stack,Skeleton} from "@chakra-ui/react";
+import {CircularProgress, Flex} from "@chakra-ui/react";
 
-const DynamicCars = dynamic(() => import('./SingleCarElement/SingleCarElement'),
-    {loading: () =>
-
-
-            <Stack>
-                <Skeleton height="260px" />
-                <Skeleton height="20px" />
-                <Skeleton height="20px" />
-                <Skeleton height="10px" />
-                <Skeleton height="10px" />
-                <Skeleton height="10px" />
-            </Stack>
-      })
+const DynamicCars = dynamic(() => import('./SingleCarElement/SingleCarElement'))
 
 
 const Cars = ({data, priceType}) => {
