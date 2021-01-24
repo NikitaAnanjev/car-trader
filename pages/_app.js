@@ -6,10 +6,10 @@ import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
 import useSWR from "swr";
 import {LoadingIconWrap} from "@/components/styles";
-import {useState} from "react";
+
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
-import { useRouter } from 'next/router'
+// import {useRouter} from 'next/router'
 // import { extendTheme } from "@chakra-ui/core"
 
 // 2. Extend the theme to include custom colors, fonts, etc.
@@ -27,55 +27,23 @@ const customTheme = extendTheme({colors})
 
 
 function MyApp({Component, pageProps}) {
-    //
-    // const [state,setState] = useState(null)
-    // const [allcars,setAllCars] = useState(true)
 
-    // const priceTypeOnClick = () => {
-    //     setState(!state)
-    // }
-    // const showAllCars = () => {
-    //     setAllCars(true)
-    //     setState(null)
-    // }
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
-    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300" /></LoadingIconWrap>
+    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
 
     const isFixed = true
     return (
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
-                <SearchPanel data={data} isfixed={isFixed ? 1 : 0}>
-                    {/*<Button*/}
-                    {/*    size="sm"*/}
-                    {/*    colorScheme='teal'*/}
-                    {/*    minW='120px'*/}
-                    {/*    mr={3}*/}
-                    {/*    onClick={showAllCars}*/}
-                    {/*>All</Button>*/}
-                    {/*<Button*/}
-                    {/*    size="sm"*/}
-                    {/*    colorScheme={state ? 'red' : 'green'}*/}
-                    {/*    minW='120px'*/}
-                    {/*    mr={3}*/}
-                    {/*    onClick={priceTypeOnClick}*/}
-                    {/*>{state ? 'Retail' : 'Leasing'} </Button>*/}
-                </SearchPanel>
+                <SearchPanel data={data} isfixed={isFixed ? 1 : 0}/>
             </NavBar>
-            <Box pt="92px">
-            <Component {...pageProps}
-                       // priceTypeProps={state}
-                       // showAllCars={showAllCars}
-                       // allcars={allcars}
-                       // priceTypeOnClick={priceTypeOnClick}
-            />
+            <Box pt={{base: "75px", md: "92px"}}>
+                <Component {...pageProps}/>
             </Box>
             <Footer/>
         </ChakraProvider>
     )
-
-
 }
 
 export default MyApp
