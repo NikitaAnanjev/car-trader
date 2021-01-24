@@ -1,20 +1,26 @@
 import {CarList} from './styles'
-import {SingleCarElement} from "./SingleCarElement";
+import dynamic from "next/dynamic";
 
-export const Cars = ({data, priceType, allcars}) => {
+const DynamicCars = dynamic(() => import('./SingleCarElement/SingleCarElement'))
+
+
+export const Cars = ({data, priceType}) => {
+
+    //
+
     const getValue = ({CashPrice}) => CashPrice && +CashPrice.slice(0) || 0;
     const getLeasingValue = ({LeasingPrice}) => LeasingPrice && +LeasingPrice.slice(0) || 0;
     const filtered = data.filter((p) => p["PriceType"] !== 'Leasing' )
-    // const filtered = allcars ? data : (!priceType ? data.filter((p) => p["PriceType"] === 'Leasing' ): (data.filter((p) => p["PriceType"] !== 'Leasing' )) )
-    const sortData = () => {
+     const sortData = () => {
         // return data.sort((a, b) =>  getValue(b) - getValue(a));
+        // return filtered.sort((a, b) => !priceType ? getLeasingValue(b) - getLeasingValue(a) : getValue(b) - getValue(a));
         return filtered.sort((a, b) => !priceType ? getLeasingValue(b) - getLeasingValue(a) : getValue(b) - getValue(a));
     }
 
     return (
         <CarList>
             {sortData().map((car) =>
-                <SingleCarElement key={car["Id"]} car={car}/>
+                <DynamicCars key={car["Id"]} car={car}/>
             )}
         </CarList>
     );

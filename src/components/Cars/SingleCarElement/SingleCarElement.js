@@ -6,7 +6,7 @@ import {CarLink, CardContainer, EuroNormBadge} from './styles'
 import {ContactForm} from "@/components/ContactForm";
 import {carPrice} from "@/helper/carPrice";
 
-export const SingleCarElement = ({car}) => {
+ const SingleCarElement = ({car}) => {
     const carDetails = {
         id: car['Id'],
         mileage: car['Mileage'],
@@ -43,12 +43,14 @@ export const SingleCarElement = ({car}) => {
         title: carTitle,
     }
 
+    const changeImageSize = property.imageUrl.replace('l1600', 'l480')
+
     return (
         <>
             <CardContainer maxW="lg" borderRadius="sm" overflow="hidden" mb={10} cursor="pointer" bg="gray.700">
 
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
-                    <Image src={property.imageUrl} alt={property.imageAlt}/>
+                    <Image src={changeImageSize} alt={property.imageAlt}/>
                 </CarLink>
 
                 {carDetails.euroNorm &&
@@ -66,20 +68,29 @@ export const SingleCarElement = ({car}) => {
                     >
                         <Heading size="lg" color="gray.200">{property.title}</Heading>
                     </Box>
-                    <Box d="flex" alignItems="baseline">
-                        <Badge borderRadius="full" px="2" colorScheme="teal">
-                            {carDetails.fuel}
-                        </Badge>
-                        <Box
-                            color="gray.500"
-                            fontWeight="semibold"
-                            letterSpacing="wide"
-                            fontSize="sm"
-                            textTransform="uppercase"
-                            ml="2"
-                        >
-                            {carDetails.motor} motor &bull; {mileage} km
-                        </Box>
+                    <Box d="flex" alignItems="baseline" justifyContent="space-between">
+                        <Flex>
+                            <Badge borderRadius="full" px="2" colorScheme="teal">
+                                {carDetails.fuel}
+                            </Badge>
+                            <Box
+                                color="gray.500"
+                                fontWeight="semibold"
+                                letterSpacing="wide"
+                                fontSize="sm"
+                                textTransform="uppercase"
+                                ml="2"
+                            >
+                                {carDetails.motor} motor &bull; {mileage} km
+                            </Box>
+                        </Flex>
+
+
+                        <Flex>
+                            <ContactForm carDetails={carDetails} carTitle={carTitle}/>
+                        </Flex>
+
+
                     </Box>
 
                     <Divider my={5}/>
@@ -114,11 +125,6 @@ export const SingleCarElement = ({car}) => {
 
 
 
-                        <Flex>
-                            <ContactForm carDetails={carDetails} carTitle={carTitle}/>
-                        </Flex>
-
-
                     </Flex>
 
                 </Box>
@@ -132,3 +138,4 @@ export const SingleCarElement = ({car}) => {
 
 
 
+export default SingleCarElement

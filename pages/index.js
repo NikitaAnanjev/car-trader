@@ -1,10 +1,10 @@
-import {useState} from "react";
+
 import Head from 'next/head'
 import {Cars} from '@/components/Cars'
 import {SearchPanel} from '@/components/SearchPanel'
 import {getAsString} from "../helper/getAsString";
 import slugify from "react-slugify";
-import {CircularProgress, Button, Heading} from "@chakra-ui/react"
+import {CircularProgress, Heading} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import useSWR from 'swr'
 import {encode} from "base-64";
@@ -13,10 +13,9 @@ import {TopBanner} from "@/components/TopBanner";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
-export default function Home(props) {
-    const {cars, priceTypeProps, priceTypeOnClick, showAllCars, allcars} = props
 
 
+export default function Home({cars}) {
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
@@ -26,29 +25,13 @@ export default function Home(props) {
         <PageLayout>
             <Head/>
             <TopBanner>
-                <Heading maxW={{sm: "100%", md: '60%', lg: "50%"}} p={3} textAlign='center' mb={10} fontSize='3rem'
+                <Heading maxW={{sm: "100%", md: '60%', lg: "60%"}}  textAlign='left' mb={10} fontSize='5rem'
                          color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
-                    {/*<Button*/}
-                    {/*    size="sm"*/}
-                    {/*    colorScheme='green'*/}
-                    {/*    minW='60px'*/}
-                    {/*    mr={3}*/}
-                    {/*    onClick={showAllCars}*/}
-                    {/*>All</Button>*/}
-                    {/*<Button*/}
-                    {/*    size="sm"*/}
-                    {/*    colorScheme={priceTypeProps ? 'red' : 'green'}*/}
-                    {/*    minW='120px'*/}
-                    {/*    mr={3}*/}
-                    {/*    onClick={priceTypeOnClick}*/}
-                    {/*>{priceTypeProps ? 'Retail' : 'Leasing'} </Button>*/}
+
                 </SearchPanel>
             </TopBanner>
-            <Cars data={cars ? cars : data}
-                  // allcars={allcars}
-                  // priceType={priceTypeProps}
-            />
+            <Cars data={cars ? cars : data}/>
         </PageLayout>
     )
 }

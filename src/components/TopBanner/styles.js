@@ -12,6 +12,7 @@ export const TopBannerContainer = styled(Box)`
   background: url("/piralux-r8-audi.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-position: center;
+  //background-attachment: fixed;
 `
 
