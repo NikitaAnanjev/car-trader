@@ -1,4 +1,3 @@
-
 import slugify from 'react-slugify';
 import NumberFormat from 'react-number-format';
 import {Box, Badge, Image, Flex, Text, Heading, Divider} from "@chakra-ui/react"

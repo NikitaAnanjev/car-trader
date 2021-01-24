@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 const DynamicCars = dynamic(() => import('./SingleCarElement/SingleCarElement'))
 
 
-export const Cars = ({data, priceType}) => {
+const Cars = ({data, priceType}) => {
 
     //
 
@@ -27,3 +27,4 @@ export const Cars = ({data, priceType}) => {
 };
 
 
+export default Cars

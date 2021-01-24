@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {Cars} from '@/components/Cars'
+// import {Cars} from '@/components/Cars'
 import {SearchPanel} from '@/components/SearchPanel'
 import {getAsString} from "../helper/getAsString";
 import slugify from "react-slugify";
@@ -9,6 +9,8 @@ import useSWR from 'swr'
 import {encode} from "base-64";
 import {PageLayout} from "@/components/Cars/styles";
 import {TopBanner} from "@/components/TopBanner";
+import dynamic from "next/dynamic";
+const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'))
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -31,7 +33,7 @@ export default function Home({cars}) {
 
                 </SearchPanel>
             </TopBanner>
-            <Cars data={cars ? cars : data}/>
+            <DynamicAllCars data={cars ? cars : data}/>
         </PageLayout>
     )
 }
