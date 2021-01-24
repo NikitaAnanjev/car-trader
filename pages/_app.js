@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {Button, ChakraProvider, CircularProgress, extendTheme, Box} from "@chakra-ui/react"
+import {ChakraProvider, extendTheme, Box, Image} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
@@ -8,9 +8,6 @@ import useSWR from "swr";
 import {LoadingIconWrap} from "@/components/styles";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-
-// import {useRouter} from 'next/router'
-// import { extendTheme } from "@chakra-ui/core"
 
 // 2. Extend the theme to include custom colors, fonts, etc.
 const colors = {
@@ -30,7 +27,8 @@ function MyApp({Component, pageProps}) {
 
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
-    if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
+    if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
+                                              src="/loaderPiralux.gif"/></LoadingIconWrap>
 
     const isFixed = true
     return (
