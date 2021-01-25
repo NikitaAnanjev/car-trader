@@ -1,0 +1,1 @@
+export {RelatedCars} from './RelatedCars'

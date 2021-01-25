@@ -5,7 +5,7 @@ import {CircularProgress, Flex} from "@chakra-ui/react";
 const DynamicCars = dynamic(() => import('./SingleCarElement/SingleCarElement'))
 
 
-const Cars = ({data, priceType}) => {
+const Cars = ({data}) => {
 
     //
 
@@ -14,8 +14,8 @@ const Cars = ({data, priceType}) => {
     const filtered = data.filter((p) => p["PriceType"] !== 'Leasing' )
      const sortData = () => {
         // return data.sort((a, b) =>  getValue(b) - getValue(a));
+        return filtered.sort((a, b) =>  getValue(b) - getValue(a));
         // return filtered.sort((a, b) => !priceType ? getLeasingValue(b) - getLeasingValue(a) : getValue(b) - getValue(a));
-        return filtered.sort((a, b) => !priceType ? getLeasingValue(b) - getLeasingValue(a) : getValue(b) - getValue(a));
     }
 
     return (

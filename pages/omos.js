@@ -45,7 +45,6 @@ const dataAboutUs = {
             smallTitle: 'Rådgivningen altid gratis',
             title: "KOMPETENT RÅDGIVNING",
             text: "Der er mange spørgsmål omkring leasing, og god rådgivning er vigtig inden du beslutter dig. Hos Piralux Automobiler er rådgivningen altid gratis, og du er mere end velkommen til at få et overslag på forskellige løsninger, så er du sikker på at vælge rigtigt, uanset hvilken bil du har i tankerne og uanset hvordan financierings- og bilmarkedet ændrer sig.\n" +
-                "\n" +
                 "For os er det vigtigste, at du dels sparer nogle penge på dit drømmekøb og at det opfylder dine behov og ønsker. Så mangler du svar på nogle af de spørgsmål de fleste stiller, så kontakt Piralux Automobiler her – og vi vil elske at hjælpe dig med din næste bil.",  image: "https://piraluxauto.wpmudev.host/wp-content/uploads/2020/04/10-e1585113116539.jpg",
             reverse: false,
             light: false

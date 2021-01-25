@@ -1,7 +1,7 @@
 import {FooterContainer, FooterItem} from './styles'
 
 import {
-    Box,  Image,  Text, Heading, Divider, ListIcon,
+    Box, Image, Text, Heading, Divider, ListIcon,
     List, ListItem
 } from "@chakra-ui/react"
 
@@ -18,10 +18,10 @@ import {
 
 export const Footer = () => {
     return (
-        <FooterContainer direction={{ sm: "column", md: "row"}} p={{ sm: "0", md: '4rem'}} >
+        <FooterContainer direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
 
-            <FooterItem basis={{ sm: "100%", md: "50%", lg: "25%"}}>
-                <Image src="/piralux-logo.png"/>
+            <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
+                <Image src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
                 <Divider/>
                 <Box p={5}>
                     <Text>Piralux Automobiler har specialiseret sig indenfor import, salg og leasing af biler i
@@ -29,7 +29,7 @@ export const Footer = () => {
                 </Box>
             </FooterItem>
 
-            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}>
+            <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                 <Heading as='h3' size="md" fontWeight='normal'> KONTAKT</Heading>
                 <Divider maxW="3rem" my={3} borderColor="red.500"/>
                 <List spacing={3}>
@@ -48,7 +48,7 @@ export const Footer = () => {
                     </ListItem>
                 </List>
             </FooterItem>
-            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}>
+            <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                 <Heading as='h3' size="md" fontWeight='normal'> ØKONOMISK INFORMATION</Heading>
                 <Divider maxW="3rem" my={3} borderColor="red.500"/>
                 <List spacing={3}>
@@ -73,8 +73,8 @@ export const Footer = () => {
                         <span>Swiftadresse: KRONDK22</span>
                     </ListItem>
                 </List></FooterItem>
-            <FooterItem  basis={{ sm: "100%", md: "50%", lg: "25%"}}><Image w="80%" src="/trustpilot.JPG"/></FooterItem>
-
+            <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}><Image maxW={{base: "60%", md: "100%"}} h="auto"
+                                                                          src="/trustpilot.JPG"/></FooterItem>
 
 
         </FooterContainer>

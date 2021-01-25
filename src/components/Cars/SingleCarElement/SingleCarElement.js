@@ -5,7 +5,7 @@ import {CarLink, CardContainer, EuroNormBadge} from './styles'
 import {ContactForm} from "@/components/ContactForm";
 import {carPrice} from "@/helper/carPrice";
 
- const SingleCarElement = ({car}) => {
+const SingleCarElement = ({car}) => {
     const carDetails = {
         id: car['Id'],
         mileage: car['Mileage'],
@@ -24,14 +24,12 @@ import {carPrice} from "@/helper/carPrice";
         vehicleSourceId: car['VehicleSourceId'],
         priceType: car['PriceType']
     }
-
     const carTitle = carDetails.make + ' ' + carDetails.model + ' ' + carDetails.year
     const slug = slugify(carTitle)
     const slugMake = slugify(carDetails.make)
-
-
     const oppositePrice = carPrice(carDetails.vehicleSourceId)
-    const leasingPrice = oppositePrice && <NumberFormat value={oppositePrice} displayType={'text'} thousandSeparator={true} prefix={'DKK '}/>
+    const leasingPrice = oppositePrice &&
+        <NumberFormat value={oppositePrice} displayType={'text'} thousandSeparator={true} prefix={'DKK '}/>
     const fullPrice = <NumberFormat value={carDetails.fullPrice} displayType={'text'} thousandSeparator={true}
                                     prefix={'DKK '}/>
     const mileage = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
@@ -46,22 +44,17 @@ import {carPrice} from "@/helper/carPrice";
 
     return (
         <>
-            <CardContainer maxW="lg" borderRadius="sm" overflow="hidden" mb={10} cursor="pointer" bg="gray.700">
-
+            <CardContainer maxW="sm" borderRadius="sm" overflow="hidden" mb={10} cursor="pointer" bg="gray.700">
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                     <Image src={changeImageSize} alt={property.imageAlt}/>
                 </CarLink>
-
                 {carDetails.euroNorm &&
                 <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
-
-
                 <Box p="6">
 
                     <Box
                         mb={3}
                         fontWeight="semibold"
-
                         lineHeight="tight"
                         isTruncated
                     >
@@ -83,34 +76,24 @@ import {carPrice} from "@/helper/carPrice";
                                 {carDetails.motor} motor &bull; {mileage} km
                             </Box>
                         </Flex>
-
-
                         <Flex>
                             <ContactForm carDetails={carDetails} carTitle={carTitle}/>
                         </Flex>
-
-
                     </Box>
-
                     <Divider my={5}/>
-
                     <Flex direction="row" justifyContent="space-between" alignItems="center">
-
-
-                        <Flex direction="row" p={3} px={5} maxW={{base: "60%", md: "80%"}}
+                        <Flex direction="row" p={2} px={1} maxW={{base: "60%", md: "80%"}}
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
-
                             {fullPrice &&
                             <Box>
                                 <Heading color="white" size={'lg'}>{fullPrice}</Heading>
                             </Box>
                             }
-
                         </Flex>
                         {leasingPrice && <Flex direction="column">
                             <Text fontSize="13px" color="white"> Leasing</Text>
-                            <Flex direction="row" borderRadius="8px" border="1px solid white" p={2} px={3}>
+                            <Flex direction="row" borderRadius="8px" border="1px solid white" p={1} px={1}>
                                 <Heading d='flex' color="white" size={'md'}>
                                     {leasingPrice}
                                 </Heading>
@@ -121,20 +104,12 @@ import {carPrice} from "@/helper/carPrice";
 
                         </Flex>
                         }
-
-
-
                     </Flex>
-
                 </Box>
-
-
             </CardContainer>
-
         </>
     );
 };
-
 
 
 export default SingleCarElement

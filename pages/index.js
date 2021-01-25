@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {SearchPanel} from '@/components/SearchPanel'
 import {getAsString} from "@/helper/getAsString";
 import slugify from "react-slugify";
-import {CircularProgress, Heading,Flex} from "@chakra-ui/react"
+import {CircularProgress, Heading,Flex,Box} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
 import useSWR from 'swr'
 import {encode} from "base-64";
@@ -32,7 +32,10 @@ export default function Home({cars}) {
 
                 </SearchPanel>
             </TopBanner>
-            <DynamicAllCars data={cars ? cars : data}/>
+            <Box maxW="1400px">
+
+                <DynamicAllCars data={cars ? cars : data}/>
+            </Box>
         </PageLayout>
     )
 }

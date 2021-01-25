@@ -1,0 +1,1 @@
+export {TableCarDetails} from './TableCarDetails'
