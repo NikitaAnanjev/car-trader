@@ -15,6 +15,7 @@ import {CarPrice} from "@/components/CarPrice";
 import NumberFormat from "react-number-format";
 import {TableCarDetails} from "@/components/TableCarDetails";
 import slugify from "react-slugify";
+import {carPrice} from "@/helper/carPrice";
 import dynamic from "next/dynamic";
 
 
@@ -49,7 +50,7 @@ export default function SingleCarPage() {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
-
+    const leasingPrice = <CarPrice carId={data['VehicleSourceId']}/>
     const car = data
 
     const carDetails = {
@@ -176,19 +177,18 @@ export default function SingleCarPage() {
                                       color="white">{fullPrice} </Text>
                             </CarContent>
                         </Flex>
-                        <Flex p={2}>
-                            <CarContent p={5} bg="green.500">
-                                <Text color="white"> Leasing måneder Prise </Text>
-                                <Text as='h4' fontSize={{base: "1.6rem", md: "2rem", lg: "2.8rem"}}
-                                      color="white"><CarPrice
-                                    carId={data['VehicleSourceId']}/></Text>
 
-                            </CarContent>
-                        </Flex>
+
+
+                        <CarPrice carId={data['VehicleSourceId']}>
+
+                        </CarPrice>
+
+
                     </>
                     }
 
-                    <Flex p={2}>
+                    <Flex p={{base: 0,md: 2}}>
                         <CarContent bg="gray.200">
                             <TableCarDetails data={specificDetails}/>
                         </CarContent>

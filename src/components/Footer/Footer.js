@@ -23,7 +23,7 @@ export const Footer = () => {
             <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                 <Image src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
                 <Divider/>
-                <Box p={5}>
+                <Box py={5} maxW="90%">
                     <Text>Piralux Automobiler har specialiseret sig indenfor import, salg og leasing af biler i
                         luksusklassen fra Tyskland.</Text>
                 </Box>

@@ -54,12 +54,21 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
                 <Image src={changeImageSize} alt={property.imageAlt} />
 
-
-                {/*<SignCarBtn>*/}
-                {/*</SignCarBtn>*/}
-
                 {carDetails.euroNorm &&
                 <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
+                <Flex w="100%">
+
+
+                    <ContactForm carDetails={carDetails} carTitle={carTitle}/>
+
+                    <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
+                        <Button w="50%"
+                                borderRadius={0}
+                                aria-label="Book this car"
+                                leftIcon={<MdDirectionsCar/>}
+                                colorScheme="teal">Mere Detailer</Button>
+                    </CarLink>
+                </Flex>
                 <Box p="6">
                     <Box
                         mb={3}
@@ -114,19 +123,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         }
                     </Flex>
                 </Box>
-                <Flex w="100%">
 
-
-                    <ContactForm carDetails={carDetails} carTitle={carTitle}/>
-
-                    <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
-                        <Button w="50%"
-                                borderRadius={0}
-                                aria-label="Book this car"
-                                leftIcon={<MdDirectionsCar/>}
-                                colorScheme="teal">Mere Detailer</Button>
-                    </CarLink>
-                </Flex>
             </CardContainer>
         </>
     );

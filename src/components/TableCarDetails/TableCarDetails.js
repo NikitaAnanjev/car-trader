@@ -25,8 +25,8 @@ export const TableCarDetails = ({data}) => {
 
                 {Object.values(data.entities).map((item) =>
                     <Tr key={item.id}>
-                        <Td>{item.title}</Td>
-                        <Td><b>{item.value}</b></Td>
+                        <Td pr={0}>{item.title}</Td>
+                        <Td pr={0}><b>{item.value}</b></Td>
                     </Tr>
 
 

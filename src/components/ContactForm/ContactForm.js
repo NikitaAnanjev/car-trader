@@ -76,17 +76,17 @@ export const ContactForm = ({carDetails, carTitle}) => {
                                 <Flex w={{base: '100%', md: "350px"}} p={6} bg="gray.800">
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
                                         <Stack spacing="24px">
-                                            <Box>
-                                                <FormLabel color="white" htmlFor="from_name">Name</FormLabel>
-                                                <Input
-                                                    color="white"
-                                                    type="text"
-                                                    name="from_name"
-                                                    ref={firstField}
-                                                    id="from_name"
-                                                    placeholder="Please enter user name"
-                                                />
-                                            </Box>
+                                            {/*<Box>*/}
+                                            {/*    <FormLabel color="white" htmlFor="from_name">Name</FormLabel>*/}
+                                            {/*    <Input*/}
+                                            {/*        color="white"*/}
+                                            {/*        type="text"*/}
+                                            {/*        name="from_name"*/}
+                                            {/*        ref={firstField}*/}
+                                            {/*        id="from_name"*/}
+                                            {/*        placeholder="Please enter user name"*/}
+                                            {/*    />*/}
+                                            {/*</Box>*/}
 
                                             <Box color="white">
                                                 <FormControl>
