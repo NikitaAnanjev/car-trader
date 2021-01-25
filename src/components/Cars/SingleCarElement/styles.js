@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-import {Box, Flex} from "@chakra-ui/react"
+import {Box, Flex, IconButton} from "@chakra-ui/react"
 
 export const SingleCarItem = styled(Flex)`
 flex-grow: 1;
@@ -20,7 +20,6 @@ export const SinglePageContainer = styled(Flex)`
 width: 100%;
 `
 
-
 export const CarContent = styled(Flex)`
 border-radius: 8px;
 flex-direction: column;
@@ -31,21 +30,25 @@ export const CarImageContainer = styled(Flex)`
 width: 100%;
 position: relative;
 `
+export const SignCarBtn = styled(Box)`
+position: absolute;
+right: 5%;
+top: 48%;
+`
 export const EuroNormBadge = styled('div')`
 position: absolute;
-border: 1px solid black;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-height: 60px;
-width: 60px;
-border-radius: 50%;
-background: #ddd7d7;
-right: 0;
-top: 50%;
+height: 41px;
+width: 41px;
+background: #f52734;
+left: 0;
+top: 11%;
+padding: 1px;
 span,p {
-color: black;
+color: white;
 font-weight: bold;
 }
 

@@ -32,8 +32,7 @@ export default function Home({cars}) {
 
                 </SearchPanel>
             </TopBanner>
-            <Box maxW="1400px">
-
+            <Box maxW="1400px" m="auto">
                 <DynamicAllCars data={cars ? cars : data}/>
             </Box>
         </PageLayout>

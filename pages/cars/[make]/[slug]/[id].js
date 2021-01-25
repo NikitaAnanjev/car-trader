@@ -7,15 +7,23 @@ import {
     SinglePageContainer,
     CarContent,
 } from "@/components/Cars/SingleCarElement/styles";
-import {useBreakpointValue, Heading, Box, Flex, Text, Image, Divider} from "@chakra-ui/react"
+import {useBreakpointValue, Heading, Box, Flex, Text, Image, Divider, CircularProgress} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
-import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
+// import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 import {SingleCarTabs} from "@/components/SingleCarTabs";
 import {CarPrice} from "@/components/CarPrice";
 import NumberFormat from "react-number-format";
 import {TableCarDetails} from "@/components/TableCarDetails";
-import {RelatedCars} from "@/components/RelatedCars";
 import slugify from "react-slugify";
+import dynamic from "next/dynamic";
+
+
+
+const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
+    {loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress isIndeterminate color="red.300"/></Flex>})
+const DynamicRelatedCars = dynamic(() => import("@/components/RelatedCars/RelatedCars"),
+    {loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress isIndeterminate color="red.300"/></Flex>})
+
 
 const fetcher = async (url) => {
     const res = await fetch(url)
@@ -73,7 +81,6 @@ export default function SingleCarPage() {
 
 
     const gearType = carDetails.gear === 'A' ? 'Automat' : 'Mekanisk'
-    console.log(car)
 
     const specificDetails = {
         entities: {
@@ -88,13 +95,7 @@ export default function SingleCarPage() {
             9: {id: "9", title: "Tank", value: carDetails.gasTank + ' L'},
             10: {id: "10", title: "KM/L", value: carDetails.kmPerLiter + ' Km'},
         }
-        // <p> ID: {carDetails.price} DKK </p>
-        // <p> MILEAGE: {carDetails.mileage} </p>
-        // <p> Mark: {carDetails.make} </p>
-        // <p> Model: {carDetails.model} </p>
-        // <p> Variant: {carDetails.variant} </p>
-        // <p> Motor: {carDetails.motor} </p>
-        // <p> Fuel: {carDetails.fuel} </p>
+
     }
 
 
@@ -109,7 +110,7 @@ export default function SingleCarPage() {
                   px={{base: "1rem", md: "1rem"}}>
 
 
-                <SingleCarItem color="white" w={{base: "100%", sm: "65%!important",lg: "75%"}} pr={{base: "0", lg: "1rem"}}>
+                <SingleCarItem color="white" w={{base: "100%", md: "65%!important",lg: "75%"}} pr={{base: "0", lg: "1rem"}}>
 
                     {/*<Link href="/"> BACK to homepage</Link>*/}
 
@@ -123,7 +124,7 @@ export default function SingleCarPage() {
                         <SinglePageContainer direction="column">
                             <Flex direction={{base: "column", lg: "row"}}>
                                 <CarImageContainer>
-                                    <CarImage images={carDetails.pictures} video={carDetails.video}/>
+                                    {carDetails.pictures &&  <DynamicCarImage images={carDetails.pictures} video={carDetails.video}/> }
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>
@@ -136,23 +137,23 @@ export default function SingleCarPage() {
 
                     <Flex borderRadius="0 8px 8px 0" overflow="hidden" mb={5} direction="row"
                           justifyContent="space-between">
-                        <Flex>
+                        <Flex grow={1}   maxW="50%">
                             <CarContent
                                 p={5}
-                                alignItems="center"
                                 bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
                             >
-                                <Text as='h4' fontSize={{base: "1.6rem"}}
+                                <Text as='h4' fontSize={{base: "2rem"}}
                                       color="white">{fullPrice} </Text>
                             </CarContent>
                         </Flex>
-                        <Flex>
-                            <CarContent p={5} bg="green.500">
-                                <Text as='h4' fontSize={{base: "1.6rem"}}
-                                      color="white"><CarPrice
-                                    carId={data['VehicleSourceId']}/></Text>
+                        <Flex grow={1} maxW="50%">
+                            <CarContent p={5} bg="green.500" ml="1rem" >
+                                <Text as='h4' fontSize={{base: "2rem"}}
+                                      color="white">
+                                    {console.log( 'wwaaaaaaaaaaa',<CarPrice carId={data['VehicleSourceId']}/>)}
+                                    <CarPrice carId={data['VehicleSourceId']}/>
+                                </Text>
                                 <Text color="white"> Leasing måneder Prise </Text>
-
                             </CarContent>
                         </Flex>
                     </Flex>
@@ -194,7 +195,9 @@ export default function SingleCarPage() {
                     </Flex>
                 </Flex>
 
-                    <RelatedCars make={slugify(carDetails.make)} />
+                <Flex mt={10} w="100%">
+                    <DynamicRelatedCars make={slugify(carDetails.make)}   carId={data['VehicleSourceId']}/>
+                </Flex>
             </Flex>
         </Box>
     )

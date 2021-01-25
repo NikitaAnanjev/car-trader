@@ -1,0 +1,1 @@
+export {CustomCardSlide} from './CustomCardSlide'

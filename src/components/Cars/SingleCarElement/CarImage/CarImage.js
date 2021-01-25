@@ -1,7 +1,7 @@
 import {SingleCarImgCarousel, CarouselItem} from './styles'
 import {Carousel} from 'react-responsive-carousel';
 
-export const CarImage = ({images, video}) => {
+ const CarImage = ({images, video}) => {
     return (
         <SingleCarImgCarousel>
             <Carousel showArrows={true} showThumbs={true} showIndicators={false} useKeyboardArrows={true} swipeable={false} infiniteLoop={true} style={{width: '100%'}}>
@@ -11,7 +11,7 @@ export const CarImage = ({images, video}) => {
                 {/*            webkitAllowFullScreen*/}
                 {/*            src={video}/>*/}
                 {/*</CarouselItem>}*/}
-                {images.map((image, index) =>
+                { images && images.map((image, index) =>
                     image &&
                     <div key={index}>
                         <img alt={'dsa'} src={image}/>
@@ -22,5 +22,5 @@ export const CarImage = ({images, video}) => {
     );
 };
 
-
+export default CarImage
 

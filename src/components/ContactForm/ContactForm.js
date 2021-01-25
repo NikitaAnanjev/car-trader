@@ -23,7 +23,7 @@ import {
     Heading
 } from "@chakra-ui/react"
 
-import {MdDirectionsCar} from "react-icons/md";
+import {MdRingVolume} from "react-icons/md";
 import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 
@@ -47,12 +47,14 @@ export const ContactForm = ({carDetails, carTitle}) => {
 
     return (
         <>
-            <Button leftIcon={<MdDirectionsCar/>}
-                    rightIcon={<ArrowForwardIcon/>}
-                    variant="link"
-                    color="white"
+            <Button leftIcon={<MdRingVolume/>}
                     aria-label="Book this car"
-                    colorScheme="green" onClick={onOpen}> Bestil</Button>
+                    colorScheme="green"
+                    size={"md"}
+                    w="50%"
+                    borderRadius={0}
+                    onClick={onOpen}>Booking</Button>
+
             <Drawer
                 isOpen={isOpen}
                 size='full'

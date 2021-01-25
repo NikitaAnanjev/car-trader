@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import 'react-alice-carousel/lib/alice-carousel.css';
 import {ChakraProvider, extendTheme, Box, Image} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
