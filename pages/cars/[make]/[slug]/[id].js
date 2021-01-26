@@ -28,20 +28,25 @@ import {TableCarDetails} from "@/components/TableCarDetails";
 import slugify from "react-slugify";
 import dynamic from "next/dynamic";
 import {ContactForm} from "@/components/ContactForm";
-import {MdRingVolume} from "react-icons/md";
-import {CarImage} from '@/components/Cars/SingleCarElement/CarImage/CarImage'
+// import {CarImage} from '@/components/Cars/SingleCarElement/CarImage/CarImage'
 
 
-// const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
-//     {
-//         loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
-//             isIndeterminate color="red.300"/></Flex>
-//     })
+const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
+    {
+        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+            isIndeterminate color="red.300"/></Flex>
+    })
 
+
+const DynamicVideo = dynamic(() => import("@/components/Cars/SingleCarElement/CarVideo/CarVideo"),
+    {
+        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center">
+            <CircularProgress isIndeterminate color="red.300"/></Flex>
+    })
 
 const DynamicRelatedCars = dynamic(() => import("@/components/RelatedCars/RelatedCars"),
     {
-        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+        loading: () => <Flex minH="200px"  justifyContent="center" alignItems="center"><CircularProgress
             isIndeterminate color="red.300"/></Flex>
     })
 
@@ -56,9 +61,9 @@ const fetcher = async (url) => {
     return data
 }
 
-export default function SingleCarPage() {
+const redGradient = "linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
 
-    const [showVideo, setShowVideo] = useState(false)
+export default function SingleCarPage() {
 
     const mobile = useBreakpointValue({base: true, md: false})
     const {query} = useRouter()
@@ -142,16 +147,8 @@ export default function SingleCarPage() {
                         <Heading color="white">{carTitle} </Heading>
                         <Spacer/>
 
-                        <Button
 
-                            mr={3}
-                            leftIcon={<MdRingVolume/>}
-                            aria-label="Se videoklip"
-                            colorScheme="orange"
-                            variant="solid"
-                            size={"md"}
-                            onClick={() => setShowVideo(!showVideo)}>Se Video</Button>
-
+                        {carDetails.video && <DynamicVideo video={carDetails.video}  title={carTitle} price={fullPrice}/>}
 
                         <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true} buttonTitle="Bestil prøvetid"/>
 
@@ -166,11 +163,9 @@ export default function SingleCarPage() {
                             <Flex direction={{base: "column", lg: "row"}}>
                                 <CarImageContainer>
                                     {carDetails.pictures &&
-                                    // <DynamicCarImage images={carDetails.pictures} video={carDetails.video} showVideo={showVideo}  /> }
-                                   <CarImage images={carDetails.pictures}
-                                             video={carDetails.video}
-                                             showVideo={showVideo}
-                                   /> }
+                                    <DynamicCarImage images={carDetails.pictures} /> }
+                                   {/*<CarImage images={carDetails.pictures} video={carDetails.video}/>*/}
+                                    }
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>
@@ -187,8 +182,7 @@ export default function SingleCarPage() {
                             <CarContent
                                 p={{base: 2, sm:3,md: 5}}
                                 justifyContent="center"
-                                bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
-                            >
+                                bg={redGradient}>
 
                                 <Text as='h4'  fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
@@ -215,20 +209,14 @@ export default function SingleCarPage() {
                     {!mobile &&
                     <>
                         <Flex p={2}>
-                            <CarContent p={5}
-                                        bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
-                            >
+                            <CarContent p={5} bg={redGradient}>
 
                                 <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
 
                             </CarContent>
                         </Flex>
-
-
                         <CarPrice carId={data['VehicleSourceId']}/>
-
-
                     </>
                     }
 

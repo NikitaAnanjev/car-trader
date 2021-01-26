@@ -54,8 +54,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                     colorScheme="white"
                     variant="outline"
                     size={"md"}
-                    onClick={onOpen}>{buttonTitle ? buttonTitle : 'Click'}</Button> :
-
+                    onClick={onOpen}>{buttonTitle ? buttonTitle : 'Click'}</Button>
+                :
                 <Button
                     leftIcon={<MdRingVolume/>}
                     aria-label="Book this car"
@@ -69,8 +69,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
 
             <Drawer
                 isOpen={isOpen}
-                size='full'
-                placement="top"
+                size='lg'
+                placement="right"
                 initialFocusRef={firstField}
                 onClose={onClose}
                 scrollBehavior="inside"
@@ -84,8 +84,11 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                         </DrawerHeader>
 
                         <DrawerBody>
-                            <Flex direction={{base: 'column', md: 'row'}} bg="gray.700">
-                                <Flex w={{base: '100%', md: "350px"}} p={6} bg="gray.800">
+                            <Flex
+                                // direction={{base: 'column', md: 'row'}}
+                                direction='column'
+                                  bg="gray.700">
+                                <Flex w="100%" p={5} bg="gray.800">
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
                                         <Stack spacing="24px">
                                             {/*<Box>*/}
@@ -100,17 +103,17 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                                             {/*    />*/}
                                             {/*</Box>*/}
 
-                                            <Box color="white">
-                                                <FormControl>
-                                                    <FormLabel>Email address</FormLabel>
-                                                    <Input type="email" name="email"/>
-                                                    <FormHelperText>We'll never share your email.</FormHelperText>
-                                                </FormControl>
-                                            </Box>
+                                            {/*<Box color="white">*/}
+                                            {/*    <FormControl>*/}
+                                            {/*        <FormLabel>Email address</FormLabel>*/}
+                                            {/*        <Input type="email" name="email"/>*/}
+                                            {/*        <FormHelperText>We'll never share your email.</FormHelperText>*/}
+                                            {/*    </FormControl>*/}
+                                            {/*</Box>*/}
 
                                             <Box color="white">
                                                 <FormControl>
-                                                    <FormLabel htmlFor="user_phone_number">Phone Number</FormLabel>
+                                                    <FormLabel htmlFor="user_phone_number">Telefon</FormLabel>
 
                                                     <InputMask mask="+4\5 99 99 99 99" maskChar={null}>
                                                         {(inputProps) => <Input type="tel" {...inputProps}
@@ -118,6 +121,15 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                                                     </InputMask>
 
                                                     <FormHelperText>Please insert your phone number</FormHelperText>
+                                                </FormControl>
+                                            </Box>
+
+
+                                            <Box color="white">
+                                                <FormControl>
+                                                    <FormLabel>Vælg en dag og tid</FormLabel>
+                                                    <Input type="date" name="dateSelect"/>
+                                                    <FormHelperText>Vi vil ringer Dig tilbage på den tid ellers som snart som muligt</FormHelperText>
                                                 </FormControl>
                                             </Box>
 
@@ -132,7 +144,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
 
                                             <Box>
 
-                                                <Button w="100%" colorScheme="blue" type="submit">Submit</Button>
+                                                <Button w="100%" colorScheme="blue" type="submit">Send</Button>
 
                                             </Box>
                                         </Stack>
