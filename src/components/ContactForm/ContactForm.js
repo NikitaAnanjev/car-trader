@@ -1,3 +1,4 @@
+import {useState} from "react";
 import emailjs from 'emailjs-com';
 import InputMask from 'react-input-mask';
 import {
@@ -20,15 +21,22 @@ import {
     Flex,
     IconButton,
     Image,
-    Heading
+    Heading,
+    Spacer
 } from "@chakra-ui/react"
-
+import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
 import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
+import DatePicker, {registerLocale, setDefaultLocale} from "react-datepicker";
 
-export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
+import da from 'date-fns/locale/da';
 
+registerLocale('da', da)
+
+
+export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => {
+    const [startDate, setStartDate] = useState(new Date());
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
@@ -44,6 +52,19 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
         e.target.reset()
     }
 
+
+    const ExampleCustomTimeInput = ({date, value, onChange}) => (
+        <input
+            value={value}
+            onChange={e => onChange(e.target.value)}
+            style={{border: "solid 1px pink"}}
+        />
+    );
+    const isWeekday = date => {
+
+        const day = new Date().getDay(date);
+        return day !== 0 && day !== 6;
+    };
 
     return (
         <>
@@ -87,7 +108,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                             <Flex
                                 // direction={{base: 'column', md: 'row'}}
                                 direction='column'
-                                  bg="gray.700">
+                                bg="gray.700">
                                 <Flex w="100%" p={5} bg="gray.800">
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
                                         <Stack spacing="24px">
@@ -120,22 +141,31 @@ export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
                                                                                 name="user_phone_number"/>}
                                                     </InputMask>
 
-                                                    <FormHelperText>Please insert your phone number</FormHelperText>
                                                 </FormControl>
                                             </Box>
 
 
-                                            <Box color="white">
+                                            <DateInputWrap color="white">
                                                 <FormControl>
                                                     <FormLabel>Vælg en dag og tid</FormLabel>
-                                                    <Input type="date" name="dateSelect"/>
-                                                    <FormHelperText>Vi vil ringer Dig tilbage på den tid ellers som snart som muligt</FormHelperText>
+
+                                                    <DatePicker
+                                                        // showTimeSelect
+                                                        showTimeInput
+                                                        dateFormat="Pp"
+                                                        locale="da"
+                                                        name="dateSelect" selected={startDate}
+                                                        onChange={date => setStartDate(date)}
+                                                        filterDate={isWeekday}
+                                                        customTimeInput={<ExampleCustomTimeInput />}
+                                                    />
+
                                                 </FormControl>
-                                            </Box>
+                                            </DateInputWrap>
 
 
                                             <Input d='none' type="text" name="car_details"
-                                                   value={carDetails.mileage + ',' + carDetails.year
+                                                   defaultValue={carDetails.mileage + ',' + carDetails.year
                                                    + ',' + carDetails.make}/>
                                             <Box color="white">
                                                 <FormLabel htmlFor="message">Description</FormLabel>
