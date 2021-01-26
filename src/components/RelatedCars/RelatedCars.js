@@ -29,7 +29,7 @@ const RelatedCars = ({make, carId}) => {
     const filtered = make ? data.filter((p) => slugify(p["Make"]) === make && p['VehicleSourceId'] !== carId && p['PriceType'] !== 'Leasing') : data
 
     const settings = {
-        autoPlay: false,
+        autoPlay: true,
         autoPlayStrategy: "none",
         autoPlayInterval: 2000,
         animationDuration: 1000,

@@ -49,7 +49,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
     return (
         <>
-            <CardContainer maxW={size ? size : (relatedItem ? "xs" : 'sm')} overflow="hidden" borderRadius="md" mb={10}
+            <CardContainer maxW={size ? size : (relatedItem ? { base: "md" ,sm:"xs"} : 'sm')} overflow="hidden" borderRadius="md" mb={10}
                            bg="gray.700">
 
                 <Image src={changeImageSize} alt={property.imageAlt} />

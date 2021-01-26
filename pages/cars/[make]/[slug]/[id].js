@@ -182,20 +182,21 @@ export default function SingleCarPage() {
                           justifyContent="space-between">
                         <Flex grow={1} maxW="50%">
                             <CarContent
-                                p={5}
+                                p={{base: 2, sm:3,md: 5}}
+                                justifyContent="center"
                                 bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
                             >
-                                <Text as='h4' fontSize={{base: "2rem"}}
+
+                                <Text as='h4'  fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
                             </CarContent>
                         </Flex>
                         <Flex grow={1} maxW="50%">
-                            <CarContent p={5} bg="green.500" ml="1rem">
-                                <Text as='h4' fontSize={{base: "2rem"}}
-                                      color="white">
+                            <CarContent   p={{base: 2, sm:3,md: 5}} bg="green.500" ml="1rem">
+
                                     <CarPrice carId={data['VehicleSourceId']}/>
-                                </Text>
-                                <Text color="white"> Leasing måneder Prise </Text>
+
+
                             </CarContent>
                         </Flex>
                     </Flex>
@@ -214,8 +215,10 @@ export default function SingleCarPage() {
                             <CarContent p={5}
                                         bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
                             >
-                                <Text as='h4' fontSize={{base: "2rem", md: "2rem", lg: "3rem"}}
+
+                                <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
+
                             </CarContent>
                         </Flex>
 
