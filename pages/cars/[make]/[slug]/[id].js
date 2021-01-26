@@ -58,6 +58,8 @@ const fetcher = async (url) => {
 
 export default function SingleCarPage() {
 
+    const [showVideo, setShowVideo] = useState(false)
+
     const mobile = useBreakpointValue({base: true, md: false})
     const {query} = useRouter()
     const {data, error} = useSWR(
@@ -70,8 +72,6 @@ export default function SingleCarPage() {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
-
-    // const [showVideo, setShowVideo] = useState(false)
 
     const car = data
 
@@ -142,15 +142,15 @@ export default function SingleCarPage() {
                         <Heading color="white">{carTitle} </Heading>
                         <Spacer/>
 
-                        {/*<Button*/}
+                        <Button
 
-                        {/*    mr={3}*/}
-                        {/*    leftIcon={<MdRingVolume/>}*/}
-                        {/*    aria-label="Se videoklip"*/}
-                        {/*    colorScheme="orange"*/}
-                        {/*    variant="solid"*/}
-                        {/*    size={"md"}*/}
-                        {/*    onClick={() => setShowVideo(true)}>Se Video</Button>*/}
+                            mr={3}
+                            leftIcon={<MdRingVolume/>}
+                            aria-label="Se videoklip"
+                            colorScheme="orange"
+                            variant="solid"
+                            size={"md"}
+                            onClick={() => setShowVideo(!showVideo)}>Se Video</Button>
 
 
                         <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true} buttonTitle="Bestil prøvetid"/>
@@ -167,7 +167,10 @@ export default function SingleCarPage() {
                                 <CarImageContainer>
                                     {carDetails.pictures &&
                                     // <DynamicCarImage images={carDetails.pictures} video={carDetails.video} showVideo={showVideo}  /> }
-                                   <CarImage images={carDetails.pictures} video={carDetails.video}   /> }
+                                   <CarImage images={carDetails.pictures}
+                                             video={carDetails.video}
+                                             showVideo={showVideo}
+                                   /> }
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>

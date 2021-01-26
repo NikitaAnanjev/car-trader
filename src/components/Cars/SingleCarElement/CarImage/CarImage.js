@@ -7,18 +7,21 @@ import {
 } from "@chakra-ui/react"
 import CarVideo from "@/components/Cars/SingleCarElement/CarVideo/CarVideo";
 
-// const DynamicVideo = dynamic(() => import("../CarVideo/CarVideo"),
-//     {
-//         loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center">
-//             <CircularProgress isIndeterminate color="red.300"/></Flex>
-//     })
+const DynamicVideo = dynamic(() => import("../CarVideo/CarVideo"),
+    {
+        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center">
+            <CircularProgress isIndeterminate color="red.300"/></Flex>
+    })
 
-export const CarImage = ({images, video}) => {
+export const CarImage = ({images, video,
+                             showVideo
+}) => {
     return (
         <SingleCarImgCarousel>
             <Carousel showArrows={true} showThumbs={true} showIndicators={false} useKeyboardArrows={true} swipeable={false} infiniteLoop={true} style={{width: '100%'}}>
 
-                {/*{video && <DynamicVideo video={video}/>}*/}
+                {video && <DynamicVideo video={video}/>}
+                {/*{video &&   <CarVideo video={video}/>}*/}
                 { images && images.map((image, index) =>
                     image &&
                     <div key={index}>
