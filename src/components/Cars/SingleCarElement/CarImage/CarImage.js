@@ -1,16 +1,24 @@
-import {SingleCarImgCarousel, CarouselItem} from './styles'
+import {SingleCarImgCarousel} from './styles'
 import {Carousel} from 'react-responsive-carousel';
+import dynamic from "next/dynamic";
+import {
+    Flex,
+    CircularProgress,
+} from "@chakra-ui/react"
+import CarVideo from "@/components/Cars/SingleCarElement/CarVideo/CarVideo";
 
- const CarImage = ({images, video}) => {
+// const DynamicVideo = dynamic(() => import("../CarVideo/CarVideo"),
+//     {
+//         loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center">
+//             <CircularProgress isIndeterminate color="red.300"/></Flex>
+//     })
+
+export const CarImage = ({images, video}) => {
     return (
         <SingleCarImgCarousel>
             <Carousel showArrows={true} showThumbs={true} showIndicators={false} useKeyboardArrows={true} swipeable={false} infiniteLoop={true} style={{width: '100%'}}>
-                {/*{video && <CarouselItem>*/}
-                {/*    <iframe style={{margin: '0', height: '100%', width: '100%'}}*/}
-                {/*            frameBorder="0" allowFullScreen allowTransparency="true" mozallowfullscreen*/}
-                {/*            webkitAllowFullScreen*/}
-                {/*            src={video}/>*/}
-                {/*</CarouselItem>}*/}
+
+                {/*{video && <DynamicVideo video={video}/>}*/}
                 { images && images.map((image, index) =>
                     image &&
                     <div key={index}>
@@ -22,5 +30,5 @@ import {Carousel} from 'react-responsive-carousel';
     );
 };
 
-export default CarImage
+// export default CarImage
 

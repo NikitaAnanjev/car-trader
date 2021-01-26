@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import useSWR from 'swr'
@@ -7,23 +8,42 @@ import {
     SinglePageContainer,
     CarContent,
 } from "@/components/Cars/SingleCarElement/styles";
-import {useBreakpointValue, Heading, Box, Flex, Text, Image, Divider, CircularProgress} from "@chakra-ui/react"
+import {
+    useBreakpointValue,
+    Heading,
+    Box,
+    Flex,
+    Text,
+    Image,
+    Divider,
+    CircularProgress,
+    Spacer,
+    Button
+} from "@chakra-ui/react"
 import {LoadingIconWrap} from "@/components/styles"
-// import {CarImage} from "@/components/Cars/SingleCarElement/CarImage";
 import {SingleCarTabs} from "@/components/SingleCarTabs";
 import {CarPrice} from "@/components/CarPrice";
 import NumberFormat from "react-number-format";
 import {TableCarDetails} from "@/components/TableCarDetails";
 import slugify from "react-slugify";
-import {carPrice} from "@/helper/carPrice";
 import dynamic from "next/dynamic";
+import {ContactForm} from "@/components/ContactForm";
+import {MdRingVolume} from "react-icons/md";
+import {CarImage} from '@/components/Cars/SingleCarElement/CarImage/CarImage'
 
 
+// const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
+//     {
+//         loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+//             isIndeterminate color="red.300"/></Flex>
+//     })
 
-const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
-    {loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress isIndeterminate color="red.300"/></Flex>})
+
 const DynamicRelatedCars = dynamic(() => import("@/components/RelatedCars/RelatedCars"),
-    {loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress isIndeterminate color="red.300"/></Flex>})
+    {
+        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+            isIndeterminate color="red.300"/></Flex>
+    })
 
 
 const fetcher = async (url) => {
@@ -50,7 +70,9 @@ export default function SingleCarPage() {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
-    const leasingPrice = <CarPrice carId={data['VehicleSourceId']}/>
+
+    // const [showVideo, setShowVideo] = useState(false)
+
     const car = data
 
     const carDetails = {
@@ -111,11 +133,29 @@ export default function SingleCarPage() {
                   px={{base: "1rem", md: "1rem"}}>
 
 
-                <SingleCarItem color="white" w={{base: "100%", md: "65%!important",lg: "75%"}} pr={{base: "0", lg: "1rem"}}>
+                <SingleCarItem color="white" w={{base: "100%", md: "65%!important", lg: "75%"}}
+                               pr={{base: "0", lg: "1rem"}}>
 
                     {/*<Link href="/"> BACK to homepage</Link>*/}
+                    <Flex justifyContent="space-between">
 
-                    <Heading color="white">{carTitle} </Heading>
+                        <Heading color="white">{carTitle} </Heading>
+                        <Spacer/>
+
+                        {/*<Button*/}
+
+                        {/*    mr={3}*/}
+                        {/*    leftIcon={<MdRingVolume/>}*/}
+                        {/*    aria-label="Se videoklip"*/}
+                        {/*    colorScheme="orange"*/}
+                        {/*    variant="solid"*/}
+                        {/*    size={"md"}*/}
+                        {/*    onClick={() => setShowVideo(true)}>Se Video</Button>*/}
+
+
+                        <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true} buttonTitle="Bestil prøvetid"/>
+
+                    </Flex>
 
                     <Divider maxW="3rem" mt={3} mb={5} borderColor="red.500"/>
 
@@ -125,7 +165,9 @@ export default function SingleCarPage() {
                         <SinglePageContainer direction="column">
                             <Flex direction={{base: "column", lg: "row"}}>
                                 <CarImageContainer>
-                                    {carDetails.pictures &&  <DynamicCarImage images={carDetails.pictures} video={carDetails.video}/> }
+                                    {carDetails.pictures &&
+                                    // <DynamicCarImage images={carDetails.pictures} video={carDetails.video} showVideo={showVideo}  /> }
+                                   <CarImage images={carDetails.pictures} video={carDetails.video}   /> }
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>
@@ -138,7 +180,7 @@ export default function SingleCarPage() {
 
                     <Flex borderRadius="0 8px 8px 0" overflow="hidden" mb={5} direction="row"
                           justifyContent="space-between">
-                        <Flex grow={1}   maxW="50%">
+                        <Flex grow={1} maxW="50%">
                             <CarContent
                                 p={5}
                                 bg=" linear-gradient(309deg, rgb(233, 33, 45) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)"
@@ -148,10 +190,9 @@ export default function SingleCarPage() {
                             </CarContent>
                         </Flex>
                         <Flex grow={1} maxW="50%">
-                            <CarContent p={5} bg="green.500" ml="1rem" >
+                            <CarContent p={5} bg="green.500" ml="1rem">
                                 <Text as='h4' fontSize={{base: "2rem"}}
                                       color="white">
-                                    {console.log( 'wwaaaaaaaaaaa',<CarPrice carId={data['VehicleSourceId']}/>)}
                                     <CarPrice carId={data['VehicleSourceId']}/>
                                 </Text>
                                 <Text color="white"> Leasing måneder Prise </Text>
@@ -166,7 +207,7 @@ export default function SingleCarPage() {
 
                 </SingleCarItem>
 
-                <Flex w={{base: "100%", md: "35%!important",lg: "25%"}} borderRadius="8px" direction="column">
+                <Flex w={{base: "100%", md: "35%!important", lg: "25%"}} borderRadius="8px" direction="column">
                     {!mobile &&
                     <>
                         <Flex p={2}>
@@ -179,16 +220,13 @@ export default function SingleCarPage() {
                         </Flex>
 
 
-
-                        <CarPrice carId={data['VehicleSourceId']}>
-
-                        </CarPrice>
+                        <CarPrice carId={data['VehicleSourceId']}/>
 
 
                     </>
                     }
 
-                    <Flex p={{base: 0,md: 2}}>
+                    <Flex p={{base: 0, md: 2}}>
                         <CarContent bg="gray.200">
                             <TableCarDetails data={specificDetails}/>
                         </CarContent>
@@ -196,7 +234,7 @@ export default function SingleCarPage() {
                 </Flex>
 
                 <Flex mt={10} w="100%">
-                    <DynamicRelatedCars make={slugify(carDetails.make)}   carId={data['VehicleSourceId']}/>
+                    <DynamicRelatedCars make={slugify(carDetails.make)} carId={data['VehicleSourceId']}/>
                 </Flex>
             </Flex>
         </Box>

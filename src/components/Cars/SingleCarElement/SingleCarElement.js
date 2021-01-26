@@ -59,14 +59,14 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                 <Flex w="100%">
 
 
-                    <ContactForm carDetails={carDetails} carTitle={carTitle}/>
+                    <ContactForm carDetails={carDetails} carTitle={carTitle} />
 
                     <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                         <Button w="50%"
                                 borderRadius={0}
                                 aria-label="Book this car"
                                 leftIcon={<MdDirectionsCar/>}
-                                colorScheme="teal">Mere Detailer</Button>
+                                colorScheme="twitter">Mere Detailer</Button>
                     </CarLink>
                 </Flex>
                 <Box p="6">

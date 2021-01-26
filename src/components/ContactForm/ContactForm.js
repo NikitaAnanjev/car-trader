@@ -27,7 +27,7 @@ import {MdRingVolume} from "react-icons/md";
 import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 
-export const ContactForm = ({carDetails, carTitle}) => {
+export const ContactForm = ({carDetails, carTitle, singlePage,buttonTitle}) => {
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
@@ -47,13 +47,25 @@ export const ContactForm = ({carDetails, carTitle}) => {
 
     return (
         <>
-            <Button leftIcon={<MdRingVolume/>}
+
+            {singlePage ? <Button
+                    leftIcon={<MdRingVolume/>}
+                    aria-label="Book this car"
+                    colorScheme="white"
+                    variant="outline"
+                    size={"md"}
+                    onClick={onOpen}>{buttonTitle ? buttonTitle : 'Click'}</Button> :
+
+                <Button
+                    leftIcon={<MdRingVolume/>}
                     aria-label="Book this car"
                     colorScheme="green"
                     size={"md"}
                     w="50%"
                     borderRadius={0}
                     onClick={onOpen}>Booking</Button>
+            }
+
 
             <Drawer
                 isOpen={isOpen}

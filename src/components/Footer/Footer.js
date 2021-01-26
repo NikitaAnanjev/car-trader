@@ -15,9 +15,11 @@ import {
     MdInfo
 } from "react-icons/md";
 
+import {BottomLine} from "@/components/Footer/BottomLine";
 
 export const Footer = () => {
     return (
+        <>
         <FooterContainer direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
 
             <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
@@ -78,5 +80,7 @@ export const Footer = () => {
 
 
         </FooterContainer>
+    <BottomLine/>
+    </>
     );
 };
