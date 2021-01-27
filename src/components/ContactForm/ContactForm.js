@@ -22,6 +22,7 @@ import {
     IconButton,
     Image,
     Heading,
+    Text,
     Spacer
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
@@ -144,24 +145,32 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                 </FormControl>
                                             </Box>
 
+                                            <Flex direction={{base: "column",md: "row"}}>
+                                                <DateInputWrap color="white">
+                                                    <FormControl>
+                                                        <FormLabel>Vælg en dag og tid</FormLabel>
 
-                                            <DateInputWrap color="white">
-                                                <FormControl>
-                                                    <FormLabel>Vælg en dag og tid</FormLabel>
+                                                        <DatePicker
+                                                            // showTimeSelect
+                                                            showTimeInput
+                                                            dateFormat="Pp"
+                                                            locale="da"
+                                                            name="dateSelect" selected={startDate}
+                                                            onChange={date => setStartDate(date)}
+                                                            filterDate={isWeekday}
+                                                            customTimeInput={<ExampleCustomTimeInput/>}
+                                                        />
 
-                                                    <DatePicker
-                                                        // showTimeSelect
-                                                        showTimeInput
-                                                        dateFormat="Pp"
-                                                        locale="da"
-                                                        name="dateSelect" selected={startDate}
-                                                        onChange={date => setStartDate(date)}
-                                                        filterDate={isWeekday}
-                                                        customTimeInput={<ExampleCustomTimeInput />}
-                                                    />
+                                                    </FormControl>
 
-                                                </FormControl>
-                                            </DateInputWrap>
+                                                </DateInputWrap>
+                                                <Flex w={{base: "100%",md: "50%"}} ml={{base: 0,md: 10}}  mt={{base:3,md: 0}}>
+
+                                                    <Text fontSize="12px" color="white">Lorem ipsum dolor sit amet, consectetur
+                                                        adipisicing elit. Deserunt, nesciunt.</Text>
+                                                </Flex>
+
+                                            </Flex>
 
 
                                             <Input d='none' type="text" name="car_details"
@@ -172,7 +181,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                 <Textarea id="message" name="message"/>
                                             </Box>
 
-                                            <Box>
+                                            <Box >
 
                                                 <Button w="100%" colorScheme="blue" type="submit">Send</Button>
 
@@ -195,8 +204,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                             {/*</Flex>*/}
                         </DrawerBody>
 
-                        <DrawerFooter borderTopWidth="1px">
-                            <Button variant="outline" mr={3} onClick={onClose}>
+                        <DrawerFooter  borderTopWidth="1px">
+                            <Button w="100%" variant="outline" colorScheme="red" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
                         </DrawerFooter>

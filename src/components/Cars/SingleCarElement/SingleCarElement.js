@@ -4,7 +4,7 @@ import {Box, Badge, Image, Flex, Text, Heading, Divider, Button} from "@chakra-u
 import {CarLink, CardContainer, EuroNormBadge, SignCarBtn} from './styles'
 import {ContactForm} from "@/components/ContactForm";
 import {carPrice} from "@/helper/carPrice";
-import {MdDirectionsCar,MdPlaylistAddCheck} from "react-icons/md";
+import {MdDirectionsCar,MdPlaylistAddCheck,MdLocalGasStation} from "react-icons/md";
 
 const SingleCarElement = ({car, size, relatedItem}) => {
 
@@ -79,27 +79,12 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         <Heading size={relatedItem ? "sm" : "lg"} color="gray.200">{property.title}</Heading>
 
                     </Box>
-                    <Box d="flex" alignItems="baseline" justifyContent="space-between">
-                        <Flex>
-                            <Badge borderRadius="full" px="2" colorScheme="teal">
-                                {carDetails.fuel}
-                            </Badge>
-                            <Box
-                                color="gray.500"
-                                fontWeight="semibold"
-                                letterSpacing="wide"
-                                fontSize="sm"
-                                textTransform="uppercase"
-                                ml="2"
-                            >
-                                {carDetails.motor} motor &bull; {mileage} km
-                            </Box>
-                        </Flex>
 
 
-                    </Box>
-                    <Divider my={5}/>
-                    <Flex direction="row" justifyContent="space-between" alignItems="flex-end" minH="60px">
+
+
+
+                    <Flex direction="row" justifyContent="space-between" alignItems="flex-end" >
                         <Flex direction="row" p={2} px={1} maxW={{base: "60%", md: "80%"}}
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
@@ -122,6 +107,30 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         </Flex>
                         }
                     </Flex>
+
+                    <Divider my={5}/>
+
+
+                    <Box d="flex" alignItems="baseline" justifyContent="space-between">
+                        <Flex>
+
+                            <Box
+                                color="gray.500"
+                                fontWeight="semibold"
+                                letterSpacing="wide"
+                                fontSize="sm"
+                                textTransform="uppercase"
+                                ml="2"
+                            >
+                                {carDetails.fuel} &bull; {carDetails.motor} motor &bull; {mileage} km
+                            </Box>
+                        </Flex>
+                    </Box>
+
+
+
+
+
                 </Box>
 
             </CardContainer>

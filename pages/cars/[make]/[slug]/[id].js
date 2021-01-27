@@ -46,7 +46,7 @@ const DynamicVideo = dynamic(() => import("@/components/Cars/SingleCarElement/Ca
 
 const DynamicRelatedCars = dynamic(() => import("@/components/RelatedCars/RelatedCars"),
     {
-        loading: () => <Flex minH="200px"  justifyContent="center" alignItems="center"><CircularProgress
+        loading: () => <Flex minH="200px" justifyContent="center" alignItems="center"><CircularProgress
             isIndeterminate color="red.300"/></Flex>
     })
 
@@ -148,9 +148,11 @@ export default function SingleCarPage() {
                         <Spacer/>
 
 
-                        {carDetails.video && <DynamicVideo video={carDetails.video}  title={carTitle} price={fullPrice}/>}
+                        {carDetails.video &&
+                        <DynamicVideo video={carDetails.video} title={carTitle} price={fullPrice}/>}
 
-                        <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true} buttonTitle="Bestil prøvetid"/>
+                        <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true}
+                                     buttonTitle="Bestil prøvetid"/>
 
                     </Flex>
 
@@ -162,10 +164,7 @@ export default function SingleCarPage() {
                         <SinglePageContainer direction="column">
                             <Flex direction={{base: "column", lg: "row"}}>
                                 <CarImageContainer>
-                                    {carDetails.pictures &&
-                                    <DynamicCarImage images={carDetails.pictures} /> }
-                                   {/*<CarImage images={carDetails.pictures} video={carDetails.video}/>*/}
-                                    }
+                                    {carDetails.pictures && <DynamicCarImage images={carDetails.pictures}/>}}
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>
@@ -180,22 +179,16 @@ export default function SingleCarPage() {
                           justifyContent="space-between">
                         <Flex grow={1} maxW="50%">
                             <CarContent
-                                p={{base: 2, sm:3,md: 5}}
+                                p={{base: 2, sm: 3, md: 5}}
                                 justifyContent="center"
                                 bg={redGradient}>
 
-                                <Text as='h4'  fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
+                                <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
                             </CarContent>
                         </Flex>
-                        <Flex grow={1} maxW="50%">
-                            <CarContent   p={{base: 2, sm:3,md: 5}} bg="green.500" ml="1rem">
 
-                                    <CarPrice carId={data['VehicleSourceId']}/>
-
-
-                            </CarContent>
-                        </Flex>
+                        <CarPrice carId={data['VehicleSourceId']}/>
                     </Flex>
                     }
 
@@ -209,7 +202,7 @@ export default function SingleCarPage() {
                     {!mobile &&
                     <>
                         <Flex p={2}>
-                            <CarContent p={5} bg={redGradient}>
+                            <CarContent bg={redGradient} p={{base: 2, sm: 3, md: 5}}>
 
                                 <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
@@ -226,6 +219,10 @@ export default function SingleCarPage() {
                         </CarContent>
                     </Flex>
                 </Flex>
+                <Box>
+
+                    <Heading pt={10}  color="gray.300"> Tjek andre {carDetails.make} biler</Heading>
+                </Box>
 
                 <Flex mt={10} w="100%">
                     <DynamicRelatedCars make={slugify(carDetails.make)} carId={data['VehicleSourceId']}/>
