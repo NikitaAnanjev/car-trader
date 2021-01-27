@@ -21,7 +21,7 @@ const CarVideo = ({video, title, price}) => {
     return (
         <>
             <Button
-                mr={3}
+                mr={{base: 0, sm:3}}   mb={{base: 3, sm:0}}
                 leftIcon={<MdPlayCircleOutline/>}
                 aria-label="Se videoklip"
                 colorScheme="orange"

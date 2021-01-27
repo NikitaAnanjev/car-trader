@@ -147,12 +147,14 @@ export default function SingleCarPage() {
                         <Heading color="white">{carTitle} </Heading>
                         <Spacer/>
 
-
+                    <Flex wrap="wrap" justifyContent="flex-end">
                         {carDetails.video &&
                         <DynamicVideo video={carDetails.video} title={carTitle} price={fullPrice}/>}
 
                         <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true}
                                      buttonTitle="Bestil prøvetid"/>
+
+                    </Flex>
 
                     </Flex>
 

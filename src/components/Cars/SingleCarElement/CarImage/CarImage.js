@@ -1,7 +1,7 @@
 import {SingleCarImgCarousel} from './styles'
 import {Carousel} from 'react-responsive-carousel';
 
- const CarImage = ({images, video}) => {
+ const CarImage = ({images}) => {
 
 
     return (

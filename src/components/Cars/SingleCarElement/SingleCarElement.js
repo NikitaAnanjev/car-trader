@@ -113,7 +113,6 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
                     <Box d="flex" alignItems="baseline" justifyContent="space-between">
                         <Flex>
-
                             <Box
                                 color="gray.500"
                                 fontWeight="semibold"
@@ -126,11 +125,6 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                             </Box>
                         </Flex>
                     </Box>
-
-
-
-
-
                 </Box>
 
             </CardContainer>
