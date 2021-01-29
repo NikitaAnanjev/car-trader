@@ -54,7 +54,6 @@ const DynamicRelatedCars = dynamic(() => import("@/components/RelatedCars/Relate
 const fetcher = async (url) => {
     const res = await fetch(url)
     const data = await res.json()
-
     if (res.status !== 200) {
         throw new Error(data.message)
     }
@@ -138,7 +137,7 @@ export default function SingleCarPage() {
                   px={{base: "1rem", md: "1rem"}}>
 
 
-                <SingleCarItem color="white" w={{base: "100%", md: "65%!important", lg: "75%"}}
+                <SingleCarItem color="white" w={{base: "100%", md: "60%", lg: "70%"}}
                                pr={{base: "0", lg: "1rem"}}>
 
                     {/*<Link href="/"> BACK to homepage</Link>*/}
@@ -147,22 +146,17 @@ export default function SingleCarPage() {
                         <Heading color="white">{carTitle} </Heading>
                         <Spacer/>
 
-                    <Flex wrap="wrap" justifyContent="flex-end">
-                        {carDetails.video &&
-                        <DynamicVideo video={carDetails.video} title={carTitle} price={fullPrice}/>}
-
-                        <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true}
-                                     buttonTitle="Bestil prøvetid"/>
-
-                    </Flex>
-
+                        <Flex wrap="wrap" justifyContent="flex-end">
+                            {carDetails.video &&
+                            <DynamicVideo video={carDetails.video} title={carTitle} price={fullPrice}/>}
+                            <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true}
+                                         buttonTitle="Bestil prøvetid"/>
+                        </Flex>
                     </Flex>
 
                     <Divider maxW="3rem" mt={3} mb={5} borderColor="red.500"/>
 
                     <Flex bg="gray.800" borderRadius="8px" overflow="hidden" mb={5}>
-
-
                         <SinglePageContainer direction="column">
                             <Flex direction={{base: "column", lg: "row"}}>
                                 <CarImageContainer>
@@ -170,13 +164,8 @@ export default function SingleCarPage() {
                                 </CarImageContainer>
                             </Flex>
                         </SinglePageContainer>
-
-
                     </Flex>
-
-
                     {mobile &&
-
                     <Flex borderRadius="0 8px 8px 0" overflow="hidden" mb={5} direction="row"
                           justifyContent="space-between">
                         <Flex grow={1} maxW="50%">
@@ -184,49 +173,40 @@ export default function SingleCarPage() {
                                 p={{base: 2, sm: 3, md: 5}}
                                 justifyContent="center"
                                 bg={redGradient}>
-
                                 <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
                             </CarContent>
                         </Flex>
-
                         <CarPrice carId={data['VehicleSourceId']}/>
                     </Flex>
                     }
 
                     <Flex borderRadius="0 8px 8px 0" overflow="hidden" mb={5}>
-                        <SingleCarTabs carDetails={carDetails}/>
+                        <SingleCarTabs carDetails={carDetails}  data={specificDetails} mobile={mobile}/>
                     </Flex>
 
                 </SingleCarItem>
 
-                <Flex w={{base: "100%", md: "35%!important", lg: "25%"}} borderRadius="8px" direction="column">
+                <Flex w={{base: "100%", md: "40%", lg: "30%"}} borderRadius="8px" direction="column">
                     {!mobile &&
                     <>
-                        <Flex p={2}>
+                        <Flex p={" 0 0.5rem 0.5rem 0.5rem"}>
                             <CarContent bg={redGradient} p={{base: 2, sm: 3, md: 5}}>
-
                                 <Text as='h4' fontSize={{base: "2rem", md: "2.5rem", lg: "3rem"}}
                                       color="white">{fullPrice} </Text>
-
                             </CarContent>
                         </Flex>
                         <CarPrice carId={data['VehicleSourceId']}/>
-                    </>
-                    }
 
                     <Flex p={{base: 0, md: 2}}>
                         <CarContent bg="gray.200">
                             <TableCarDetails data={specificDetails}/>
                         </CarContent>
                     </Flex>
+                    </>
+                    }
                 </Flex>
-                <Box>
-
-                    <Heading pt={10}  color="gray.300"> Tjek andre {carDetails.make} biler</Heading>
-                </Box>
-
-                <Flex mt={10} w="100%">
+                <Flex  w="100%" direction="column">
                     <DynamicRelatedCars make={slugify(carDetails.make)} carId={data['VehicleSourceId']}/>
                 </Flex>
             </Flex>

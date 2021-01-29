@@ -7,7 +7,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Button,
-    Flex, Text
+    Flex, Text, ModalFooter, ModalContent
 
 } from "@chakra-ui/react"
 import {ContactInfo} from './ContactInfo'
@@ -58,8 +58,6 @@ export const DrawerBar = () => {
                                             <li>IBAN: <b>DK 1393 2300 1211 6403</b></li>
                                             <li>Swiftadresse: <b>KRONDK22</b> </li>
                                         </ul>
-
-
                                     </Text>
 
                                 </Flex>
@@ -78,10 +76,12 @@ export const DrawerBar = () => {
                             </Flex>
                         </DrawerBody>
 
-                        <DrawerFooter>
 
-
-                        </DrawerFooter>
+                        <ModalFooter>
+                            <Button w="100%" colorScheme="blue" mr={3} onClick={onClose}>
+                                Close
+                            </Button>
+                        </ModalFooter>
                     </DrawerContent>
                 </DrawerOverlay>
             </Drawer>

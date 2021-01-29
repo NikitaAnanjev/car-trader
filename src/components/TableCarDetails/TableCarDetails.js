@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {
     Table,
     Thead,
@@ -6,16 +7,20 @@ import {
     Tr,
     Th,
     Td,
-    TableCaption, Button,
+    TableCaption, Button,Box
 } from "@chakra-ui/react"
 
-
 export const TableCarDetails = ({data}) => {
+    const [show, setShow] = useState(true)
     return (
-        <>
-        <Table variant="striped" colorScheme="gray">
+
+            <Box  h={show ? '100%' : '30%'} >
+
+
+
+        <Table w="100%" variant="striped" colorScheme="black" >
             {/*<TableCaption>Imperial to metric conversion factors</TableCaption>*/}
-            <Thead>
+            <Thead bg="green.100">
                 <Tr>
                     <Th>Specifikationer</Th>
                     <Th>Værdier</Th>
@@ -28,15 +33,11 @@ export const TableCarDetails = ({data}) => {
                         <Td pr={0}>{item.title}</Td>
                         <Td pr={0}><b>{item.value}</b></Td>
                     </Tr>
-
-
                 )}
 
             </Tbody>
-
         </Table>
-
-    <Button w="100%"> Show Less</Button>
-            </>
+    {/*<Button w="100%" colorScheme="green" onClick={()=> setShow(!show)}> Show Less</Button>*/}
+            </Box>
     );
 };

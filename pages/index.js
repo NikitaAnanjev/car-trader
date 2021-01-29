@@ -39,7 +39,6 @@ export default function Home({cars}) {
     )
 }
 
-// export const getStaticProps = async (ctx) => {
 export const getServerSideProps = async (ctx) => {
     const make = getAsString(ctx.query.make);
     // const year = getAsString(ctx.query.year);

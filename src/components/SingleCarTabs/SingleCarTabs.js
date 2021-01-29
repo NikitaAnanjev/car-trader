@@ -15,18 +15,28 @@ import {
 import {MdInfo} from "react-icons/md";
 
 import TextTruncate from 'react-text-truncate';
+import {TableCarDetails} from "@/components/TableCarDetails";
 
-export const SingleCarTabs = ({carDetails}) => {
+export const SingleCarTabs = ({carDetails,data,mobile}) => {
     const [show, setShow] = React.useState(false)
 
 
     return (
-        <Tabs isFitted variant="enclosed" bg="gray.800" borderRadius="8px" colorScheme="red" isLazy>
+        <Tabs w="100%" isFitted variant="enclosed" bg="gray.800" borderRadius="8px" colorScheme="white" isLazy>
             <TabList mb="1em">
+                {mobile && <Tab borderRadius="8px 0 8x 0">Specifikacioner</Tab>}
                 <Tab borderRadius="8px 0 8x 0">Beskrivelse</Tab>
                 <Tab borderRadius="8px 0 8x 0">Udstyr</Tab>
             </TabList>
             <TabPanels>
+
+                {mobile && <TabPanel>
+                    <Box w="100%" bg="gray.600">
+                        <TableCarDetails data={data}></TableCarDetails>
+                    </Box>
+
+                </TabPanel> }
+
                 <TabPanel>
                     <Box>
                         {!show ? <TextTruncate

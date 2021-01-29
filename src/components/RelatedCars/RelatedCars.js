@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import {LoadingIconWrap} from "@/components/styles";
-import {CircularProgress, Flex} from "@chakra-ui/react";
+import {Box, CircularProgress, Flex, Heading} from "@chakra-ui/react";
 import slugify from "react-slugify";
 import AliceCarousel from 'react-alice-carousel';
 import dynamic from "next/dynamic";
@@ -37,17 +37,27 @@ const RelatedCars = ({make, carId}) => {
         infinite: true,
         touchTracking: false,
         disableDotsControls: true,
-        disableButtonsControls: true,
+        disableButtonsControls: false,
         mouseTracking: true,
     }
 
     return (
-        <AliceCarousel
-            {...settings}
-            items={filtered.map((car) => <DynamicCars key={car["Id"]} car={car} relatedItem={true}/>)}
-            responsive={responsive}
-        />
-    );
+        <>
+            {filtered &&
+            <>
+            <Box>
+                <Heading py={10} color="gray.300"> Tjek andre {make} biler</Heading>
+            </Box>
+                <AliceCarousel
+                {...settings}
+                items={filtered.map((car) => <DynamicCars key={car["Id"]} car={car} relatedItem={true}/>)}
+                responsive={responsive}
+                />
+            </>
+            }
+
+        </>
+    )
 };
 
 export default RelatedCars

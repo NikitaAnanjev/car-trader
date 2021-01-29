@@ -1,4 +1,4 @@
-import {FooterContainer, FooterItem} from './styles'
+import {FooterContainer, FooterItem,Overflow} from './styles'
 
 import {
     Box, Image, Text, Heading, Divider, ListIcon,
@@ -21,8 +21,9 @@ export const Footer = () => {
     return (
         <>
         <FooterContainer direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
+                <Overflow/>
 
-            <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
+            <FooterItem  basis={{sm: "100%", md: "50%", lg: "25%"}}>
                 <Image src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
                 <Divider/>
                 <Box py={5} maxW="90%">

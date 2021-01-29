@@ -1,4 +1,4 @@
-import {useState} from "react";
+
 import emailjs from 'emailjs-com';
 import InputMask from 'react-input-mask';
 import {
@@ -29,15 +29,9 @@ import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
 import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
-import DatePicker, {registerLocale, setDefaultLocale} from "react-datepicker";
-
-import da from 'date-fns/locale/da';
-
-registerLocale('da', da)
 
 
 export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => {
-    const [startDate, setStartDate] = useState(new Date());
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
@@ -52,20 +46,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
 
         e.target.reset()
     }
-
-
-    const ExampleCustomTimeInput = ({date, value, onChange}) => (
-        <input
-            value={value}
-            onChange={e => onChange(e.target.value)}
-            style={{border: "solid 1px pink"}}
-        />
-    );
-    const isWeekday = date => {
-
-        const day = new Date().getDay(date);
-        return day !== 0 && day !== 6;
-    };
 
     return (
         <>
@@ -87,8 +67,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                     borderRadius={0}
                     onClick={onOpen}>Booking</Button>
             }
-
-
             <Drawer
                 isOpen={isOpen}
                 size='lg'
@@ -149,17 +127,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                 <DateInputWrap color="white">
                                                     <FormControl>
                                                         <FormLabel>Vælg en dag og tid</FormLabel>
-
-                                                        <DatePicker
-                                                            // showTimeSelect
-                                                            showTimeInput
-                                                            dateFormat="Pp"
-                                                            locale="da"
-                                                            name="dateSelect" selected={startDate}
-                                                            onChange={date => setStartDate(date)}
-                                                            filterDate={isWeekday}
-                                                            customTimeInput={<ExampleCustomTimeInput/>}
-                                                        />
+                                                        <Input type="date" name="dateSelect" />
 
                                                     </FormControl>
 

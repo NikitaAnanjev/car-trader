@@ -1,5 +1,4 @@
 import {CarouselItem} from './styles'
-import {useState} from "react";
 import {
     Button,
     Modal,
@@ -15,22 +14,17 @@ import {
 import {MdPlayCircleOutline} from "react-icons/md";
 
 const CarVideo = ({video, title, price}) => {
-
-
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
             <Button
-                mr={{base: 0, sm:3}}   mb={{base: 3, sm:0}}
+                mr={{base: 0, lg:3}}   mb={{base: 3, lg:0}}
                 leftIcon={<MdPlayCircleOutline/>}
                 aria-label="Se videoklip"
                 colorScheme="orange"
                 variant="solid"
                 size={"md"}
                 onClick={onOpen}>Se Video</Button>
-
-
-
             <Modal isOpen={isOpen} onClose={onClose} size="full">
                 <ModalOverlay />
                 <ModalContent bg="gray.900" color="gray.100">

@@ -1,6 +1,6 @@
 import {About} from "../src/pages/About";
 import {Heading, Text} from "@chakra-ui/react";
-
+import {SubPageBanner} from "@/components/SubPageBanner";
 
 const dataAboutUs = {
     entities: {
@@ -55,13 +55,16 @@ const dataAboutUs = {
 
 const Omos = () => {
     return (
-        <div>
-
+        <>
+            <SubPageBanner>
+                {/*<Heading>Lorem ipsum dolor sit amet.</Heading>*/}
+                {/*<Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, maiores.</Text>*/}
+            </SubPageBanner>
             {Object.values(dataAboutUs.entities).map((item)=>
                 <About  key={item.id} {...item}/>
             )}
 
-        </div>
+        </>
     );
 };
 

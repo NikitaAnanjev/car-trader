@@ -2,7 +2,6 @@ import {encode} from "base-64";
 import slugify from 'react-slugify';
 
 export default async function handler(req, res) {
-
     const {
         query: {make,slug,id },
     } = req
@@ -10,7 +9,6 @@ export default async function handler(req, res) {
     const username = process.env.BIlBASEN_API_LOGIN
     const password = process.env.BIlBASEN_API_PASS
     const url = process.env.BIlBASEN_API_URL
-
 
     const response = await fetch(url, {
         method: 'GET',
@@ -21,9 +19,6 @@ export default async function handler(req, res) {
 
     });
     const data = await response.json();
-
-
-
     const filtered = data.Vehicles.filter((p) => slugify(p["Make"]) === make && slugify(p["Make"]  + ' ' + p["Model"]  + ' ' + p["Year"]) === slug && p['Id'] === id)
 
     // User with id exists

@@ -84,8 +84,8 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
 
 
-                    <Flex direction="row" justifyContent="space-between" alignItems="flex-end" >
-                        <Flex direction="row" p={2} px={1} maxW={{base: "60%", md: "80%"}}
+                    <Flex direction={{base: "column", md:"row"}} justifyContent="space-between" alignItems="flex-end" >
+                        <Flex direction="row" p={2} px={1} maxW={{base: "100%",sm: "60%", md: "80%"}}
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
                             {fullPrice &&
