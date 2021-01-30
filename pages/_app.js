@@ -6,8 +6,12 @@ import {ChakraProvider, extendTheme, Box, Image} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
-import useSWR from "swr";
+import useSWR, {SWRConfig} from "swr";
 import {LoadingIconWrap} from "@/components/styles";
+import {encode} from "base-64";
+// import axios from "axios";
+// import { CacheProvider } from '@emotion/react'
+// import createCache from '@emotion/cache'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -32,8 +36,49 @@ function MyApp({Component, pageProps}) {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
+// AXIOS SETUP
+//     const cache = createCache()
+//
+//     const username =  process.env.BIlBASEN_API_LOGIN
+//     const password =  process.env.BIlBASEN_API_PASS
+//     const url = process.env.BIlBASEN_API_URL
+//     export const instanceFrontApi = axios.create({
+//         baseURL: url,
+//         headers: {
+//             common: {
+//                 Authorization: 'Basic ' + encode(username + ":" + password),
+//             },
+//         },
+//     })
+//
+//
+//     export const sourceUrl = {
+//         paymentMethods: 'api/payment-contract/methods',
+//         player: 'api/player',
+//         betHistory: 'api/betting/history',
+//     }
+//
+//     export const apiMethods = {
+//         fetcher: (url) =>
+//             instanceFrontApi.get(url).then((res) => res.data),
+//     }
+
+    // --- usage anywhere
+    //import useSWR from 'swr'
+    // import axios from 'axios'
+    // import { sourceUrl } from 'pages/_app'
+    // const { data: personalData } = useSWR(sourceUrl.player)
+
+
     const isFixed = true
     return (
+        // <CacheProvider value={(cache) }>
+        // <SWRConfig
+        //     value={{
+        //         dedupingInterval: 3000,
+        //         fetcher: (url) => apiMethods.fetcher(url),
+        //     }}
+        // >
         <ChakraProvider theme={customTheme} resetCSS>
             <NavBar>
                 <SearchPanel data={data} isfixed={isFixed ? 1 : 0}/>
@@ -43,6 +88,8 @@ function MyApp({Component, pageProps}) {
             </Box>
             <Footer/>
         </ChakraProvider>
+        // </SWRConfig>
+        // </CacheProvider>
     )
 }
 

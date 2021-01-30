@@ -23,7 +23,7 @@ import {
     Image,
     Heading,
     Text,
-    Spacer
+    Spacer, useBreakpointValue
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
@@ -35,6 +35,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
+    const isMobile = useBreakpointValue({base: true,sm: true, md: false})
     const sendEmail = (e) => {
         e.preventDefault();
         emailjs.sendForm('service_6y44txc', 'template_3mrc3ml', e.target, 'user_6gxi4XejgEsVRHpYzh70z')
@@ -56,7 +57,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                     colorScheme="white"
                     variant="outline"
                     size={"md"}
-                    onClick={onOpen}>{buttonTitle ? buttonTitle : 'Click'}</Button>
+                    onClick={onOpen}>{!isMobile && buttonTitle ? buttonTitle : 'Click'}</Button>
                 :
                 <Button
                     leftIcon={<MdRingVolume/>}
@@ -65,7 +66,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                     size={"md"}
                     w="50%"
                     borderRadius={0}
-                    onClick={onOpen}>Booking</Button>
+                    onClick={onOpen}>{!isMobile && ' Booking' }</Button>
             }
             <Drawer
                 isOpen={isOpen}
