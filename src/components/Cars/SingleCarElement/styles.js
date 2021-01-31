@@ -29,6 +29,8 @@ width: 100%;
 export const CarImageContainer = styled(Flex)`
 width: 100%;
 position: relative;
+border-radius: 8px;
+overflow: hidden;
 `
 export const SignCarBtn = styled(Box)`
 position: absolute;
@@ -66,4 +68,10 @@ transition: box-shadow 0.1s ease;
 
 `
 
-export const CarLink = styled(Link)``
+export const CarLink = styled(Link)`
+
+&:hover, &:focus, &:active {
+cursor: pointer;
+opacity: .9;
+}
+`

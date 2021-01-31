@@ -8,11 +8,9 @@ export const FooterContainer = styled(Flex)`
   width: 100%;
   min-height: 60vh;
   flex-wrap: wrap;
-  background: url("bg/car-right-piraluxauto.jpg");
-  background-repeat: no-repeat;
+  background: url("/bg/car-right-piraluxauto.jpg") no-repeat  bottom right fixed;
   background-size: cover;
-  background-position: bottom right;
-  background-attachment: fixed;
+ z-index: 50;
 `
 
 export const FooterItem = styled(Flex)`
@@ -32,8 +30,8 @@ export const Overflow = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
-   background: ${({theme}) => theme.colors.gray['900']};  
-   opacity: .7;
-   
+   background: ${({theme}) => theme.colors.gray['800']};  
+  
+   z-index: 1;
 `
 

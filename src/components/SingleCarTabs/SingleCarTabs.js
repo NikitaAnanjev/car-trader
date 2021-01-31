@@ -60,7 +60,7 @@ export const SingleCarTabs = ({carDetails,data,mobile}) => {
                             <List spacing={2} w="100%" flexDirection="column" flexWrap="wrap">
                                 {carDetails.equipmentList.map((item, index) =>
                                     <ListItem w={{base: "48%", lg: "31%"}}
-                                              fontSize={{base: "50%", sm: "60%", lg: "100%"}} mr="2%"
+                                              fontSize={{base: "10px", md: "12px"}} mr="2%"
                                               key={index} float="left">
                                         <ListIcon as={MdInfo} color="green.500"/>
                                         {item}

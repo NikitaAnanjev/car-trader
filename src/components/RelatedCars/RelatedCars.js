@@ -16,7 +16,6 @@ const DynamicCars = dynamic(() => import('@/components/Cars/SingleCarElement/Sin
 
 const responsive = {
     0: {items: 1},
-    320: {items: 1},
     568: {items: 2},
     1024: {items: 3},
     1280: {items: 4},
@@ -34,11 +33,11 @@ const RelatedCars = ({make, carId}) => {
         autoPlayStrategy: "none",
         autoPlayInterval: 2000,
         animationDuration: 1000,
-        animationType: "fadeout",
+        animationType: "slide",
         infinite: true,
         touchTracking: false,
         disableDotsControls: true,
-        disableButtonsControls: false,
+        disableButtonsControls: true,
         mouseTracking: true,
     }
 

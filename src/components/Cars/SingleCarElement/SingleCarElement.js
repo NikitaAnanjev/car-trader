@@ -50,37 +50,32 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
     return (
         <>
-            <CardContainer maxW={size ? size : (relatedItem ? { base: "md" ,sm:"xs"} :  { base: "48%",sm:"49%" ,md:"sm"})} overflow="hidden" borderRadius="md" mb={10}
+            <CardContainer maxW={size ? size : (relatedItem ? { base: "md" ,sm:"xs"} :  "sm")} overflow="hidden" borderRadius="md" mb={10}
                            bg="gray.700">
-                <Image src={changeImageSize} alt={property.imageAlt} />
+                <CarLink   href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
+                 <Image cursor="pointer" _hover={{'opacity' : '0.9'}} _active={{'opacity' : '0.8'}} src={changeImageSize} alt={property.imageAlt} />
+                </CarLink>
                 {carDetails.euroNorm &&
                 <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
+
                 <Flex w="100%">
                     <ContactForm carDetails={carDetails} carTitle={carTitle} />
-
-                    <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
-                        <Button w="50%"
-                                borderRadius={0}
-                                aria-label="Book this car"
-                                leftIcon={<MdDirectionsCar/>}
-                                colorScheme="twitter">{!isMobile && 'Mere Detailer'}</Button>
-                    </CarLink>
                 </Flex>
                 <Box p={ {base: "2" ,md:"6"}}>
                     <Box
-                        mb={3}
+                        my={3}
                         fontWeight="semibold"
                         lineHeight="tight"
                         isTruncated
                     >
-                        <Heading size={relatedItem ? "sm" :{base: "sm",sm: "lg"}} color="gray.200" textAlign={{base: "center",sm: "center"}}>{property.title}</Heading>
-
+                        <Heading size={relatedItem ? "md" : 'lg'} color="gray.200"
+                        >{property.title}</Heading>
                     </Box>
 
-                    <Flex direction={{base: "column", md:"row"}} justifyContent="space-between" alignItems="flex-end" >
+                    <Flex  justifyContent="space-between" alignItems="flex-end" >
                         <Flex direction="row" p={2} px={1} maxW={{base: "100%",md: "60%", lg: "80%"}}
                               w="100%"
-                              mb={{base: "3", sm:"0"}}
+
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
                             {fullPrice &&
@@ -91,9 +86,9 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         </Flex>
                         {leasingPrice &&
 
-                        <Flex direction="column" w={{base: "100%",sm: "100%"}}  justifyContent={{base: "center",sm: "center"}} alignItems={{base: "center",sm: "center"}} >
+                        <Flex direction="column" w="100%" maxW="40%" ml="5%" >
                             {!relatedItem && <Text fontSize="13px" color="white"> Leasing</Text>}
-                            <Flex direction="row" borderRadius="8px" border="1px solid white" p={1} px={1}>
+                            <Flex direction="row" borderRadius="8px" border="1px solid white" py={1} px={2}>
                                 <Heading d='flex' color="white" size={relatedItem ? "sm" : {base: "sm" ,md:"md"}}>
                                     {leasingPrice}
                                 </Heading>
@@ -105,7 +100,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         }
                     </Flex>
 
-                    <Divider my={{base: 2 ,md:5}}/>
+                    <Divider my={{base: 3 ,md:5}}/>
 
 
                     <Box d="flex" alignItems="baseline" justifyContent="space-between">

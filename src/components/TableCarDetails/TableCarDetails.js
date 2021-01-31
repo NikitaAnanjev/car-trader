@@ -14,11 +14,11 @@ export const TableCarDetails = ({data}) => {
     const [show, setShow] = useState(true)
     return (
 
-            <Box  h={show ? '100%' : '30%'} >
+            <Box  h={show ? '100%' : '30%'} borderRadius="8px" overflow="hidden">
 
 
 
-        <Table w="100%" variant="striped" colorScheme="black" >
+        <Table w="100%" bg="gray.800" >
             {/*<TableCaption>Imperial to metric conversion factors</TableCaption>*/}
             <Thead bg="green.100">
                 <Tr>
@@ -29,7 +29,7 @@ export const TableCarDetails = ({data}) => {
             <Tbody>
 
                 {Object.values(data.entities).map((item) =>
-                    <Tr key={item.id}>
+                    <Tr key={item.id} color="gray.100">
                         <Td pr={0}>{item.title}</Td>
                         <Td pr={0}><b>{item.value}</b></Td>
                     </Tr>
