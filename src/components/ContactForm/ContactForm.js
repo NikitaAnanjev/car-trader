@@ -119,28 +119,29 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                 }
                                 {showForm &&  <Flex w="100%" p={5} bg="gray.800">
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
-                                        <HStack spacing="24px">
+                                        <HStack spacing="24px" mb={5}>
                                             <Box
                                             >
-                                                <FormLabel color="white" htmlFor="from_name">Name</FormLabel>
+                                                {/*<FormLabel color="white" htmlFor="from_name">Name</FormLabel>*/}
                                                 <Input
                                                     color="white"
                                                     type="text"
                                                     name="from_name"
                                                     ref={firstField}
                                                     id="from_name"
-                                                    placeholder="Please enter user name"
+                                                    placeholder="Navn"
                                                 />
                                             </Box>
 
                                             <Box color="white">
                                                 <FormControl>
                                                     {/*<FormLabel>Email address</FormLabel>*/}
-                                                    <Input type="email" name="email"/>
+                                                    <Input type="email" name="email"   placeholder="email@mail.dk"/>
                                                     {/*<FormHelperText>We'll never share your email.</FormHelperText>*/}
                                                 </FormControl>
                                             </Box>
                                         </HStack>
+                                        <HStack spacing="24px" mb={5}>
                                             <Box color="white">
                                                 <FormControl>
 
@@ -154,7 +155,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                 </FormControl>
                                             </Box>
 
-                                            <Flex direction={{base: "column",md: "row"}}>
                                                 {/*<DateInputWrap color="white">*/}
                                                 {/*    <FormControl>*/}
                                                 {/*        <Input type="date" name="dateSelect" />*/}
@@ -163,7 +163,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                 <Flex w={{base: "100%",md: "50%"}}>
                                                     <DateInputWrap color="white">
                                                     <FormControl id="timeToCall" color="white" >
-                                                        <FormLabel>Country</FormLabel>
                                                         <Select placeholder="Tid" name="timeSelect">
                                                             {timeToCall.map((tid)=>
                                                                 <option>{tid}</option>
@@ -175,8 +174,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                     </DateInputWrap>
                                                 </Flex>
 
-                                            </Flex>
-
+                                    </HStack>
 
                                             <Input d='none' type="text" name="car_details"
                                                    defaultValue={carDetails.mileage + ',' + carDetails.year
