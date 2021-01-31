@@ -1,32 +1,16 @@
-import slugify from 'react-slugify';
-import NumberFormat from 'react-number-format';
+import {CarListElementContainer, CarListElementWrapper, ContentWrapper, ImgWrapper, EuroNormBadge} from './styles'
 import {
-    Box,
-    Badge,
-    Image,
-    Flex,
-    Text,
-    Heading,
-    Divider,
-    Button,
-    useBreakpointValue,
-    CircularProgress
+    Box, Divider,
+    Flex, Heading,
+    Image, Text, useBreakpointValue
 } from "@chakra-ui/react"
-import {CarLink, CardContainer, EuroNormBadge, ImgCarouselConteiner} from './styles'
-import {ContactForm} from "@/components/ContactForm";
+import slugify from "react-slugify";
 import {carPrice} from "@/helper/carPrice";
-import {MdDirectionsCar, MdPlaylistAddCheck, MdLocalGasStation} from "react-icons/md";
-import dynamic from "next/dynamic";
+import NumberFormat from "react-number-format";
+import {CardContainer, CarLink, ImgCarouselConteiner} from "@/components/Cars/SingleCarElement/styles";
 
 
-const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
-    {
-        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
-            isIndeterminate color="red.300"/></Flex>
-    })
-
-
-const SingleCarElement = ({car, size, relatedItem}) => {
+const SingleCarListElement = ({car}) => {
 
 
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
@@ -90,54 +74,44 @@ const SingleCarElement = ({car, size, relatedItem}) => {
     const changeImageSize = property.imageUrl.replace('l1600', 'l480')
 
     return (
-        <>
-            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "md", sm: "md",md:"xs", lg: "sm"} )}
-                           overflow="hidden" borderRadius="md" mb={10}
+        <CarListElementContainer mb={5}>
+            {/*<CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>*/}
+            <CarListElementWrapper bg="gray.800">
 
-                           bg="gray.700">
-                <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
-                    <ImgCarouselConteiner>
+                <Flex>
 
-                        {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt} />}
-                        {/*{carDetails.pictures && <DynamicCarImage singleElement images={imageSizes()}/>}*/}
+                    <ImgWrapper>
+                        {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt}/>}
                         {carDetails.euroNorm &&
                         <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
-                    </ImgCarouselConteiner>
-                </CarLink>
-
-                <Flex w="100%">
-                    <ContactForm carDetails={carDetails} carTitle={carTitle} specificDetails={specificDetails}/>
+                    </ImgWrapper>
                 </Flex>
-                <Box p={{base: "2", md: "3"}}>
-                    <Box
-                        my={3}
-                        fontWeight="semibold"
-                        lineHeight="tight"
-                        isTruncated
-                    >
-                        <Heading size={relatedItem ? "md" : 'lg'} color="gray.200"
+                <ContentWrapper direction="column" p={3} w="100%">
+
+                    <Box w="100%">
+                        <Heading size={{base: "sm",sm: 'lg'}} color="gray.200"
                         >{property.title}</Heading>
+                        <Divider my={{base: 3, md: 5}}/>
                     </Box>
 
-                    <Flex justifyContent="space-between" alignItems="flex-end">
-                        <Flex direction="row" p={2} px={1} maxW={{base: "100%", md: "60%", lg: "80%"}}
-                              w="100%"
 
-                              justifyContent="center" alignItems="center" borderRadius="8px"
+                    <Flex justifyContent="space-between" alignItems="flex-start"
+                          direction={{base: "row", md: "column"}}>
+                        <Flex direction="row" p={isMobile ? 1 : 2} px={1}
+                              borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
                             {fullPrice &&
                             <Box>
-                                <Heading color="white"
-                                         size={relatedItem ? "sm" : {base: "sm", md: "md"}}>{fullPrice}</Heading>
+                                <Heading color="white" size={{base: "sm", md: "md"}}>{fullPrice}</Heading>
                             </Box>
                             }
                         </Flex>
                         {leasingPrice &&
 
-                        <Flex direction="column" w="100%"  ml="5%">
-                            {!relatedItem && <Text fontSize="12px" color="white"> Leasing</Text>}
+                        <Flex direction="column" mt={{base: 0, md: 3}}>
+                            {!isMobile && <Text fontSize="12px" color="white"> Leasing</Text>}
                             <Flex direction="row" borderRadius="8px" border="1px solid white" py={1} px={2}>
-                                <Heading d='flex' color="white" size={relatedItem ? "xs" : {base: "sm", md: "md"}}>
+                                <Heading d='flex' color="white" size={{base: "sm", md: "md"}}>
                                     {leasingPrice}
                                 </Heading>
                                 <Box ml={2} as="span" color="gray.100" fontSize={{base: "xs", md: "sm"}} d="flex">
@@ -148,29 +122,13 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         }
                     </Flex>
 
-                    <Divider my={{base: 3, md: 5}}/>
+                </ContentWrapper>
 
 
-                    <Box d="flex" alignItems="baseline" justifyContent="space-between">
-                        <Flex>
-                            <Box
-                                color="gray.500"
-                                fontWeight="semibold"
-                                letterSpacing="wide"
-                                fontSize={{base: "xs", md: "sm"}}
-                                textTransform="uppercase"
-                                ml="2"
-                            >
-                                {carDetails.fuel} &bull; {carDetails.motor} motor &bull; {mileage} km
-                            </Box>
-                        </Flex>
-                    </Box>
-                </Box>
-
-            </CardContainer>
-        </>
+            </CarListElementWrapper>
+            {/*</CarLink>*/}
+        </CarListElementContainer>
     );
 };
 
-
-export default SingleCarElement
+export default SingleCarListElement;

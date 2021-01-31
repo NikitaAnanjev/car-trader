@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import {Box} from "@chakra-ui/react"
+import {Box, Select} from "@chakra-ui/react"
 import {Form} from "formik";
 
 export const SearchPanelContainer = styled(Box)`
@@ -9,10 +9,8 @@ export const SearchPanelContainer = styled(Box)`
     background: ${({theme, isfixed}) => !isfixed ? theme.colors.gray['800'] : 'transparent'};
 `
 
-export const FormikForm = styled(Form)`
-    display: flex;
-    flex-grow: 1;
-    background: ${({theme}) => theme.colors.brand};
-    justify-content: flex-end;
-    align-items: center;
+export const SelectInput = styled(Select)`
+    option {
+    color: #111111;
+    }
 `
