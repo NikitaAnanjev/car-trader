@@ -23,15 +23,19 @@ export default function Home({cars}) {
     return (
         <PageLayout>
             <Head/>
+
             <TopBanner>
-                <Heading maxW={{sm: "100%", md: '70%', lg: "60%"}} textAlign={{base: "center", md: "left"}} mb={10}
+                <Flex  maxW={{sm: "100%", md: '50%', lg: "60%"}} direction="column" >
+                <Heading  maxW={{sm: "100%", md: '50%', lg: "60%"}} textAlign={{base: "center", md: "left"}} mb={10}
                          fontSize={{base: "2rem", sm: "3rem", md: '3.5rem', lg: '5rem'}}
                          p={{base: 3, sm: 2, md: 0}}
                          color="white"> VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                 <SearchPanel data={data}>
 
                 </SearchPanel>
+                </Flex>
             </TopBanner>
+
             <Box maxW="1400px" m="auto">
                 <DynamicAllCars data={cars ? cars : data}/>
             </Box>

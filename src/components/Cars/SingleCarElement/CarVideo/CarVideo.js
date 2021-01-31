@@ -11,7 +11,7 @@ import {
     useDisclosure,
     Text
 } from "@chakra-ui/react";
-import {MdPlayCircleOutline} from "react-icons/md";
+import {MdPlayCircleOutline, MdKeyboardReturn} from "react-icons/md";
 
 const CarVideo = ({video, title, price}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -43,11 +43,10 @@ const CarVideo = ({video, title, price}) => {
 
                     </ModalBody>
 
-                    <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
-                            Close
+                    <ModalFooter w="100%" justifyContent="center">
+                        <Button colorScheme="orange" w="300px" leftIcon={<MdKeyboardReturn/>}  mr={3} onClick={onClose}>
+                            Tilbage
                         </Button>
-                        <Button variant="ghost">Secondary Action</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

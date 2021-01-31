@@ -29,8 +29,8 @@ const Cars = ({data}) => {
     // const paginate = pageNumber => setCurrentPage(pageNumber)
     // console.log()
     return (
-        <CarList>
-            {sortData() .map((car) =>
+        <CarList id="carList">
+            {sortData().map((car) =>
                 <DynamicCars key={car["Id"]} car={car}/>
             )}
             {/*<Pagination carsPerPage={carsPerPage} totalCars={filtered.length} paginate={paginate}/>*/}

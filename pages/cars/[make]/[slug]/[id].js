@@ -109,7 +109,7 @@ export default function SingleCarPage() {
 
     const gearType = carDetails.gear === 'A' ? 'Automat' : 'Mekanisk'
 
-    const specificDetails = {
+   const specificDetails = {
         entities: {
             1: {id: "1", title: "Bilmærke", value: carDetails.make},
             2: {id: "2", title: "Modelår", value: carDetails.year},
@@ -139,23 +139,17 @@ export default function SingleCarPage() {
 
                 <SingleCarItem color="white" w={{base: "100%", md: "60%", lg: "70%"}}
                                pr={{base: "0", lg: "1rem"}}>
-
-                    {/*<Link href="/"> BACK to homepage</Link>*/}
                     <Flex justifyContent="space-between">
-
                         <Heading color="white">{carTitle} </Heading>
                         <Spacer/>
-
                         <Flex wrap="wrap" justifyContent="flex-end">
                             {carDetails.video &&
                             <DynamicVideo video={carDetails.video} title={carTitle} price={fullPrice}/>}
                             <ContactForm carDetails={carDetails} carTitle={carTitle} singlePage={true}
-                                         buttonTitle="Bestil prøvetid"/>
+                                         buttonTitle="Bestil prøvetid" specificDetails={specificDetails}/>
                         </Flex>
                     </Flex>
-
                     <Divider maxW="3rem" mt={3} mb={5} borderColor="red.500"/>
-
                     <Flex bg="gray.800" borderRadius="8px" overflow="hidden" mb={5}>
                         <SinglePageContainer direction="column">
                             <Flex direction={{base: "column", lg: "row"}}>
@@ -180,11 +174,9 @@ export default function SingleCarPage() {
                         <CarPrice carId={data['VehicleSourceId']}/>
                     </Flex>
                     }
-
                     <Flex borderRadius="0 8px 8px 0" overflow="hidden" mb={5}>
-                        <SingleCarTabs carDetails={carDetails}  data={specificDetails} mobile={mobile}/>
+                        <SingleCarTabs carDetails={carDetails} data={specificDetails} mobile={mobile}/>
                     </Flex>
-
                 </SingleCarItem>
 
                 <Flex w={{base: "100%", md: "40%", lg: "30%"}} borderRadius="8px" direction="column">
@@ -198,15 +190,15 @@ export default function SingleCarPage() {
                         </Flex>
                         <CarPrice carId={data['VehicleSourceId']}/>
 
-                    <Flex p={{base: 0, md: 2}}>
-                        <CarContent bg="gray.200">
-                            <TableCarDetails data={specificDetails}/>
-                        </CarContent>
-                    </Flex>
+                        <Flex p={{base: 0, md: 2}}>
+                            <CarContent bg="gray.200">
+                                <TableCarDetails data={specificDetails}/>
+                            </CarContent>
+                        </Flex>
                     </>
                     }
                 </Flex>
-                <Flex  w="100%" direction="column">
+                <Flex w="100%" direction="column">
                     <DynamicRelatedCars make={slugify(carDetails.make)} carId={data['VehicleSourceId']}/>
                 </Flex>
             </Flex>

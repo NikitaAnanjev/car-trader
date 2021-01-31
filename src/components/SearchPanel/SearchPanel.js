@@ -57,7 +57,6 @@ export const SearchPanel = ({data, children, isfixed}) => {
                               w="100%">
                             <Flex
                                 mb={4}
-                                // mb={{base: '1rem', md: "1rem"}}
                             >
                                 {!isfixed &&  <Text color="gray.200" mr={5}>I am looking for a car</Text> }
 
@@ -66,7 +65,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
                             <Flex grow={1}>
                                 <FormControl id="make" bg='gray.700'  >
-                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white" size="lg" border={0} borderRadius="0 3px 3px 0" w="100%"
+                                    <Field as={Select} name="make" placeholder="Select cars brand" color="white" size="md" border={0} borderRadius="0 3px 3px 0" w="100%"
                                            // onChange={() => searchForm.submit()}
                                     >
                                         {getAllMakes('Make').map((make, index) =>
@@ -76,7 +75,7 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
                                     </Field>
                                 </FormControl>
-                                <Button type="submit" colorScheme="blue" w="150px" size="lg" borderRadius="0 3px 3px 0" > Search</Button>
+                                <Button type="submit" colorScheme="blue" w="150px" size="md" borderRadius="0 3px 3px 0" > Search</Button>
                             </Flex>
                         </Flex>
                     </FormikForm>

@@ -60,40 +60,53 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                                     prefix={'DKK '}/>
     const mileage = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
 
+    const distance = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
+
+
+    const gearType = carDetails.gear === 'A' ? 'Automat' : 'Mekanisk'
+
     const property = {
         imageUrl: carDetails.pictures[0],
         imageAlt: slug,
         title: carTitle,
     }
 
-    // const changeImageSize = property.imageUrl.replace('l1600', 'l480')
 
-    const imageSizes = () => {
-        const allImages = carDetails.pictures
-        let resizedImages = []
-        allImages.map((image) =>
-            resizedImages.push(image.replace('l1600', 'l480'))
-        )
-        return resizedImages
+    const specificDetails = {
+        entities: {
+            1: {id: "1", title: "Bilmærke", value: carDetails.make},
+            2: {id: "2", title: "Modelår", value: carDetails.year},
+            3: {id: "3", title: "Motorstørrelse", value: carDetails.motor},
+            4: {id: "4", title: "Model", value: carDetails.model},
+            5: {id: "5", title: "Km", value: distance},
+            6: {id: "6", title: "Gearkasse", value: gearType},
+            7: {id: "7", title: "Brændstof", value: carDetails.fuel},
+            8: {id: "8", title: "Karosseri type", value: carDetails.bodyType},
+            9: {id: "9", title: "Tank", value: carDetails.gasTank + ' L'},
+            10: {id: "10", title: "KM/L", value: carDetails.kmPerLiter + ' Km'},
+        }
+
     }
 
+    const changeImageSize = property.imageUrl.replace('l1600', 'l480')
 
     return (
         <>
-
             <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : "sm")}
                            overflow="hidden" borderRadius="md" mb={10}
                            bg="gray.700">
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                     <ImgCarouselConteiner>
-                        {carDetails.pictures && <DynamicCarImage singleElement images={imageSizes()}/>}
+
+                        {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt} />}
+                        {/*{carDetails.pictures && <DynamicCarImage singleElement images={imageSizes()}/>}*/}
                         {carDetails.euroNorm &&
                         <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
                     </ImgCarouselConteiner>
                 </CarLink>
 
                 <Flex w="100%">
-                    <ContactForm carDetails={carDetails} carTitle={carTitle}/>
+                    <ContactForm carDetails={carDetails} carTitle={carTitle} specificDetails={specificDetails}/>
                 </Flex>
                 <Box p={{base: "2", md: "6"}}>
                     <Box

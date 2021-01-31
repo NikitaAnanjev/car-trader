@@ -23,7 +23,7 @@ export const EquipmentItem = ({title, text, header, url, img}) => {
 
     return (
         <>
-            <Box onClick={onOpen} maxW="lg" borderRadius="xs" overflow="hidden" m={5} bg="gray.700" color="white">
+            <Box onClick={onOpen} maxW="md" borderRadius="md" overflow="hidden" m={5} bg="gray.700" color="white" _hover={{'cursor' : "pointer"}}>
                 <Image src={`/udstyr/${img}`}/>
                 <Box p="6">
                     <Heading size="md" mb={3} color="gray.100">{title}</Heading>
