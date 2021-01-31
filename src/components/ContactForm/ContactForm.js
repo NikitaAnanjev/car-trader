@@ -169,8 +169,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                                             )}
                                                         </Select>
                                                     </FormControl>
-                                                    <Text mt={3} fontSize="12px" color="white">Lorem ipsum dolor sit amet, consectetur
-                                                        adipisicing elit. Deserunt, nesciunt.</Text>
+                                                    {/*<Text mt={3} fontSize="12px" color="white">Lorem ipsum dolor sit amet, consectetur*/}
+                                                    {/*    adipisicing elit. Deserunt, nesciunt.</Text>*/}
                                                     </DateInputWrap>
                                                 </Flex>
 
