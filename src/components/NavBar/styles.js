@@ -1,5 +1,11 @@
 import styled from '@emotion/styled'
-import {Flex} from "@chakra-ui/react"
+import {Flex,Box} from "@chakra-ui/react"
+import { jsx, css, keyframes } from '@emotion/react'
+export const activeStroke = keyframes`
+  0%   {width: 0;}
+ 
+  100% {width: 100%;}
+`
 
 export const NavBarLogo = styled(Flex)`
 display: flex;
@@ -8,9 +14,30 @@ max-width: 200px;
 cursor: pointer;
 }
 `
+export const MenuItem = styled(Flex)`
+flex-direction: column;
+height: 40px;
+padding: 0 0.5rem;
+justify-content: center;
+align-items: center;
+&:hover {
+cursor: pointer;
+}
+`
+
 export const NavList = styled('div')`
 display: flex;
+width: 100%;
 `
+
+export const ActiveIndicator = styled(Box)`
+
+  animation-fill-mode: forwards;  
+  height: 2px;
+  background:red;
+
+`
+
 export const SearchNavBar = styled('div')`
 display: flex;
 flex-grow: 1;

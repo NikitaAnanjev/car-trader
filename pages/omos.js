@@ -1,5 +1,5 @@
 import {About} from "../src/pages/About";
-import {Heading, Text} from "@chakra-ui/react";
+import {Heading, Text, Box, Image} from "@chakra-ui/react";
 import {SubPageBanner} from "@/components/SubPageBanner";
 
 const dataAboutUs = {
@@ -57,8 +57,7 @@ const Omos = () => {
     return (
         <>
             <SubPageBanner>
-                {/*<Heading>Lorem ipsum dolor sit amet.</Heading>*/}
-                {/*<Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, maiores.</Text>*/}
+                <Image src="bg/drommebil.jpg"/>
             </SubPageBanner>
             {Object.values(dataAboutUs.entities).map((item)=>
                 <About  key={item.id} {...item}/>

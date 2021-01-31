@@ -15,21 +15,10 @@ import {useRouter} from "next/router";
 import {MenuItemChakra} from "@/components/NavBar/NavDrawer/styles";
 import Link from "next/link";
 
-
-// const MenuItems = ({ href,children}) =>  (
-//         <MenuItemChakra isActive={Boolean(router.pathname === href)}><Link href={href ? href : '#'} >   {children} </Link></MenuItemChakra>
-//     )
-
-
-
 export const NavDrawer = () => {
     const router = useRouter()
-
     const {isOpen, onOpen, onClose} = useDisclosure()
     const btnRef = React.useRef()
-
-
-
     return (
         <>
             <Box display={{base: "block", md: "none"}} ref={btnRef} onClick={onOpen}>
@@ -62,9 +51,9 @@ export const NavDrawer = () => {
 
                         <DrawerBody color="white" p="0">
                             <List>
-                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/') } onClick={onClose}><Link href='/' >  Home </Link></MenuItemChakra></ListItem>
-                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/udstyr')} onClick={onClose}><Link href='/udstyr' >  Udstyr </Link></MenuItemChakra></ListItem>
-                                <ListItem>     <MenuItemChakra active={Boolean(router.pathname === '/omos')} onClick={onClose}><Link href='/omos' >  OmOs </Link></MenuItemChakra></ListItem>
+                                <ListItem>     <Link href='/'><MenuItemChakra active={Boolean(router.pathname === '/') } onClick={onClose}>Home</MenuItemChakra></Link></ListItem>
+                                <ListItem>     <Link href='/udstyr'><MenuItemChakra active={Boolean(router.pathname === '/udstyr')} onClick={onClose}>  Udstyr </MenuItemChakra></Link></ListItem>
+                                <ListItem>     <Link href='/omos'><MenuItemChakra active={Boolean(router.pathname === '/omos')} onClick={onClose}>  OmOs</MenuItemChakra></Link></ListItem>
 
                             </List>
                         </DrawerBody>

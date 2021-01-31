@@ -32,11 +32,14 @@ position: relative;
 border-radius: 8px;
 overflow: hidden;
 `
-export const SignCarBtn = styled(Box)`
-position: absolute;
-right: 5%;
-top: 48%;
+export const ImgCarouselConteiner = styled.div`
+width: 100%;
+&:hover {
+cursor: pointer;
+}
+
 `
+
 export const EuroNormBadge = styled('div')`
 position: absolute;
 display: flex;

@@ -17,6 +17,7 @@ const DynamicCars = dynamic(() => import('@/components/Cars/SingleCarElement/Sin
 const responsive = {
     0: {items: 1},
     568: {items: 2},
+    769: {items: 3},
     1024: {items: 3},
     1280: {items: 4},
 };

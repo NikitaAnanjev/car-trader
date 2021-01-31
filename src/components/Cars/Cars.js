@@ -30,7 +30,7 @@ const Cars = ({data}) => {
     // console.log()
     return (
         <CarList>
-            {sortData().map((car) =>
+            {sortData() .map((car) =>
                 <DynamicCars key={car["Id"]} car={car}/>
             )}
             {/*<Pagination carsPerPage={carsPerPage} totalCars={filtered.length} paginate={paginate}/>*/}

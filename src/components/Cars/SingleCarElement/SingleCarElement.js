@@ -1,15 +1,35 @@
 import slugify from 'react-slugify';
 import NumberFormat from 'react-number-format';
-import {Box, Badge, Image, Flex, Text, Heading, Divider, Button, useBreakpointValue} from "@chakra-ui/react"
-import {CarLink, CardContainer, EuroNormBadge, SignCarBtn} from './styles'
+import {
+    Box,
+    Badge,
+    Image,
+    Flex,
+    Text,
+    Heading,
+    Divider,
+    Button,
+    useBreakpointValue,
+    CircularProgress
+} from "@chakra-ui/react"
+import {CarLink, CardContainer, EuroNormBadge, ImgCarouselConteiner} from './styles'
 import {ContactForm} from "@/components/ContactForm";
 import {carPrice} from "@/helper/carPrice";
-import {MdDirectionsCar,MdPlaylistAddCheck,MdLocalGasStation} from "react-icons/md";
+import {MdDirectionsCar, MdPlaylistAddCheck, MdLocalGasStation} from "react-icons/md";
+import dynamic from "next/dynamic";
+
+
+const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
+    {
+        loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+            isIndeterminate color="red.300"/></Flex>
+    })
+
 
 const SingleCarElement = ({car, size, relatedItem}) => {
 
 
-    const isMobile = useBreakpointValue({base: true,sm: true, md: false})
+    const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const carDetails = {
         id: car['Id'],
         mileage: car['Mileage'],
@@ -46,22 +66,36 @@ const SingleCarElement = ({car, size, relatedItem}) => {
         title: carTitle,
     }
 
-    const changeImageSize = property.imageUrl.replace('l1600', 'l480')
+    // const changeImageSize = property.imageUrl.replace('l1600', 'l480')
+
+    const imageSizes = () => {
+        const allImages = carDetails.pictures
+        let resizedImages = []
+        allImages.map((image) =>
+            resizedImages.push(image.replace('l1600', 'l480'))
+        )
+        return resizedImages
+    }
+
 
     return (
         <>
-            <CardContainer maxW={size ? size : (relatedItem ? { base: "md" ,sm:"xs"} :  "sm")} overflow="hidden" borderRadius="md" mb={10}
+
+            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : "sm")}
+                           overflow="hidden" borderRadius="md" mb={10}
                            bg="gray.700">
-                <CarLink   href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
-                 <Image cursor="pointer" _hover={{'opacity' : '0.9'}} _active={{'opacity' : '0.8'}} src={changeImageSize} alt={property.imageAlt} />
+                <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
+                    <ImgCarouselConteiner>
+                        {carDetails.pictures && <DynamicCarImage singleElement images={imageSizes()}/>}
+                        {carDetails.euroNorm &&
+                        <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
+                    </ImgCarouselConteiner>
                 </CarLink>
-                {carDetails.euroNorm &&
-                <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
 
                 <Flex w="100%">
-                    <ContactForm carDetails={carDetails} carTitle={carTitle} />
+                    <ContactForm carDetails={carDetails} carTitle={carTitle}/>
                 </Flex>
-                <Box p={ {base: "2" ,md:"6"}}>
+                <Box p={{base: "2", md: "6"}}>
                     <Box
                         my={3}
                         fontWeight="semibold"
@@ -72,24 +106,25 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         >{property.title}</Heading>
                     </Box>
 
-                    <Flex  justifyContent="space-between" alignItems="flex-end" >
-                        <Flex direction="row" p={2} px={1} maxW={{base: "100%",md: "60%", lg: "80%"}}
+                    <Flex justifyContent="space-between" alignItems="flex-end">
+                        <Flex direction="row" p={2} px={1} maxW={{base: "100%", md: "60%", lg: "80%"}}
                               w="100%"
 
                               justifyContent="center" alignItems="center" borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
                             {fullPrice &&
                             <Box>
-                                <Heading color="white" size={relatedItem ? "sm" :  {base: "sm" ,md:"md"}}>{fullPrice}</Heading>
+                                <Heading color="white"
+                                         size={relatedItem ? "sm" : {base: "sm", md: "md"}}>{fullPrice}</Heading>
                             </Box>
                             }
                         </Flex>
                         {leasingPrice &&
 
-                        <Flex direction="column" w="100%" maxW="40%" ml="5%" >
-                            {!relatedItem && <Text fontSize="13px" color="white"> Leasing</Text>}
+                        <Flex direction="column" w="100%"  ml="5%">
+                            {!relatedItem && <Text fontSize="12px" color="white"> Leasing</Text>}
                             <Flex direction="row" borderRadius="8px" border="1px solid white" py={1} px={2}>
-                                <Heading d='flex' color="white" size={relatedItem ? "sm" : {base: "sm" ,md:"md"}}>
+                                <Heading d='flex' color="white" size={relatedItem ? "xs" : {base: "sm", md: "md"}}>
                                     {leasingPrice}
                                 </Heading>
                                 <Box ml={2} as="span" color="gray.100" fontSize={{base: "xs", md: "sm"}} d="flex">
@@ -100,7 +135,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         }
                     </Flex>
 
-                    <Divider my={{base: 3 ,md:5}}/>
+                    <Divider my={{base: 3, md: 5}}/>
 
 
                     <Box d="flex" alignItems="baseline" justifyContent="space-between">
@@ -109,7 +144,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                                 color="gray.500"
                                 fontWeight="semibold"
                                 letterSpacing="wide"
-                                fontSize={{base: "xs" ,md:"sm"}}
+                                fontSize={{base: "xs", md: "sm"}}
                                 textTransform="uppercase"
                                 ml="2"
                             >

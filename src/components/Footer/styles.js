@@ -7,6 +7,7 @@ export const FooterContainer = styled(Flex)`
   position: relative;
   width: 100%;
   min-height: 60vh;
+  max-height: 200vh;
   flex-wrap: wrap;
   background: url("/bg/car-right-piraluxauto.jpg") no-repeat  bottom right fixed;
   background-size: cover;
@@ -31,7 +32,6 @@ export const Overflow = styled.div`
   bottom: 0;
   right: 0;
    background: ${({theme}) => theme.colors.gray['800']};  
-  
-   z-index: 1;
+  opacity: .4;
 `
 

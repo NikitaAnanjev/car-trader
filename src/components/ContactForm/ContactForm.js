@@ -1,24 +1,19 @@
-
 import emailjs from 'emailjs-com';
 import InputMask from 'react-input-mask';
 import {
     Drawer,
     DrawerBody,
-    DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
     Box,
-    Stack,
     FormControl,
-    FormLabel,
-    FormHelperText,
     Input,
     Textarea,
     Flex,
-    IconButton,
+    Divider,
     Image,
     Heading,
     Text,
@@ -26,7 +21,10 @@ import {
     Button,
     Select,
     ButtonGroup,
-    Spacer, useBreakpointValue
+    useBreakpointValue,
+    Radio,
+    RadioGroup,
+    Stack
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
@@ -39,7 +37,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
-    const isMobile = useBreakpointValue({base: true,sm: true, md: false})
+    const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [showForm, setShowForm] = useState(false)
 
     const timeToCall = [
@@ -56,8 +54,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
         "18:00",
 
     ]
-
-
 
 
     const sendEmail = (e) => {
@@ -90,7 +86,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                     size={"md"}
                     w="100%"
                     borderRadius={0}
-                    onClick={onOpen}>{ 'Book den bil' }</Button>
+                    onClick={onOpen}>{'Book den bil'}</Button>
             }
             <Drawer
                 isOpen={isOpen}
@@ -101,9 +97,9 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                 scrollBehavior="inside"
             >
                 <DrawerOverlay>
-                    <DrawerContent bg={showForm ? 'gray.800' : "gray.200"} >
+                    <DrawerContent bg={showForm ? 'gray.800' : "gray.200"}>
 
-                        <DrawerCloseButton/>
+                        <DrawerCloseButton color={showForm && 'white'}/>
                         <DrawerHeader borderBottomWidth="1px" color={showForm && 'gray.50'}>
                             <Heading>{carTitle}</Heading>
                         </DrawerHeader>
@@ -113,110 +109,134 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle}) => 
                                 direction='column'
                                 bg="gray.700">
                                 {!showForm &&
-                                <CarImageContainer  maxW={{base: '100%'}}>
+                                <CarImageContainer maxW={{base: '100%'}}>
                                     <Image src={carDetails.pictures[0]}/>
                                 </CarImageContainer>
                                 }
-                                {showForm &&  <Flex w="100%" p={5} bg="gray.800">
+                                {showForm &&
+
+                                <Flex direction="column" w="100%" p={5} bg="gray.800">
+                                    <Box color="white">
+                                        <Heading mb={5} size="lg" color="gray.300">Lorem ipsum dolor.</Heading>
+                                        <Text mb={10} maxW="80%">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                            elit. Ab accusamus ad architecto exercitationem id illum itaque
+                                            necessitatibus obcaecati officia. Eius esse explicabo harum laborum maxime
+                                            odio quia, quod tenetur voluptatem!</Text>
+
+
+                                    </Box>
+
                                     <form className="contact-form" onSubmit={sendEmail} style={{width: '100%'}}>
                                         <HStack spacing="24px" mb={5}>
-                                            <Box
+                                            <Box w="50%"
                                             >
-                                                {/*<FormLabel color="white" htmlFor="from_name">Name</FormLabel>*/}
+
                                                 <Input
+                                                    size="sm"
                                                     color="white"
                                                     type="text"
                                                     name="from_name"
                                                     ref={firstField}
                                                     id="from_name"
                                                     placeholder="Navn"
+
                                                 />
                                             </Box>
 
-                                            <Box color="white">
+                                            <Box w="50%" color="white">
                                                 <FormControl>
-                                                    {/*<FormLabel>Email address</FormLabel>*/}
-                                                    <Input type="email" name="email"   placeholder="email@mail.dk"/>
-                                                    {/*<FormHelperText>We'll never share your email.</FormHelperText>*/}
+                                                    <Input size="sm" type="email" name="email"
+                                                           placeholder="email@mail.dk"/>
                                                 </FormControl>
                                             </Box>
                                         </HStack>
+                                        <Box color="white" mb={5}>
+                                            <FormControl>
+
+                                                <InputMask mask="+4\5 99 99 99 99" maskChar={null}>
+                                                    {(inputProps) => <Input type="tel" {...inputProps}
+                                                                            name="user_phone_number"
+                                                                            placeholder="Telefon *"
+                                                                            required
+                                                                            size="sm"
+                                                    />}
+                                                </InputMask>
+
+                                            </FormControl>
+                                        </Box>
                                         <HStack spacing="24px" mb={5}>
-                                            <Box color="white">
+
+
+                                            <DateInputWrap color="white">
                                                 <FormControl>
-
-                                                    <InputMask mask="+4\5 99 99 99 99" maskChar={null}>
-                                                        {(inputProps) => <Input type="tel" {...inputProps}
-                                                                                name="user_phone_number"
-                                                                                placeholder="Telefon #"
-                                                        />}
-                                                    </InputMask>
-
+                                                    <Input size="sm" type="date" name="dateSelect"/>
                                                 </FormControl>
-                                            </Box>
+                                            </DateInputWrap>
 
-                                                {/*<DateInputWrap color="white">*/}
-                                                {/*    <FormControl>*/}
-                                                {/*        <Input type="date" name="dateSelect" />*/}
-                                                {/*    </FormControl>*/}
-                                                {/*</DateInputWrap>*/}
-                                                <Flex w={{base: "100%",md: "50%"}}>
-                                                    <DateInputWrap color="white">
-                                                    <FormControl id="timeToCall" color="white" >
-                                                        <Select placeholder="Tid" name="timeSelect">
-                                                            {timeToCall.map((tid)=>
-                                                                <option>{tid}</option>
-                                                            )}
-                                                        </Select>
-                                                    </FormControl>
-                                                    {/*<Text mt={3} fontSize="12px" color="white">Lorem ipsum dolor sit amet, consectetur*/}
-                                                    {/*    adipisicing elit. Deserunt, nesciunt.</Text>*/}
-                                                    </DateInputWrap>
-                                                </Flex>
 
-                                    </HStack>
+                                            {/*<Flex w={{base: "100%", md: "50%"}}>*/}
+                                            {/*    <DateInputWrap color="white">*/}
+                                            {/*        <FormControl id="timeToCall" color="white">*/}
+                                            {/*            <Select placeholder="Tid" name="timeSelect" size="sm">*/}
+                                            {/*                {timeToCall.map((tid) =>*/}
+                                            {/*                    <option>{tid}</option>*/}
+                                            {/*                )}*/}
+                                            {/*            </Select>*/}
+                                            {/*        </FormControl>*/}
 
-                                            <Input d='none' type="text" name="car_details"
-                                                   defaultValue={carDetails.mileage + ',' + carDetails.year
-                                                   + ',' + carDetails.make}/>
-                                            <Box color="white">
-                                                <Textarea id="message" name="message" placeholder="Description"/>
-                                            </Box>
+                                            {/*    </DateInputWrap>*/}
+                                            {/*</Flex>*/}
 
-                                            <Box >
+                                            <Flex w={{base: "100%", md: "50%"}}>
+                                                <DateInputWrap color="white">
+                                                    <RadioGroup defaultValue="1">
+                                                        <Stack spacing={4} direction="row">
+                                                            <Radio value="1" >
 
-                                                <Button w="100%" colorScheme="blue" type="submit">Send</Button>
+                                                               10 - 12
+                                                            </Radio>
+                                                            <Radio value="2">12 - 14</Radio>
+                                                            <Radio value="3">14 - 17</Radio>
+                                                        </Stack>
+                                                    </RadioGroup>
 
-                                            </Box>
+                                                </DateInputWrap>
+                                            </Flex>
+
+                                        </HStack>
+
+                                        <Input d='none' type="text" name="car_details" size="sm"
+                                               defaultValue={carDetails.mileage + ',' + carDetails.year
+                                               + ',' + carDetails.make}/>
+                                        <Box color="white">
+                                            <Textarea size="sm" id="message" name="message" placeholder="Description"/>
+                                        </Box>
+
+                                        <Box mt={5}>
+
+                                            <Button w="100%" colorScheme="blue" type="submit">Send</Button>
+
+                                        </Box>
 
                                     </form>
-                                </Flex> }
+                                </Flex>}
                             </Flex>
 
-                                <Flex w="100%" my={5}  p={5}>
-                                    <ButtonGroup variant="solid" spacing="6" w="100%">
-                                        <Button colorScheme="blue" w="50%">Ring nu</Button>
-                                        <Button colorScheme="green" isDisabled={showForm} w="50%" onClick={()=> setShowForm(!showForm)}>Bestid opkald</Button>
-                                    </ButtonGroup>
-                                </Flex>
+                            <Divider/>
 
 
+                            <Flex w="100%" my={5} p={5}>
+                                <ButtonGroup variant="solid" spacing="6" w="100%">
+
+                                    {!showForm && <Button as="a" colorScheme="blue" w="50%" href="tel:+4560240897">Ring nu</Button>}
+                                    <Button colorScheme={showForm ? 'red' : 'green'} w="50%"
+                                            onClick={() => setShowForm(!showForm)}>{showForm ? 'Tilbage' : 'Bestid opkald'}</Button>
+                                </ButtonGroup>
+                            </Flex>
 
 
-                            {/*<Flex p={6}>*/}
-                            {/*    <Box color="white">*/}
-                            {/*        <p> {carDetails.mileage}</p>*/}
-                            {/*        <p> {carDetails.year}</p>*/}
-                            {/*        <p> {carDetails.make}</p>*/}
-                            {/*    </Box>*/}
-                            {/*</Flex>*/}
                         </DrawerBody>
 
-                        <DrawerFooter  borderTopWidth="1px">
-                            <Button w="100%" variant="outline" colorScheme="red" mr={3} onClick={onClose}>
-                                Tilbage
-                            </Button>
-                        </DrawerFooter>
 
                     </DrawerContent>
                 </DrawerOverlay>
