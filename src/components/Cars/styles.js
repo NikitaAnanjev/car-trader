@@ -4,7 +4,7 @@ export const CarList = styled('div')`
 display: flex;
 flex-flow: wrap row;
 width: 100%;
-justify-content: space-between;
+justify-content: flex-end;
 padding: 40px 0;
 `
 

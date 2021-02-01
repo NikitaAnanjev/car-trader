@@ -65,7 +65,7 @@ export default function Home({cars}) {
                             colorScheme="red"
                             aria-label="List view"
                             onClick={() => setView(false)}
-                            size="sm" icon={<MdViewModule fontSize="1.5rem"/>}/>
+                            size="sm" icon={<MdViewList fontSize="1.5rem"/>}/>
 
                         <IconButton
                             ml={3}
@@ -73,7 +73,7 @@ export default function Home({cars}) {
                             colorScheme="red"
                             aria-label="List view"
                             size="sm"
-                            icon={<MdViewList fontSize="1.5rem"/>}
+                            icon={<MdViewModule fontSize="1.5rem"/>}
                             onClick={() => setView(true)}
                         />
 
