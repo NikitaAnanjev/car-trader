@@ -8,6 +8,7 @@ import slugify from "react-slugify";
 import {carPrice} from "@/helper/carPrice";
 import NumberFormat from "react-number-format";
 import {CardContainer, CarLink, ImgCarouselConteiner} from "@/components/Cars/SingleCarElement/styles";
+import {ContactForm} from "@/components/ContactForm";
 
 
 const SingleCarListElement = ({car}) => {
@@ -58,51 +59,114 @@ const SingleCarListElement = ({car}) => {
 
     const specificDetails = {
         entities: {
-            1: {id: "1", title: "Bilmærke", value: carDetails.make},
+            // 1: {id: "1", title: "Brændstof", value: carDetails.fuel},
             2: {id: "2", title: "Modelår", value: carDetails.year},
-            3: {id: "3", title: "Motorstørrelse", value: carDetails.motor},
+            3: {id: "3", title: "Motors", value: carDetails.motor},
             4: {id: "4", title: "Model", value: carDetails.model},
             5: {id: "5", title: "Km", value: distance},
             6: {id: "6", title: "Gearkasse", value: gearType},
             7: {id: "7", title: "Brændstof", value: carDetails.fuel},
-            8: {id: "8", title: "Karosseri type", value: carDetails.bodyType},
-            9: {id: "9", title: "Tank", value: carDetails.gasTank + ' L'},
-            10: {id: "10", title: "KM/L", value: carDetails.kmPerLiter + ' Km'},
+            // 8: {id: "8", title: "Karosseri type", value: carDetails.bodyType},
+            // 9: {id: "9", title: "Tank", value: carDetails.gasTank + ' L'},
+            // 10: {id: "10", title: "KM/L", value: carDetails.kmPerLiter + ' Km'},
         }
     }
 
     const changeImageSize = property.imageUrl.replace('l1600', 'l480')
 
     return (
-        <CarListElementContainer mb={5}>
-            {/*<CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>*/}
+        <CarListElementContainer mb={5} borderRadius="8px" overflow="hidden">
             <CarListElementWrapper bg="gray.800">
 
-                <Flex>
+                <Flex w={{base: '70%', sm: '80%', md: '70%', lg: "90%"}} maxW="350px">
 
-                    <ImgWrapper>
-                        {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt}/>}
-                        {carDetails.euroNorm &&
-                        <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
-                    </ImgWrapper>
+                    <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
+                        <ImgWrapper>
+                            {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt}/>}
+                            {!isMobile && carDetails.euroNorm &&
+                            <EuroNormBadge><span>{carDetails.euroNorm}</span> <p>EuroNorm</p></EuroNormBadge>}
+                        </ImgWrapper>
+                    </CarLink>
                 </Flex>
-                <ContentWrapper direction="column" p={3} w="100%">
 
-                    <Box w="100%">
-                        <Heading size={{base: "sm",sm: 'lg'}} color="gray.200"
+                <ContentWrapper direction="column" p="1rem" w="100%">
+
+                    <Flex w="100%">
+                        <Heading fontSize={{base: "0.75rem", sm: '1.4rem', md: "1.6rem"}} mr={5} fontWeight="200"
+                                 color="gray.200"
                         >{property.title}</Heading>
-                        <Divider my={{base: 3, md: 5}}/>
-                    </Box>
+
+                        {!isMobile &&
+                        <Flex alignItems="flex-start">
+                            <Flex direction="row" p={1}
+                                  mr={5}
+                                  borderRadius="8px"
+                                  style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
+                                {fullPrice &&
+                                <Box>
+                                    <Heading color="white" fontSize={{
+                                        base: "0.75rem",
+                                        sm: '1.2rem',
+                                        md: "1.5rem"
+                                    }}>{fullPrice}</Heading>
+                                </Box>
+                                }
+                            </Flex>
+                            {leasingPrice &&
+                            <Flex direction="column">
+                                <Flex direction="row" borderRadius="8px" border="1px solid white" py={1} px={2}>
+                                    <Heading d='flex' color="white"
+                                             fontSize={{base: "0.75rem", sm: '1.2rem', md: "1.5rem"}}>
+                                        {leasingPrice}
+                                    </Heading>
+                                    <Box ml={2} as="span" color="gray.100"
+                                         fontSize={{base: "0.5rem", sm: '0.75rem', md: "1rem"}} d="flex">
+                                        mdr
+                                    </Box>
+                                </Flex>
+                            </Flex>
+                            }
+                        </Flex>
+                        }
 
 
-                    <Flex justifyContent="space-between" alignItems="flex-start"
+                    </Flex>
+                    <Divider my={{base: 1, sm: 2, md: 3, lg: 5}}/>
+
+                    {!isMobile &&
+
+                    <Flex maxH={{md: "100px", lg: "120px"}} maxW={{md: "100%", lg: "80%"}} wrap="wrap"
+                          direction="column">
+                        {Object.values(specificDetails.entities).map((info) =>
+
+                            <Flex key={info.id} maxH={{md: "30px", lg: "50px"}} direction="row" border="0.5px solid #171923">
+                                <Flex justifyContent="center" alignItems="center" bg="gray.700" w="80px">
+                                    <Text fontSize="xs" color="gray.200">{info.title}</Text>
+                                </Flex>
+                                <Flex justifyContent="center" alignItems="center" p={2}>
+                                    <Text fontWeight="500" color="gray.100">{info.value}</Text>
+                                </Flex>
+                            </Flex>
+                        )}
+                    </Flex>
+                    }
+
+
+                    {isMobile &&
+                    <Flex alignItems="flex-start"
                           direction={{base: "row", md: "column"}}>
                         <Flex direction="row" p={isMobile ? 1 : 2} px={1}
+                              mr={5}
                               borderRadius="8px"
                               style={{background: 'linear-gradient(309deg, #e9212d 0%, #ec1e2b 35%, #fa313d 50%, #f52734 68%, #e32531 68%)'}}>
                             {fullPrice &&
                             <Box>
-                                <Heading color="white" size={{base: "sm", md: "md"}}>{fullPrice}</Heading>
+                                <Heading color="white"
+                                         fontSize={{
+                                             base: "0.75rem",
+                                             sm: '1rem',
+                                             md: "1.5rem"
+                                         }}>{fullPrice}</Heading>
                             </Box>
                             }
                         </Flex>
@@ -111,22 +175,29 @@ const SingleCarListElement = ({car}) => {
                         <Flex direction="column" mt={{base: 0, md: 3}}>
                             {!isMobile && <Text fontSize="12px" color="white"> Leasing</Text>}
                             <Flex direction="row" borderRadius="8px" border="1px solid white" py={1} px={2}>
-                                <Heading d='flex' color="white" size={{base: "sm", md: "md"}}>
+                                <Heading d='flex' color="white"
+                                         fontSize={{base: "0.75rem", sm: '0.8rem', md: "1.5rem"}}>
                                     {leasingPrice}
                                 </Heading>
-                                <Box ml={2} as="span" color="gray.100" fontSize={{base: "xs", md: "sm"}} d="flex">
-                                    / mdr
+                                <Box ml={2} as="span" color="gray.100"
+                                     fontSize={{base: "0.5rem", sm: '0.6rem', md: "1rem"}} d="flex">
+                                    mdr
                                 </Box>
                             </Flex>
                         </Flex>
                         }
                     </Flex>
+                    }
+
 
                 </ContentWrapper>
-
+                <Flex w={{base:"30px",sm:"30px",md:"5%"}}>
+                    <ContactForm carDetails={carDetails} carTitle={carTitle} specificDetails={specificDetails}
+                                 listitem={true}/>
+                </Flex>
 
             </CarListElementWrapper>
-            {/*</CarLink>*/}
+
         </CarListElementContainer>
     );
 };

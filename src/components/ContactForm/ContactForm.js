@@ -31,7 +31,7 @@ import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 import {useState} from "react";
 import {TableCarDetails} from "@/components/TableCarDetails";
 
-export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle,specificDetails}) => {
+export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, specificDetails, listitem}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
     const firstField = React.useRef()
 
@@ -70,14 +70,28 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle,speci
                     size={"md"}
                     onClick={onOpen}>{buttonTitle ? buttonTitle : 'Bestil opkald'}</Button>
                 :
-                <Button
-                    leftIcon={<MdRingVolume/>}
-                    aria-label="Book this car"
-                    colorScheme="green"
-                    size={"md"}
-                    w="100%"
-                    borderRadius={0}
-                    onClick={onOpen}>{'Book den bil'}</Button>
+                (!listitem ? <Button
+                            leftIcon={<MdRingVolume/>}
+                            aria-label="Book this car"
+                            colorScheme="green"
+                            size={"md"}
+                            w="100%"
+                            borderRadius={0}
+                            onClick={onOpen}>{'Book den bil'}</Button> :
+
+                        <Button
+
+                            aria-label="Book den bil"
+                            colorScheme="green"
+                            size={"md"}
+                            w="100%"
+                            h="100%"
+                            borderRadius={0}
+                            onClick={onOpen}><Flex transform="rotate(-90deg)"> <Box
+                            mr={2}><MdRingVolume/></Box> {!isMobile && <Text>Book den bil</Text>}</Flex></Button>
+                )
+
+
             }
             <Drawer
                 isOpen={isOpen}
@@ -112,7 +126,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle,speci
                                     <Box color="white">
                                         <Heading mb={{base: 3, md: 5}} size="lg" color="gray.200">Lorem ipsum
                                             dolor.</Heading>
-                                        <Text color="gray.300" mb={10}  maxW={{base: "100%", md: "80%"}}>Lorem ipsum dolor sit amet,
+                                        <Text color="gray.300" mb={10} maxW={{base: "100%", md: "80%"}}>Lorem ipsum
+                                            dolor sit amet,
                                             consectetur adipisicing
                                             elit. Ab accusamus ad architecto exercitationem id illum itaque
                                             necessitatibus obcaecati officia. Eius esse explicabo harum laborum maxime
@@ -231,7 +246,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle,speci
                                 </ButtonGroup>
                             </Flex>
                             {!showForm &&
-                            <TableCarDetails data={specificDetails}/> }
+                            <TableCarDetails data={specificDetails}/>}
                         </DrawerBody>
                     </DrawerContent>
                 </DrawerOverlay>

@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import {FooterItem} from "@/components/Footer/styles";
 import {useRouter} from "next/router";
 import {MdViewList, MdViewModule} from "react-icons/md";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'),
@@ -28,11 +28,19 @@ export default function Home({cars}) {
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
     const {query} = useRouter()
 
-    const [view, setView] = useState(true)
+    const [view, setView] = useState(  true)
+    // const [view, setView] = useState( localStorage.getItem('carListView') ? localStorage.getItem('carListView') : true)
+
+
+
+    const onClickView = (value) => {
+        // localStorage.setItem('carListView', Boolean(value));
+        setView(value)
+    }
 
     return (
         <PageLayout>
-            <Head/>
+            <Head><title> Piralux Auto</title></Head>
 
             <TopBanner>
                 <Flex w={{sm: "90%", md: '80%', lg: "90%"}} maxW="1400px" direction="column">
@@ -50,7 +58,7 @@ export default function Home({cars}) {
             </TopBanner>
 
 
-            <Box maxW="1400px" w="90%" m="auto">
+            <Box maxW="1400px" w={{ base:"99%",sm:"98%",md:"95%",lg:"90%" }} m="auto">
 
                 <Flex direction="row" w="100%" justifyContent="space-between" alignItems="center">
                     <Flex pt={10} direction="column">
@@ -60,22 +68,23 @@ export default function Home({cars}) {
                     </Flex>
 
                     <Flex color="white">
-                        <IconButton
-                            variant={!view ? "solid" : "outline"}
-                            colorScheme="red"
-                            aria-label="List view"
-                            onClick={() => setView(false)}
-                            size="sm" icon={<MdViewList fontSize="1.5rem"/>}/>
 
                         <IconButton
-                            ml={3}
+                            mr={3}
                             variant={view ? "solid" : "outline"}
                             colorScheme="red"
                             aria-label="List view"
                             size="sm"
                             icon={<MdViewModule fontSize="1.5rem"/>}
-                            onClick={() => setView(true)}
+                            onClick={() => onClickView(true)}
                         />
+                        <IconButton
+
+                            variant={!view ? "solid" : "outline"}
+                            colorScheme="red"
+                            aria-label="List view"
+                            onClick={() => onClickView(false)}
+                            size="sm" icon={<MdViewList fontSize="1.5rem"/>}/>
 
                     </Flex>
 
