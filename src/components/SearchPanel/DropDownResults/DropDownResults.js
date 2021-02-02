@@ -5,9 +5,7 @@ import {
     Image,
     Heading
 } from "@chakra-ui/react"
-import NumberFormat from "react-number-format";
 import Link from "next/link";
-import {CarLink} from "@/components/Cars/SingleCarElement/styles";
 import slugify from "react-slugify";
 
 export const DropDownResults = ({finalResult, onClickLink}) => {
@@ -25,7 +23,6 @@ export const DropDownResults = ({finalResult, onClickLink}) => {
                       as={`/cars/${slugLink(car['Make'])}/${slugLink(car['Make'] + ' ' + car['Model'] + ' ' + car['Year'])}/${car['Id']}`}>
                     <Flex _hover={{background: "gray.700", cursor: "pointer"}}  _active={{background: "red.700", cursor: "pointer"}} borderBottom="1px solid #25394c"
                           justifyContent="space-between" p={3}>
-
                         <Text fontWeight="300" size="xs" color="white" mr={2}>{car['Make'] + ' ' + car['Model']}</Text>
                         <Text>{car['Year']}</Text>
                     </Flex>

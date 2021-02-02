@@ -41,8 +41,8 @@ export const ActiveIndicator = styled(Box)`
 export const SearchNavBar = styled('div')`
 display: flex;
 flex-grow: 1;
-flex-basis: 50%;
-justify-content: center;
+margin-right: 2.5rem;
+justify-content: flex-end;
 `
 
 export const NavBarContainer = styled(Flex)`

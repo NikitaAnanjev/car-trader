@@ -1,5 +1,5 @@
 import Fuse from 'fuse.js'
-import {Input, InputGroup, InputLeftElement, Menu, MenuButton} from "@chakra-ui/react"
+import {Input, InputGroup, InputRightElement, Menu, MenuButton, useBreakpointValue} from "@chakra-ui/react"
 import {Search2Icon} from "@chakra-ui/icons";
 import useSWR from "swr";
 import {useState, useRef, useEffect, useCallback} from 'react'
@@ -8,18 +8,14 @@ import {DropDownResults} from "@/components/SearchPanel/DropDownResults";
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 
-
-
-
-
-
 export const SearchBar = () => {
 
-const [show, setShow] = useState(Boolean(false))
+    const isMobile = useBreakpointValue({base: true, sm: true, md: false})
+    const [show, setShow] = useState(Boolean(false))
     /**
      * Hook that alerts clicks outside of the passed ref
      */
-    const useOutsideAlerter =(ref) => {
+    const useOutsideAlerter = (ref) => {
         useEffect(() => {
             /**
              * Alert if clicked on outside of element
@@ -29,6 +25,7 @@ const [show, setShow] = useState(Boolean(false))
                     setShow(Boolean(false))
                 }
             }
+
             // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             // document.addEventListener("mouseover", handleClickOutside);
@@ -41,8 +38,6 @@ const [show, setShow] = useState(Boolean(false))
     }
 
 
-
-
     const [query, setQuery] = useState('')
     const [barOpen, setBarOpen] = useState(Boolean(true))
     const wrapperRef = useRef(null);
@@ -51,9 +46,9 @@ const [show, setShow] = useState(Boolean(false))
     // useOutsideAlerter(listRef);
 
     const handleOnSearch = ({currentTarget = {}}) => {
-     if(!show) {
-         setShow(Boolean(true))
-     }
+        if (!show) {
+            setShow(Boolean(true))
+        }
         const {value} = currentTarget
         setQuery(value)
     }
@@ -66,14 +61,14 @@ const [show, setShow] = useState(Boolean(false))
     );
 
     const onClickReset = () => {
-            if (query.length > 0) {
-                setQuery('')
-            }
+        if (query.length > 0) {
+            setQuery('')
         }
+    }
 
     const {data} = useSWR('/api/cars', fetcher)
     const filtered = data.filter((p) => p["PriceType"] !== 'Leasing')
-      const fuse = new Fuse(filtered, {
+    const fuse = new Fuse(filtered, {
         keys: ['Make', 'Year', 'Model', 'Comment', 'EquipmentList'],
         includeScore: true,
         shouldSort: true,
@@ -89,13 +84,15 @@ const [show, setShow] = useState(Boolean(false))
     return (
 
         <>
-            <InputGroup  ref={wrapperRef} maxW="300px" w={barOpen ? '100%' : '0'} bg="gray.800">
-                <InputLeftElement
-                  children={<Search2Icon color="gray.300"/>}
+            <InputGroup mr={10} ref={wrapperRef}  maxW="400px" w={barOpen ? {md:"50%",lg:"100%"} : '0'} bg="gray.800">
+
+                <Input onClick={onClickReset} bg="gray.800" type="text" placeholder="Søg..." value={query}
+                       onChange={handleOnSearch}/>
+                <InputRightElement
+                    children={<Search2Icon color="gray.300"/>}
                 />
-                <Input  onClick={onClickReset} bg="gray.800" type="text" placeholder="Søg..." value={query} onChange={handleOnSearch} />
-                {show &&  <DropDownResults onClickLink={onClickLink} show={show} finalResult={finalResult}/> }
+                {show && <DropDownResults onClickLink={onClickLink} show={show} finalResult={finalResult}/>}
             </InputGroup>
-            </>
+        </>
     );
 };
