@@ -9,6 +9,7 @@ import {useScrollPosition} from '@n8tb1t/use-scroll-position'
 import {useRouter} from "next/router";
 import {useBreakpointValue} from "@chakra-ui/react"
 import {NavDrawer} from "@/components/NavBar/NavDrawer";
+import {SearchBar} from "@/components/SearchBar";
 
 const MenuItems = ({children, href,router}) => (
     <MenuItem mt={{base: 4, md: 0}} mr={6} active={Boolean(router.pathname === href) } >
@@ -47,7 +48,7 @@ export const NavBar = ({children}) => {
                         </Link>
                     </NavBarLogo>
                 </Flex>
-
+                <SearchBar/>
                 {/*{!isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
                 {!isMobile && router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
                 {!isMobile &&

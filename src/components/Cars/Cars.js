@@ -15,7 +15,7 @@ const Cars = ({data,view}) => {
     // const [currentPage, setCurrentPage] = useState(1)
     // const [carsPerPage, setCarsPerPage] = useState(6)
     // const {query} = useRouter()
-
+        console.log(view)
     const getValue = ({CashPrice}) => CashPrice && +CashPrice.slice(0) || 0;
     // const getLeasingValue = ({LeasingPrice}) => LeasingPrice && +LeasingPrice.slice(0) || 0;
     const filtered = data.filter((p) => p["PriceType"] !== 'Leasing')
@@ -33,15 +33,10 @@ const Cars = ({data,view}) => {
     // console.log()
     return (
         <CarList id="carList">
-
-
             {sortData().map((car) =>
              <React.Fragment key={car["Id"]}>
-                 {view ?  <DynamicCars  car={car}/> :    <DynamicListCars car={car}/>}
+                 {view === 'grid'?  <DynamicCars  car={car}/>   :    <DynamicListCars car={car}/>}
              </React.Fragment>
-
-
-
             )}
             {/*<Pagination carsPerPage={carsPerPage} totalCars={filtered.length} paginate={paginate}/>*/}
         </CarList>

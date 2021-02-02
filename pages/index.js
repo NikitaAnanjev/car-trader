@@ -28,13 +28,19 @@ export default function Home({cars}) {
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
     const {query} = useRouter()
 
-    const [view, setView] = useState(  true)
-    // const [view, setView] = useState( localStorage.getItem('carListView') ? localStorage.getItem('carListView') : true)
+    // const [view, setView] = useState(  true)
+    const [view, setView] = useState( localStorage.getItem('carListView') &&  localStorage.getItem('carListView') || 'grid')
 
-
+    // useEffect(()=> {
+    //         if(localStorage.getItem('carListView')){
+    //                 console.log('local store',localStorage.getItem('carListView'),view)
+    //             setView( localStorage.getItem('carListView'))
+    //         }
+    //
+    // },)
 
     const onClickView = (value) => {
-        // localStorage.setItem('carListView', Boolean(value));
+        localStorage.setItem('carListView',value);
         setView(value)
     }
 
@@ -71,19 +77,18 @@ export default function Home({cars}) {
 
                         <IconButton
                             mr={3}
-                            variant={view ? "solid" : "outline"}
+                            variant={view === 'grid' ? "solid" : "outline"}
                             colorScheme="red"
                             aria-label="List view"
                             size="sm"
                             icon={<MdViewModule fontSize="1.5rem"/>}
-                            onClick={() => onClickView(true)}
+                            onClick={() => onClickView('grid')}
                         />
                         <IconButton
-
-                            variant={!view ? "solid" : "outline"}
+                            variant={view === 'list' ? "solid" : "outline"}
                             colorScheme="red"
                             aria-label="List view"
-                            onClick={() => onClickView(false)}
+                            onClick={() => onClickView('list')}
                             size="sm" icon={<MdViewList fontSize="1.5rem"/>}/>
 
                     </Flex>
