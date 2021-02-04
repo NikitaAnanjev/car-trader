@@ -3,24 +3,21 @@ import styled from '@emotion/styled'
 import {Flex} from "@chakra-ui/react"
 
 export const FooterContainer = styled(Flex)`
-
   position: relative;
   width: 100%;
-  min-height: 60vh;
-  max-height: 200vh;
   flex-wrap: wrap;
-  background: url("/bg/car-right-piraluxauto.jpg") no-repeat  bottom right fixed;
+  background: url("/bg/car-right-piraluxauto.jpg") no-repeat center right;
   background-size: cover;
- z-index: 50;
+  z-index: 50;
 `
 
 export const FooterItem = styled(Flex)`
-flex-direction: column;
-padding: 2rem;
-color: white;
-z-index: 100;
+  flex-direction: column;
+  padding: 2rem;
+  color: white;
+  z-index: 100;
 span {
-margin-right: 1rem;
+  margin-right: 1rem;
 }
 `
 

@@ -9,7 +9,7 @@ import {SearchPanel} from "@/components/SearchPanel";
 import useSWR, {SWRConfig} from "swr";
 import {LoadingIconWrap} from "@/components/styles";
 import {encode} from "base-64";
-// import axios from "axios";
+import axios from "axios";
 // import { CacheProvider } from '@emotion/react'
 // import createCache from '@emotion/cache'
 
@@ -28,6 +28,25 @@ const colors = {
 
 const customTheme = extendTheme({colors})
 
+// const username =  process.env.BIlBASEN_API_LOGIN
+// const password =  process.env.BIlBASEN_API_PASS
+// const url = process.env.BIlBASEN_API_URL
+//
+//
+// export const instanceFrontApi = axios.create({
+//     baseURL: url,
+//     headers: {
+//         common: {
+//             Authorization: 'Basic ' + encode(username + ":" + password),
+//         },
+//     },
+// })
+//
+// export const apiMethods = {
+//     fetcher: (url) =>
+//         instanceFrontApi.get(url).then((res) => res.data),
+// }
+
 
 function MyApp({Component, pageProps}) {
 
@@ -36,38 +55,8 @@ function MyApp({Component, pageProps}) {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
-// AXIOS SETUP
-//     const cache = createCache()
-//
-//     const username =  process.env.BIlBASEN_API_LOGIN
-//     const password =  process.env.BIlBASEN_API_PASS
-//     const url = process.env.BIlBASEN_API_URL
-//     export const instanceFrontApi = axios.create({
-//         baseURL: url,
-//         headers: {
-//             common: {
-//                 Authorization: 'Basic ' + encode(username + ":" + password),
-//             },
-//         },
-//     })
-//
-//
-//     export const sourceUrl = {
-//         paymentMethods: 'api/payment-contract/methods',
-//         player: 'api/player',
-//         betHistory: 'api/betting/history',
-//     }
-//
-//     export const apiMethods = {
-//         fetcher: (url) =>
-//             instanceFrontApi.get(url).then((res) => res.data),
-//     }
 
-    // --- usage anywhere
-    //import useSWR from 'swr'
-    // import axios from 'axios'
-    // import { sourceUrl } from 'pages/_app'
-    // const { data: personalData } = useSWR(sourceUrl.player)
+
 
 
     const isFixed = true
@@ -88,8 +77,8 @@ function MyApp({Component, pageProps}) {
             </Box>
             <Footer/>
         </ChakraProvider>
-        // </SWRConfig>
-        // </CacheProvider>
+        //  </SWRConfig>
+        // // </CacheProvider>
     )
 }
 

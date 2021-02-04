@@ -10,9 +10,10 @@ import {useRouter} from "next/router";
 import {useBreakpointValue} from "@chakra-ui/react"
 import {NavDrawer} from "@/components/NavBar/NavDrawer";
 import {SearchBar} from "@/components/SearchBar";
+import useSWR from "swr";
 
 const MenuItems = ({children, href, router}) => (
-    <MenuItem mt={{base: 4, md: 0}} mr={6} active={Boolean(router.pathname === href)}>
+    <MenuItem mt={{base: 4, md: 0}} mr={6}>
         <Link display="block" href={href ? href : '#'}>
             {children}
         </Link>
@@ -27,6 +28,8 @@ export const NavBar = ({children}) => {
 
     const [isSticky, setSticky] = useState(false);
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
+
+
     useScrollPosition(({prevPos, currPos}) => {
         if (currPos.y < -410) {
             setSticky(true)
@@ -35,6 +38,7 @@ export const NavBar = ({children}) => {
         }
     })
     const router = useRouter()
+
     return (
         <>
             <NavBarContainer p={4} position='fixed' wrap='no-wrap'>

@@ -80,15 +80,19 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                             onClick={onOpen}>{'Book den bil'}</Button> :
 
                         <Button
-
                             aria-label="Book den bil"
                             colorScheme="green"
                             size={"md"}
-                            w="100%"
-                            h="100%"
+                            w={!isMobile && '100%'}
+                            h={!isMobile && '100%'}
                             borderRadius={0}
-                            onClick={onOpen}><Flex transform="rotate(-90deg)"> <Box
-                            mr={2}><MdRingVolume/></Box> {!isMobile && <Text>Book den bil</Text>}</Flex></Button>
+                            onClick={onOpen}>
+
+                            <Flex transform="rotate(-90deg)">
+                                <Box mr={2}>
+                                    <MdRingVolume/>
+                                </Box>
+                                {!isMobile && <Text>Book den bil</Text>}</Flex></Button>
                 )
 
 

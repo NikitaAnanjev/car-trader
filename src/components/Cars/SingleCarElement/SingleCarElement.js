@@ -2,13 +2,11 @@ import slugify from 'react-slugify';
 import NumberFormat from 'react-number-format';
 import {
     Box,
-    Badge,
     Image,
     Flex,
     Text,
     Heading,
     Divider,
-    Button,
     useBreakpointValue,
     CircularProgress
 } from "@chakra-ui/react"
@@ -91,7 +89,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
     return (
         <>
-            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "md", sm: "md",md:"xs", lg: "sm"} )}
+            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "100%", sm: "100%",md:"48%", lg: "33%"} )}
                            overflow="hidden" borderRadius="md" mb={10}
 
                            bg="gray.700">

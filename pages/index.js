@@ -6,13 +6,12 @@ import {CircularProgress, Heading, Flex, Box, Divider, IconButton} from "@chakra
 import {LoadingIconWrap} from "@/components/styles"
 import useSWR from 'swr'
 import {encode} from "base-64";
-import {CarList, PageLayout} from "@/components/Cars/styles";
+import { PageLayout} from "@/components/Cars/styles";
 import {TopBanner} from "@/components/TopBanner";
 import dynamic from "next/dynamic";
-import {FooterItem} from "@/components/Footer/styles";
 import {useRouter} from "next/router";
 import {MdViewList, MdViewModule} from "react-icons/md";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 
 const DynamicAllCars = dynamic(() => import('@/components/Cars/Cars'),
@@ -28,16 +27,7 @@ export default function Home({cars}) {
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
     const {query} = useRouter()
 
-    // const [view, setView] = useState(  true)
     const [view, setView] = useState( localStorage.getItem('carListView') &&  localStorage.getItem('carListView') || 'grid')
-
-    // useEffect(()=> {
-    //         if(localStorage.getItem('carListView')){
-    //                 console.log('local store',localStorage.getItem('carListView'),view)
-    //             setView( localStorage.getItem('carListView'))
-    //         }
-    //
-    // },)
 
     const onClickView = (value) => {
         localStorage.setItem('carListView',value);
@@ -66,7 +56,7 @@ export default function Home({cars}) {
 
             <Box maxW="1400px" w={{ base:"99%",sm:"98%",md:"95%",lg:"90%" }} m="auto">
 
-                <Flex direction="row" w="100%" justifyContent="space-between" alignItems="center">
+                <Flex direction="row" w="100%" px={{base:"15px",sm:"10px",md:"0"}} justifyContent="space-between" alignItems="center">
                     <Flex pt={10} direction="column">
                         <Heading color="gray.200"
                                  textTransform="capitalize">{query.make ? `${query.make} biller` : "Alle vores biller"}</Heading>
@@ -74,7 +64,6 @@ export default function Home({cars}) {
                     </Flex>
 
                     <Flex color="white">
-
                         <IconButton
                             mr={3}
                             variant={view === 'grid' ? "solid" : "outline"}

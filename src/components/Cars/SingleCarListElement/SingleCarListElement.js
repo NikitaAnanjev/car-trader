@@ -59,16 +59,13 @@ const SingleCarListElement = ({car}) => {
 
     const specificDetails = {
         entities: {
-            // 1: {id: "1", title: "Brændstof", value: carDetails.fuel},
             2: {id: "2", title: "Modelår", value: carDetails.year},
             3: {id: "3", title: "Motors", value: carDetails.motor},
             4: {id: "4", title: "Model", value: carDetails.model},
             5: {id: "5", title: "Km", value: distance},
             6: {id: "6", title: "Gearkasse", value: gearType},
             7: {id: "7", title: "Brændstof", value: carDetails.fuel},
-            // 8: {id: "8", title: "Karosseri type", value: carDetails.bodyType},
-            // 9: {id: "9", title: "Tank", value: carDetails.gasTank + ' L'},
-            // 10: {id: "10", title: "KM/L", value: carDetails.kmPerLiter + ' Km'},
+
         }
     }
 
@@ -191,7 +188,7 @@ const SingleCarListElement = ({car}) => {
 
 
                 </ContentWrapper>
-                <Flex w={{base:"30px",sm:"30px",md:"5%"}}>
+                <Flex w={{base:"40px",sm:"40px",md:"5%"}} justifyContent="center" >
                     <ContactForm carDetails={carDetails} carTitle={carTitle} specificDetails={specificDetails}
                                  listitem={true}/>
                 </Flex>

@@ -10,8 +10,11 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export const SearchBar = () => {
 
-    const isMobile = useBreakpointValue({base: true, sm: true, md: false})
+    // const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [show, setShow] = useState(Boolean(false))
+    const [query, setQuery] = useState('')
+    const [barOpen, setBarOpen] = useState(Boolean(true))
+
     /**
      * Hook that alerts clicks outside of the passed ref
      */
@@ -38,12 +41,10 @@ export const SearchBar = () => {
     }
 
 
-    const [query, setQuery] = useState('')
-    const [barOpen, setBarOpen] = useState(Boolean(true))
     const wrapperRef = useRef(null);
-    // const listRef = useRef(null);
+
     useOutsideAlerter(wrapperRef);
-    // useOutsideAlerter(listRef);
+
 
     const handleOnSearch = ({currentTarget = {}}) => {
         if (!show) {
@@ -72,24 +73,22 @@ export const SearchBar = () => {
         keys: ['Make', 'Year', 'Model', 'Comment', 'EquipmentList'],
         includeScore: true,
         shouldSort: true,
-        threshold: 0.4
+        threshold: 0.6
     })
 
     const searchResults = fuse.search(query)
     const characterResults = searchResults.map(result => result.item)
     const finalResult = characterResults.slice(0, 10)
 
-    // console.log(fuse.search('BMW'))
-
+        console.log(barOpen)
     return (
-
         <>
-            <InputGroup mr={10} ref={wrapperRef}  maxW="400px" w={barOpen ? {md:"50%",lg:"100%"} : '0'} bg="gray.800">
-
-                <Input onClick={onClickReset} bg="gray.800" type="text" placeholder="Søg..." value={query}
+            <InputGroup mr={10} ref={wrapperRef} maxW={!barOpen ? "40px" : "400px"} bg="gray.800">
+                <Input px={!barOpen ? 0 : 'auto'} onClick={onClickReset} bg="gray.800" type="text" placeholder="Søg..." value={query}
                        onChange={handleOnSearch}/>
                 <InputRightElement
-                    children={<Search2Icon color="gray.300"/>}
+                    onClick={() => setBarOpen(!barOpen)}
+                    children={<Search2Icon  color="gray.300"/>}
                 />
                 {show && <DropDownResults onClickLink={onClickLink} show={show} finalResult={finalResult}/>}
             </InputGroup>

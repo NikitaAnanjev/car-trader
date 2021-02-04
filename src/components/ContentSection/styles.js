@@ -9,7 +9,11 @@ width: 100%;
 justify-content: center;
 align-items: center;
 padding: 3rem 0;
-background-color: ${({light,theme})=> light ? theme.colors.gray['800'] : theme.colors.gray['700']};
+
+background-color:${({theme})=> theme.colors.gray['700']};
+&:nth-of-type(2n) {
+background-color:${({theme})=> theme.colors.gray['800']};
+}
 `
 
 export const ContentSectionRow = styled(Flex)`

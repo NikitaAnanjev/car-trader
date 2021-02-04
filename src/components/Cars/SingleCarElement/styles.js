@@ -37,7 +37,6 @@ width: 100%;
 &:hover {
 cursor: pointer;
 }
-
 `
 
 export const EuroNormBadge = styled('div')`
@@ -64,17 +63,15 @@ font-size: 8px;
 export const CardContainer = styled(Box)`
 position: relative;
 &:hover{
-box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+cursor: pointer;
+opacity: .9;
+box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
 transition: box-shadow 0.1s ease;
 }
 transition: box-shadow 0.1s ease;
-
 `
 
 export const CarLink = styled(Link)`
 
-&:hover, &:focus, &:active {
-cursor: pointer;
-opacity: .9;
-}
+
 `
