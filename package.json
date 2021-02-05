@@ -32,6 +32,7 @@
     "react-number-format": "^4.4.1",
     "react-player": "^2.7.2",
     "react-responsive-carousel": "^3.2.11",
+    "react-scroll-up-button": "^1.6.4",
     "react-slugify": "^2.0.3",
     "react-text-truncate": "^0.16.0",
     "swr": "^0.3.11",

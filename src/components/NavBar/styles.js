@@ -14,21 +14,7 @@ max-width: 200px;
 cursor: pointer;
 }
 `
-export const MenuItem = styled(Flex)`
-flex-direction: column;
-height: 40px;
-padding: 0 0.5rem;
-justify-content: center;
-align-items: center;
-&:hover {
-cursor: pointer;
-}
-`
 
-export const NavList = styled('div')`
-display: flex;
-width: 100%;
-`
 
 export const ActiveIndicator = styled(Box)`
 
@@ -36,6 +22,24 @@ export const ActiveIndicator = styled(Box)`
   height: 2px;
   background:red;
 
+`
+
+export const MenuItem = styled(Flex)`
+flex-direction: column;
+height: 40px;
+padding: 0 0.5rem;
+justify-content: center;
+align-items: center;
+&:hover {
+color: red;
+cursor: pointer;
+
+}
+`
+
+export const NavList = styled('div')`
+display: flex;
+width: 100%;
 `
 
 export const SearchNavBar = styled('div')`

@@ -10,17 +10,16 @@ import {useRouter} from "next/router";
 import {useBreakpointValue} from "@chakra-ui/react"
 import {NavDrawer} from "@/components/NavBar/NavDrawer";
 import {SearchBar} from "@/components/SearchBar";
-import useSWR from "swr";
 
 const MenuItems = ({children, href, router}) => (
     <MenuItem mt={{base: 4, md: 0}} mr={6}>
         <Link display="block" href={href ? href : '#'}>
             {children}
         </Link>
-        {router.pathname === href && <ActiveIndicator
-            css={css`
-             animation: ${activeStroke} 1s ease;
-    `}/>}
+         <ActiveIndicator
+            css={router.pathname === href && css` 
+          
+            animation: ${activeStroke} 1s ease;`}/>
     </MenuItem>
 );
 
@@ -76,6 +75,7 @@ export const NavBar = ({children}) => {
 
 
                     <Flex>
+                        {isMobile &&    <SearchBar/> }
                     <DrawerBar/>
                     </Flex>
                     </Flex>

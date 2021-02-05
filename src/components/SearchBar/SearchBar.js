@@ -6,10 +6,7 @@ import {useState, useRef, useEffect, useCallback} from 'react'
 import {DropDownResults} from "@/components/SearchPanel/DropDownResults";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-
-
 export const SearchBar = () => {
-
     // const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [show, setShow] = useState(Boolean(false))
     const [query, setQuery] = useState('')
@@ -80,11 +77,10 @@ export const SearchBar = () => {
     const characterResults = searchResults.map(result => result.item)
     const finalResult = characterResults.slice(0, 10)
 
-        console.log(barOpen)
     return (
         <>
             <InputGroup mr={10} ref={wrapperRef} maxW={!barOpen ? "40px" : "400px"} bg="gray.800">
-                <Input px={!barOpen ? 0 : 'auto'} onClick={onClickReset} bg="gray.800" type="text" placeholder="Søg..." value={query}
+                <Input pl={!barOpen ? '0': '.5rem' }  pr={!barOpen ? '0': '1.5rem' } onClick={onClickReset} bg="gray.800" type="text" placeholder={!barOpen ? '': "Søg..." } value={query}
                        onChange={handleOnSearch}/>
                 <InputRightElement
                     onClick={() => setBarOpen(!barOpen)}

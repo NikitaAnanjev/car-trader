@@ -45,9 +45,6 @@ const SingleCarListElement = ({car}) => {
                                     prefix={'DKK '}/>
     const mileage = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
 
-    const distance = <NumberFormat value={carDetails.mileage} displayType={'text'} thousandSeparator={true}/>
-
-
     const gearType = carDetails.gear === 'A' ? 'Automat' : 'Mekanisk'
 
     const property = {
@@ -56,13 +53,12 @@ const SingleCarListElement = ({car}) => {
         title: carTitle,
     }
 
-
     const specificDetails = {
         entities: {
             2: {id: "2", title: "Modelår", value: carDetails.year},
             3: {id: "3", title: "Motors", value: carDetails.motor},
             4: {id: "4", title: "Model", value: carDetails.model},
-            5: {id: "5", title: "Km", value: distance},
+            5: {id: "5", title: "Km", value: mileage},
             6: {id: "6", title: "Gearkasse", value: gearType},
             7: {id: "7", title: "Brændstof", value: carDetails.fuel},
 
@@ -74,9 +70,7 @@ const SingleCarListElement = ({car}) => {
     return (
         <CarListElementContainer mb={5} borderRadius="8px" overflow="hidden">
             <CarListElementWrapper bg="gray.800">
-
                 <Flex w={{base: '70%', sm: '80%', md: '70%', lg: "90%"}} maxW="350px">
-
                     <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                         <ImgWrapper>
                             {changeImageSize && <Image src={changeImageSize} alt={property.imageAlt}/>}
@@ -131,12 +125,12 @@ const SingleCarListElement = ({car}) => {
                     <Divider my={{base: 1, sm: 2, md: 3, lg: 5}}/>
 
                     {!isMobile &&
-
                     <Flex maxH={{md: "100px", lg: "120px"}} maxW={{md: "100%", lg: "80%"}} wrap="wrap"
                           direction="column">
                         {Object.values(specificDetails.entities).map((info) =>
 
-                            <Flex key={info.id} maxH={{md: "30px", lg: "50px"}} direction="row" border="0.5px solid #171923">
+                            <Flex key={info.id} maxH={{md: "30px", lg: "50px"}} direction="row"
+                                  border="0.5px solid #171923">
                                 <Flex justifyContent="center" alignItems="center" bg="gray.700" w="80px">
                                     <Text fontSize="xs" color="gray.200">{info.title}</Text>
                                 </Flex>
@@ -147,7 +141,6 @@ const SingleCarListElement = ({car}) => {
                         )}
                     </Flex>
                     }
-
 
                     {isMobile &&
                     <Flex alignItems="flex-start"
@@ -188,7 +181,7 @@ const SingleCarListElement = ({car}) => {
 
 
                 </ContentWrapper>
-                <Flex w={{base:"40px",sm:"40px",md:"5%"}} justifyContent="center" >
+                <Flex w={{base: "40px", sm: "40px", md: "5%"}} justifyContent="center">
                     <ContactForm carDetails={carDetails} carTitle={carTitle} specificDetails={specificDetails}
                                  listitem={true}/>
                 </Flex>

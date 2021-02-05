@@ -8,8 +8,9 @@ import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
 import useSWR, {SWRConfig} from "swr";
 import {LoadingIconWrap} from "@/components/styles";
-import {encode} from "base-64";
-import axios from "axios";
+import ScrollUpButton from "react-scroll-up-button"
+// import {encode} from "base-64";
+// import axios from "axios";
 // import { CacheProvider } from '@emotion/react'
 // import createCache from '@emotion/cache'
 
@@ -55,10 +56,6 @@ function MyApp({Component, pageProps}) {
     if (!data) return <LoadingIconWrap><Image maxW={{base: "80%", md: "100%"}} w="230px"
                                               src="/loaderPiralux.gif"/></LoadingIconWrap>
 
-
-
-
-
     const isFixed = true
     return (
         // <CacheProvider value={(cache) }>
@@ -76,6 +73,7 @@ function MyApp({Component, pageProps}) {
                 <Component {...pageProps}/>
             </Box>
             <Footer/>
+            <ScrollUpButton style={{width: 50,borderRadius: "100%"}} ToggledStyle={{borderRadius: "100%", padding: 10, background: 'red', outline: 'none'}} />
         </ChakraProvider>
         //  </SWRConfig>
         // // </CacheProvider>
