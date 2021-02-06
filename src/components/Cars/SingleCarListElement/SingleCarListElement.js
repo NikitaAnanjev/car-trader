@@ -7,12 +7,11 @@ import {
 import slugify from "react-slugify";
 import {carPrice} from "@/helper/carPrice";
 import NumberFormat from "react-number-format";
-import {CardContainer, CarLink, ImgCarouselConteiner} from "@/components/Cars/SingleCarElement/styles";
+import {CarLink } from "@/components/Cars/SingleCarElement/styles";
 import {ContactForm} from "@/components/ContactForm";
 
 
 const SingleCarListElement = ({car}) => {
-
 
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const carDetails = {
@@ -61,7 +60,6 @@ const SingleCarListElement = ({car}) => {
             5: {id: "5", title: "Km", value: mileage},
             6: {id: "6", title: "Gearkasse", value: gearType},
             7: {id: "7", title: "Brændstof", value: carDetails.fuel},
-
         }
     }
 
@@ -80,10 +78,10 @@ const SingleCarListElement = ({car}) => {
                     </CarLink>
                 </Flex>
 
-                <ContentWrapper direction="column" p="1rem" w="100%">
+                <ContentWrapper direction="column" p={{base:"0.4rem",sm:"0.4rem",md:"1rem"}} w="100%">
 
                     <Flex w="100%">
-                        <Heading fontSize={{base: "0.75rem", sm: '1.4rem', md: "1.6rem"}} mr={5} fontWeight="200"
+                        <Heading fontSize={{base: "1rem", sm: '1.4rem', md: "1.6rem"}} mr={5} fontWeight="200"
                                  color="gray.200"
                         >{property.title}</Heading>
 
@@ -122,7 +120,7 @@ const SingleCarListElement = ({car}) => {
 
 
                     </Flex>
-                    <Divider my={{base: 1, sm: 2, md: 3, lg: 5}}/>
+                    <Divider my={{base: 2, sm: 3, md: 3, lg: 5}}/>
 
                     {!isMobile &&
                     <Flex maxH={{md: "100px", lg: "120px"}} maxW={{md: "100%", lg: "80%"}} wrap="wrap"
@@ -143,6 +141,7 @@ const SingleCarListElement = ({car}) => {
                     }
 
                     {isMobile &&
+                        <>
                     <Flex alignItems="flex-start"
                           direction={{base: "row", md: "column"}}>
                         <Flex direction="row" p={isMobile ? 1 : 2} px={1}
@@ -154,8 +153,8 @@ const SingleCarListElement = ({car}) => {
                                 <Heading color="white"
                                          fontSize={{
                                              base: "0.75rem",
-                                             sm: '1rem',
-                                             md: "1.5rem"
+                                             sm: '1rem'
+
                                          }}>{fullPrice}</Heading>
                             </Box>
                             }
@@ -176,7 +175,24 @@ const SingleCarListElement = ({car}) => {
                             </Flex>
                         </Flex>
                         }
+
+
                     </Flex>
+
+                        <Flex>
+                            <Box
+                                color="gray.500"
+                                fontWeight="semibold"
+                                letterSpacing="wide"
+                                fontSize={{base: "xs", md: "sm"}}
+                                textTransform="uppercase"
+                                mt="2"
+                            >
+                                {carDetails.fuel} &bull; {carDetails.motor} motor &bull; {mileage} km
+                            </Box>
+
+                        </Flex>
+                    </>
                     }
 
 

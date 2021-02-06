@@ -17,8 +17,8 @@ export const DropDownResults = ({finalResult, onClickLink}) => {
               w="100%" direction="column"
               onClick={onClickLink}
         >
-            {finalResult.map((car) =>
 
+            {finalResult.map((car) =>
                 <Link href="/cars/[make]/[slug]/[id]"
                       as={`/cars/${slugLink(car['Make'])}/${slugLink(car['Make'] + ' ' + car['Model'] + ' ' + car['Year'])}/${car['Id']}`}>
                     <Flex _hover={{background: "gray.700", cursor: "pointer"}}  _active={{background: "red.700", cursor: "pointer"}} borderBottom="1px solid #25394c"

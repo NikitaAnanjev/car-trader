@@ -193,8 +193,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                                         <Select color="white" placeholder="Tid" name="timeSelect"
                                                                 size="sm">
                                                             {timeToCall.map((tid) =>
-                                                                <option
-                                                                    style={{backgroundColor: "#343f56"}}>{tid}</option>
+                                                                <option>{tid}</option>
                                                             )}
                                                         </Select>
                                                     </FormControl>

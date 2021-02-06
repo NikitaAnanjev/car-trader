@@ -20,11 +20,12 @@ export const DrawerBar = () => {
     const btnRef = React.useRef()
 
 
-    const contactButtonVariants = useBreakpointValue({ base: <MdContactPhone/>, md: "Kontakt" })
+    const contactButtonVariants = useBreakpointValue({ base: <MdContactPhone fontSize={20}/>, md: "Kontakt" })
+    const contactButtonSize = useBreakpointValue({ base:'xs', md: "md" })
 
     return (
         <>
-            <Button border="1px" m={0} colorScheme="red" ref={btnRef} onClick={onOpen}>
+            <Button borderRadius="100%" minH="40px" minW="40px" m={0} colorScheme="red" size={contactButtonSize} ref={btnRef} onClick={onOpen}>
                 {contactButtonVariants}
             </Button>
 

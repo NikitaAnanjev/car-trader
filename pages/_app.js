@@ -69,7 +69,7 @@ function MyApp({Component, pageProps}) {
             <NavBar>
                 <SearchPanel data={data} isfixed={isFixed ? 1 : 0}/>
             </NavBar>
-            <Box pt={{base: "75px", md: "60px"}}>
+            <Box pt={{base: "40px", md: "60px"}}>
                 <Component {...pageProps}/>
             </Box>
             <Footer/>

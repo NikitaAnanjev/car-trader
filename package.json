@@ -35,6 +35,7 @@
     "react-scroll-up-button": "^1.6.4",
     "react-slugify": "^2.0.3",
     "react-text-truncate": "^0.16.0",
+    "store": "^2.0.12",
     "swr": "^0.3.11",
     "yup": "^0.32.8"
   },

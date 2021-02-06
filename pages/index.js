@@ -53,7 +53,7 @@ export default function Home({cars}) {
             </TopBanner>
 
 
-            <Box maxW="1400px" w={{ base:"99%",sm:"98%",md:"95%",lg:"90%" }} m="auto">
+            <Box maxW="1400px" px="10px" w={{ base:"100%",md:"95%",lg:"90%" }} m="auto">
 
                 <Flex direction="row" w="100%" px={{base:"15px",sm:"10px",md:"0"}} justifyContent="space-between" alignItems="center">
                     <Flex pt={10} direction="column">

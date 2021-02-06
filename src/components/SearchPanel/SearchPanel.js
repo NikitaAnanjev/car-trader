@@ -62,7 +62,8 @@ export const SearchPanel = ({data, children, isfixed}) => {
                               justifyContent='flex-end'
                               borderRadius="8px"
                               overflow="hidden"
-                              w={{base: isfixed ? "250px" : "100%", md:  isfixed ? "30%" : "100%", lg: isfixed ? "250px" : "60%"}}>
+                              w="100%"
+                             maxW={{base: isfixed ? "100%" : "100%", md:  isfixed ? "30%" : "100%", lg: isfixed ? "250px" : "60%"}}>
             <Flex grow={1} borderRadius="8px">
                 <FormControl id="make" bg='gray.700' onChange={handleChange}>
                     <SelectInput name="make" placeholder="Vælg en bil mærke" color="white"

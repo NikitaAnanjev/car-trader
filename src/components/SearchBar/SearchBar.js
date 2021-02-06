@@ -4,13 +4,21 @@ import {Search2Icon} from "@chakra-ui/icons";
 import useSWR from "swr";
 import {useState, useRef, useEffect, useCallback} from 'react'
 import {DropDownResults} from "@/components/SearchPanel/DropDownResults";
+import store from "store";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-export const SearchBar = () => {
-    const isMobile = useBreakpointValue({base: true, sm: true, md: true, lg:false})
+export const SearchBar = ({barOpenHandler, barOpen,marginRight}) => {
+    const isMobile = useBreakpointValue({base: true, sm: true, md: true, lg: false})
     const [show, setShow] = useState(Boolean(false))
     const [query, setQuery] = useState('')
-    const [barOpen, setBarOpen] = useState(Boolean(!isMobile))
+
+    useEffect(()=>{
+        if(!barOpen) {
+            if (query.length > 0) {
+                setQuery('')
+            }
+        }
+    },[barOpen])
 
     /**
      * Hook that alerts clicks outside of the passed ref
@@ -39,10 +47,7 @@ export const SearchBar = () => {
 
 
     const wrapperRef = useRef(null);
-
     useOutsideAlerter(wrapperRef);
-
-
     const handleOnSearch = ({currentTarget = {}}) => {
         if (!show) {
             setShow(Boolean(true))
@@ -58,11 +63,15 @@ export const SearchBar = () => {
         [],
     );
 
+
+
+
     const onClickReset = () => {
         if (query.length > 0) {
             setQuery('')
         }
     }
+
 
     const {data} = useSWR('/api/cars', fetcher)
     const filtered = data.filter((p) => p["PriceType"] !== 'Leasing')
@@ -79,12 +88,13 @@ export const SearchBar = () => {
 
     return (
         <>
-            <InputGroup  mr={10} ref={wrapperRef} maxW={!barOpen ? "40px" : "300px"} bg="gray.800">
-                <Input pl={!barOpen ? '0': '.5rem' }  pr={!barOpen ? '0': '1.5rem' } onClick={onClickReset} bg="gray.800" type="text" placeholder={!barOpen ? '': "Søg..." } value={query}
+            <InputGroup marginRight={marginRight} ref={wrapperRef} maxW={!barOpen ? "40px" : "100%"} bg="gray.800">
+                <Input color="white" pl={!barOpen ? '0' : '.5rem'} pr={!barOpen ? '0' : '1.5rem'} onClick={onClickReset}
+                       bg="gray.800" type="text" placeholder={!barOpen ? '' : "Søg..."} value={query}
                        onChange={handleOnSearch}/>
                 <InputRightElement
-                    onClick={() => setBarOpen(!barOpen)}
-                    children={<Search2Icon  color="gray.300"/>}
+                    onClick={barOpenHandler}
+                    children={<Search2Icon color="gray.300"/>}
                 />
                 {show && <DropDownResults onClickLink={onClickLink} show={show} finalResult={finalResult}/>}
             </InputGroup>
