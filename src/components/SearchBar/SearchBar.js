@@ -7,10 +7,10 @@ import {DropDownResults} from "@/components/SearchPanel/DropDownResults";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export const SearchBar = () => {
-    // const isMobile = useBreakpointValue({base: true, sm: true, md: false})
+    const isMobile = useBreakpointValue({base: true, sm: true, md: true, lg:false})
     const [show, setShow] = useState(Boolean(false))
     const [query, setQuery] = useState('')
-    const [barOpen, setBarOpen] = useState(Boolean(true))
+    const [barOpen, setBarOpen] = useState(Boolean(!isMobile))
 
     /**
      * Hook that alerts clicks outside of the passed ref
@@ -79,7 +79,7 @@ export const SearchBar = () => {
 
     return (
         <>
-            <InputGroup mr={10} ref={wrapperRef} maxW={!barOpen ? "40px" : "400px"} bg="gray.800">
+            <InputGroup  mr={10} ref={wrapperRef} maxW={!barOpen ? "40px" : "300px"} bg="gray.800">
                 <Input pl={!barOpen ? '0': '.5rem' }  pr={!barOpen ? '0': '1.5rem' } onClick={onClickReset} bg="gray.800" type="text" placeholder={!barOpen ? '': "Søg..." } value={query}
                        onChange={handleOnSearch}/>
                 <InputRightElement

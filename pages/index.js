@@ -47,9 +47,8 @@ export default function Home({cars}) {
                              textShadow=" 0px 15px 17px rgb(0 0 0 / 60%)
 "
                     > VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
-                    <SearchPanel data={data}>
+                    <SearchPanel data={data}/>
 
-                    </SearchPanel>
                 </Flex>
             </TopBanner>
 

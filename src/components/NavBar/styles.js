@@ -42,16 +42,19 @@ display: flex;
 width: 100%;
 `
 
-export const SearchNavBar = styled('div')`
+export const SearchNavBar = styled(Box)`
 display: flex;
 flex-grow: 1;
-margin-right: 2.5rem;
 justify-content: flex-end;
 `
 
 export const NavBarContainer = styled(Flex)`
 background: linear-gradient(145deg, #000000, #2a3744);
-// background: ${({theme}) => theme.colors.gray["900"]};
+z-index: 100;
+width: 100%;
+flex-direction: column;
+`
+export const NavBarWrap = styled(Flex)`
 z-index: 100;
 width: 100%;
 color: white;
@@ -59,7 +62,6 @@ justify-content: space-between;
 align-items: center;
 a {
   text-transform: uppercase;
-  
   font-family: 'Open Sans', sans-serif!important;
 }
 `

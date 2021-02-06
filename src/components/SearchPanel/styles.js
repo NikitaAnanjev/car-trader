@@ -7,6 +7,7 @@ export const SearchPanelContainer = styled(Box)`
     flex-flow: wrap row;
     padding: ${({isfixed}) => isfixed ? ' 0' : '1.5rem'};
     background: ${({theme, isfixed}) => !isfixed ? theme.colors.gray['800'] : 'transparent'};
+
 `
 
 export const SelectInput = styled(Select)`

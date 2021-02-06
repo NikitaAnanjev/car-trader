@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {Box, Flex, Image, Divider} from "@chakra-ui/react"
-import {NavBarLogo, NavBarContainer, SearchNavBar, MenuItem, ActiveIndicator, activeStroke} from './styles'
+import {Box, Flex, Image, Spacer} from "@chakra-ui/react"
+import {NavBarLogo, NavBarContainer, SearchNavBar, MenuItem, ActiveIndicator, activeStroke,NavBarWrap} from './styles'
 
 import {css} from '@emotion/react'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ const MenuItems = ({children, href, router}) => (
         <Link display="block" href={href ? href : '#'}>
             {children}
         </Link>
-         <ActiveIndicator
+        <ActiveIndicator
             css={router.pathname === href && css` 
           
             animation: ${activeStroke} 1s ease;`}/>
@@ -40,8 +40,9 @@ export const NavBar = ({children}) => {
 
     return (
         <>
-            <NavBarContainer p={4} position='fixed' wrap='no-wrap'>
+            <NavBarContainer position='fixed' wrap='no-wrap'>
                 {/*<NavBarContainer p={4} position={isSticky && 'fixed'} wrap={router.pathname === '/' && isSticky && 'no-wrap'}>*/}
+                <NavBarWrap px={3}>
 
                 <NavDrawer/>
                 <Flex w={{base: "", sm: "150px", md: "200px"}}>
@@ -52,45 +53,51 @@ export const NavBar = ({children}) => {
                     </NavBarLogo>
                 </Flex>
 
-                {!isMobile && router.pathname === '/' && isSticky &&
-                <SearchNavBar bg="gray.400">{children}</SearchNavBar>}
 
 
                 {!isMobile &&
-                    <>
+                <>
 
-                        {!isSticky && <Flex grow={1}/>}
-                    <SearchBar/>
-                    <Flex direction="row" maxW='30%'>
-                    <Flex
-                    justifyContent="flex-end"
-                    width={{base: "100%", md: "auto"}}
-                    alignItems="center"
-                    flexGrow={1}
-                    >
-                    <MenuItems router={router} href="/">Forside</MenuItems>
-                    <MenuItems router={router}  href="/udstyr">UDSTYR</MenuItems>
-                    <MenuItems router={router} href="/omos">OmOs</MenuItems>
-                    </Flex>
+                    <Flex direction="row" maxW='80%'>
 
 
-                    <Flex>
-                        {isMobile &&    <SearchBar/> }
-                    <DrawerBar/>
+                        {!isSticky &&   <SearchBar/> }
+                        <Flex
+                            justifyContent="flex-end"
+                            width={{base: "100%", md: "auto"}}
+                            alignItems="center"
+                            flexGrow={1}
+                        >
+                            <MenuItems router={router} href="/">Forside</MenuItems>
+                            <MenuItems router={router} href="/udstyr">UDSTYR</MenuItems>
+                            <MenuItems router={router} href="/omos">OmOs</MenuItems>
+                        </Flex>
+                        <Flex>
+                            <DrawerBar/>
+                        </Flex>
                     </Flex>
-                    </Flex>
-                    </>
+                </>
                 }
 
 
-                {isMobile &&
-                    <Flex>
-                    <DrawerBar/>
-                    </Flex>}
+                {isMobile && <Flex><DrawerBar/></Flex>}
 
-                {/*{  router.pathname === '/' && isSticky && <SearchNavBar bg="gray.400">{children}</SearchNavBar>}*/}
-                    </NavBarContainer>
-                    </>
-                    );
-                    };
+                </NavBarWrap>
+                {  router.pathname === '/' && isSticky &&
+                <Flex justifyContent="flex-end" py={2} px={3} w="100%">
+                    <Flex justifyContent="flex-end">
+                        <SearchBar/>
+                        <SearchNavBar  maxW="300px" p={0} bg="gray.400">{children}</SearchNavBar>
+
+
+                    </Flex>
+
+                </Flex>
+                }
+            </NavBarContainer>
+        </>
+
+
+    );
+};
 

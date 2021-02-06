@@ -58,7 +58,8 @@ export const SearchPanel = ({data, children, isfixed}) => {
 
 
     return (
-        <SearchPanelContainer isfixed={isfixed} justifyContent='flex-end'
+        <SearchPanelContainer isfixed={isfixed}
+                              justifyContent='flex-end'
                               borderRadius="8px"
                               overflow="hidden"
                               w={{base: isfixed ? "250px" : "100%", md:  isfixed ? "30%" : "100%", lg: isfixed ? "250px" : "60%"}}>
