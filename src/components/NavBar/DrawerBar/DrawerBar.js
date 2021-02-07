@@ -25,7 +25,7 @@ export const DrawerBar = () => {
 
     return (
         <>
-            <Button borderRadius="100%" minH="40px" minW="40px" m={0} colorScheme="red" size={contactButtonSize} ref={btnRef} onClick={onOpen}>
+            <Button borderRadius={{base:"100%",sm:"100%",md: "8px"}} minH="40px" minW="40px" m={0} colorScheme="red" size={contactButtonSize} ref={btnRef} onClick={onOpen}>
                 {contactButtonVariants}
             </Button>
 

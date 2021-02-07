@@ -7,7 +7,7 @@ import {DropDownResults} from "@/components/SearchPanel/DropDownResults";
 import store from "store";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
-export const SearchBar = ({barOpenHandler, barOpen,marginRight}) => {
+export const SearchBar = ({barOpenHandler, barOpen,marginRight,maxWidth}) => {
     const isMobile = useBreakpointValue({base: true, sm: true, md: true, lg: false})
     const [show, setShow] = useState(Boolean(false))
     const [query, setQuery] = useState('')
@@ -88,7 +88,7 @@ export const SearchBar = ({barOpenHandler, barOpen,marginRight}) => {
 
     return (
         <>
-            <InputGroup marginRight={marginRight} ref={wrapperRef} maxW={!barOpen ? "40px" : "100%"} bg="gray.800">
+            <InputGroup marginRight={marginRight} w={maxWidth} ref={wrapperRef} maxW={!barOpen ? "40px" : "100%"} bg="gray.800">
                 <Input color="white" pl={!barOpen ? '0' : '.5rem'} pr={!barOpen ? '0' : '1.5rem'} onClick={onClickReset}
                        bg="gray.800" type="text" placeholder={!barOpen ? '' : "Søg..."} value={query}
                        onChange={handleOnSearch}/>
