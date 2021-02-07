@@ -39,10 +39,10 @@ export default function Home({cars}) {
             <Head><title> Piralux Auto</title></Head>
 
             <TopBanner>
-                <Flex w={{sm: "90%", md: '80%', lg: "90%"}} maxW="1400px" direction="column">
+                <Flex w={{sm: "90%", md: '80%', lg: "90%"}} maxW="1400px" direction="column" py={10}>
                     <Heading maxW={{sm: "100%", md: '80%', lg: "70%"}} textAlign={{base: "center", md: "left"}} mb={10}
                              fontSize={{base: "2rem", sm: "3rem", md: '3.5rem', lg: '5rem'}}
-                             p={{base: 3, sm: 2, md: 0}}
+                             p='3rem 3rem 0 3rem'
                              color="white"
                              textShadow=" 0px 15px 17px rgb(0 0 0 / 60%)
 "

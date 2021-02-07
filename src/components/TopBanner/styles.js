@@ -4,7 +4,7 @@ import {Box} from "@chakra-ui/react"
 
 export const TopBannerContainer = styled(Box)`
   width: 100%;
-  height: 60vh;
+  height: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -13,14 +13,11 @@ export const TopBannerContainer = styled(Box)`
   background-size: cover;
 
   @media all and (max-width: 768px) {
-  height: 60vh;
-  background-position: center;
-   background-size: contain;
+   background-position: center;
+
   }
   @media all and (max-width: 640px) {
     background-size: cover;
-   background: url("bg/blck-pira.jpg")  no-repeat left;
-   height: 60vh;
   }
 
 `

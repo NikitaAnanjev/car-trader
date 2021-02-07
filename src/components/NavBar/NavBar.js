@@ -52,7 +52,7 @@ export const NavBar = ({children}) => {
                     <Flex justifyContent="center" alignItems="center">
                         <NavDrawer/>
 
-                        <Flex d={barOpen && isMobile ? 'none' : 'flex'} ml={5} w={{base: "130px", sm: "150px", md: "200px"}}>
+                        <Flex d={barOpen && isMobile ? 'none' : 'flex'} ml={5} w={{base: "130px", sm: "150px", lg:"200px"}}>
                             <NavBarLogo>
                                 <Link href="/">
                                     <Image src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"/>
@@ -65,7 +65,8 @@ export const NavBar = ({children}) => {
                     {!isMobile &&
                     <>
                         <Flex direction="row" maxW='100%' grow={1} ml={10}>
-                            {!isTablet && <SearchBar marginRight="20px" barOpen={true}/>}
+                             <SearchBar marginRight="10px" barOpen={true}/>
+                            {/*{!isTablet && <SearchBar marginRight="20px" barOpen={true}/>}*/}
                             <Flex
                                 justifyContent="flex-end"
                                 width={{base: "100%", md: "auto"}}
@@ -92,14 +93,14 @@ export const NavBar = ({children}) => {
 
                 </NavBarWrap>
                 {isTablet && router.pathname === '/' && isSticky &&
-                <Flex justifyContent="flex-end" py={2} px={3} w="100%">
+                <Flex justifyContent="flex-end" px={3} pt={3} w="100%">
                     <Flex justifyContent="flex-end" grow={1}>
 
-                      <SearchNavBar mr={5}  maxW="100%">{children}</SearchNavBar>
+                      <SearchNavBar maxW="100%">{children}</SearchNavBar>
 
 
                         {/*{!barOpen && <SearchNavBar maxW="100%" mr={5}>{children}</SearchNavBar>}*/}
-                        <SearchBar maxWidth="50%" barOpen={barOpen} barOpenHandler={barOpenHandler}/>
+                        {/*<SearchBar maxWidth="50%" barOpen={barOpen} barOpenHandler={barOpenHandler}/>*/}
 
                     </Flex>
 

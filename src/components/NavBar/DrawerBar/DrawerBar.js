@@ -20,7 +20,7 @@ export const DrawerBar = () => {
     const btnRef = React.useRef()
 
 
-    const contactButtonVariants = useBreakpointValue({ base: <MdContactPhone fontSize={20}/>, md: "Kontakt" })
+    const contactButtonVariants = useBreakpointValue({ base: <MdContactPhone fontSize={20}/>, lg: "Kontakt" })
     const contactButtonSize = useBreakpointValue({ base:'xs', md: "md" })
 
     return (
