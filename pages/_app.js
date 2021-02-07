@@ -2,11 +2,17 @@ import '../styles/globals.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-alice-carousel/lib/alice-carousel.css';
+import 'nprogress/nprogress.css'
+
 import {ChakraProvider, extendTheme, Box, Image} from "@chakra-ui/react"
 import {NavBar} from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
 import {SearchPanel} from "@/components/SearchPanel";
-import useSWR, {SWRConfig} from "swr";
+import useSWR
+    // ,{SWRConfig}
+from "swr";
+import Router from 'next/router';
+import NProgress from 'nprogress'
 import {LoadingIconWrap} from "@/components/styles";
 import ScrollUpButton from "react-scroll-up-button"
 // import {encode} from "base-64";
@@ -26,6 +32,9 @@ const colors = {
         },
     },
 }
+
+
+
 
 const customTheme = extendTheme({colors})
 
@@ -47,6 +56,11 @@ const customTheme = extendTheme({colors})
 //     fetcher: (url) =>
 //         instanceFrontApi.get(url).then((res) => res.data),
 // }
+
+//Binding events.
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 
 function MyApp({Component, pageProps}) {

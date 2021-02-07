@@ -19,3 +19,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#nprogress .bar {
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(236, 30, 43) 35%, rgb(250, 49, 61) 50%, rgb(245, 39, 52) 68%, rgb(227, 37, 49) 68%)!important;
+  height: 4px!important;
+}
+#nprogress .peg{
+
+  box-shadow: 0 0 10px #f34953, 0 0 5px #e9202c!important;
+}
