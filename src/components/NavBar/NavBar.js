@@ -52,7 +52,7 @@ export const NavBar = ({children}) => {
                     <Flex justifyContent="center" alignItems="center">
                         <NavDrawer/>
 
-                        <Flex d={barOpen && isMobile ? 'none' : 'flex'} ml={5} w={{base: "130px", sm: "150px", lg:"200px"}}>
+                        <Flex d={barOpen && isMobile ? 'none' : 'flex'} ml={{base:5, md:0}} w={{base: "130px", sm: "150px", lg:"200px"}}>
                             <NavBarLogo>
                                 <Link href="/">
                                     <Image src="/piralux-logo.png" alt="piralux-auto-aalborg-bilcenter" width="100%"/>
@@ -65,7 +65,7 @@ export const NavBar = ({children}) => {
                     {!isMobile &&
                     <>
                         <Flex direction="row" maxW='100%' grow={1} ml={10}>
-                             <SearchBar marginRight="10px" barOpen={true}/>
+                             <SearchBar marginRight="25px" barOpen={true}/>
                             {/*{!isTablet && <SearchBar marginRight="20px" barOpen={true}/>}*/}
                             <Flex
                                 justifyContent="flex-end"

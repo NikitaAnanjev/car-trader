@@ -1,5 +1,5 @@
 import {About} from "../src/pages/About";
-import { Heading} from "@chakra-ui/react";
+import {Box, Divider, Heading, Text,Flex} from "@chakra-ui/react";
 import {SubPageBanner} from "@/components/SubPageBanner";
 
 const dataAboutUs = {
@@ -60,7 +60,14 @@ const Omos = () => {
     return (
         <>
             <SubPageBanner>
-                <Heading> OM OS</Heading>
+                <Flex bg="#edf2f785" wrap="wrap" p={10}>
+                    <Flex direction="column" mr={10}>
+                    <Heading color="red.500"> OM OS</Heading>
+                    <Divider maxW="3rem" my={3} borderColor="red.500"/>
+                    </Flex>
+                    <Text fontWeight="700" maxW={{base: "100%", md: "60%"}} color="gray.800"> Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. </Text>
+                </Flex>
             </SubPageBanner>
             {Object.values(dataAboutUs.entities).map((item) =>
                 <About key={item.id}{...item}/>

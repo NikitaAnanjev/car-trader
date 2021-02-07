@@ -28,8 +28,6 @@ import {TableCarDetails} from "@/components/TableCarDetails";
 import slugify from "react-slugify";
 import dynamic from "next/dynamic";
 import {ContactForm} from "@/components/ContactForm";
-// import {CarImage} from '@/components/Cars/SingleCarElement/CarImage/CarImage'
-
 
 const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
     {

@@ -10,7 +10,8 @@ import {
     ListIcon,
     List,
     Text,
-    Button
+    Button,
+    Divider
 } from "@chakra-ui/react"
 import {MdInfo} from "react-icons/md";
 
@@ -49,9 +50,10 @@ export const SingleCarTabs = ({carDetails,data,mobile}) => {
                             <Text maxW={{base: "100%"}} m="auto" whiteSpace="pre-line"> {carDetails.comment}</Text>}
 
                     </Box>
-                    <Flex justifyContent="center">
+                    <Divider my={5}/>
+                    <Flex justifyContent="center" direction="column">
 
-                        <Button colorScheme="gray" mt={3} variant="outline" onClick={() => setShow(!show)}>{!show ? 'Show More' : 'Show less'}</Button>
+                        <Button colorScheme="orange" size="sm"  onClick={() => setShow(!show)}>{!show ? 'Vis Mere' : 'Vis mindre'}</Button>
                     </Flex>
                 </TabPanel>
                 <TabPanel>

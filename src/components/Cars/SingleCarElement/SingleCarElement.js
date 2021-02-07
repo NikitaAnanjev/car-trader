@@ -89,7 +89,7 @@ const SingleCarElement = ({car, size, relatedItem}) => {
 
     return (
         <>
-            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "100%", sm: "100%",md:"48%", lg: "33%"} )}
+            <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "100%", sm: "100%",md:"48%", lg: "31.5%"} )}
                            overflow="hidden" borderRadius="md" mb={10}
 
                            bg="gray.700">

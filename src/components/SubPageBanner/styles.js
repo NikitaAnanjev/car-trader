@@ -4,18 +4,19 @@ import {Box} from "@chakra-ui/react"
 
 export const SubPageBannerContainer = styled(Box)`
   width: 100%;
-  height: 30vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: url("./bg/drommebil.jpg");
+  align-items: flex-start;
+  background: url("./bg/blur.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  padding: 4rem;
   
   @media all and (max-width: 768px){
-  height: 30vh;
+
   background-position: left;
   }
 `

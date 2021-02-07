@@ -1,15 +1,21 @@
 import useSWR from "swr";
 import {LoadingIconWrap} from "@/components/styles";
-import {Box, CircularProgress, Flex, Heading} from "@chakra-ui/react";
+import {Box, CircularProgress, Divider, Flex, Heading, useBreakpointValue} from "@chakra-ui/react";
 import slugify from "react-slugify";
 import AliceCarousel from 'react-alice-carousel';
 import dynamic from "next/dynamic";
+import {FooterItem} from "@/components/Footer/styles";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const DynamicCars = dynamic(() => import('@/components/Cars/SingleCarElement/SingleCarElement'),
     {
         loading: () => <Flex minH="300px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
+            isIndeterminate color="red.300"/></Flex>
+    })
+const DynamicListCars = dynamic(() => import('@/components/Cars/SingleCarListElement/SingleCarListElement'),
+    {
+        loading: () => <Flex minH="150px" w="100%" justifyContent="center" alignItems="center"><CircularProgress
             isIndeterminate color="red.300"/></Flex>
     })
 
@@ -24,6 +30,8 @@ const responsive = {
 
 
 const RelatedCars = ({make, carId}) => {
+
+    const isMobile = useBreakpointValue({base: true, md: false})
     const {data, error} = useSWR('/api/cars', fetcher)
     if (error) return <LoadingIconWrap>Failed to load</LoadingIconWrap>
     if (!data) return <LoadingIconWrap><CircularProgress isIndeterminate color="red.300"/></LoadingIconWrap>
@@ -45,18 +53,27 @@ const RelatedCars = ({make, carId}) => {
     return (
         <>
             {filtered &&
-            <>
-            <Box>
-                <Heading py={10} color="gray.300"> Tjek andre {make} biler</Heading>
-            </Box>
-                <AliceCarousel
-                {...settings}
-                items={filtered.map((car) => <DynamicCars key={car["Id"]} car={car} relatedItem={true}/>)}
-                responsive={responsive}
-                />
-            </>
+            <Box py={5}>
+                <Heading color="gray.300"> Tjek andre <span style={{
+                    textTransform: "capitalize",
+                    color: "white"
+                }}> {filtered.length} {make}</span> biler</Heading>
+                <Divider maxW="7rem" my={5} borderColor="red.500"/>
+            </Box>}
+            {filtered && (!isMobile ?
+                    <>
+                        <AliceCarousel
+                            {...settings}
+                            items={filtered.map((car) => <DynamicCars key={car["Id"]} car={car} relatedItem={true}/>)}
+                            responsive={responsive}
+                        />
+                    </>
+                    :
+                    <>
+                        {filtered.map((car) => <DynamicListCars key={car["Id"]} car={car} relatedItem={true}/>)}
+                    </>
+                )
             }
-
         </>
     )
 };
