@@ -38,6 +38,41 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [showForm, setShowForm] = useState(false)
 
+
+    /*
+    * GET WEEK DAYS FROM A DAY TODAY
+    * */
+
+
+    const getDatesBetweenDates = (startDate, endDate) => {
+        let dates= []
+        const theDate = new Date(startDate)
+
+        const weekDaysNames = {
+            0: 'Søndag',
+            1: 'Manday',
+            2: 'Tirsdag',
+            3: 'Onsdag',
+            4: 'Torsdag',
+            5: 'Fredag',
+            6: 'Lukket',
+        }
+
+        while (theDate < endDate) {
+            const myDate = theDate.getUTCDate() + '.' + (theDate.getMonth() + 1) + ' ' +  (weekDaysNames[theDate.getDay()])
+            dates = [...dates, myDate]
+            theDate.setDate(theDate.getDate() + 1)
+        }
+        return dates
+    }
+
+    const today = new Date()
+    const sevenDaysFromNow = new Date(today)
+    sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7)
+    const getDayOptions = getDatesBetweenDates(today, sevenDaysFromNow)
+
+
+
     const timeToCall = [
         "En hver tid",
         "10:00 - 12:00",
@@ -179,16 +214,27 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                         <HStack spacing="24px" mb={5}>
 
 
-                                            <DateInputWrap color="white" w="50%">
-                                                <FormControl>
-                                                    <Input size="sm" type="date" name="dateSelect"
-                                                           placeholder={new Date()}/>
-                                                </FormControl>
-                                            </DateInputWrap>
 
+
+                                            <Flex  w="50%">
+                                                <DateInputWrap color="white" w="100%">
+                                                    <FormControl id="dayToCall" color="white">
+                                                        <Select color="white" placeholder="Dag" name="dateSelect"
+                                                                size="sm">
+                                                            {getDayOptions.map((day,index) =>
+
+                                                            day.includes("Lukket") ? <option className="closed" key={index + day}>{day}</option>
+                                                                : <option key={index + day}>{day}</option>
+                                                            )}
+
+                                                        </Select>
+                                                    </FormControl>
+
+                                                </DateInputWrap>
+                                            </Flex>
 
                                             <Flex w="50%">
-                                                <DateInputWrap color="white">
+                                                <DateInputWrap color="white" w="100%">
                                                     <FormControl id="timeToCall" color="white">
                                                         <Select color="white" placeholder="Tid" name="timeSelect"
                                                                 size="sm">
