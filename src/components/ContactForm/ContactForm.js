@@ -24,7 +24,8 @@ import {
     useBreakpointValue,
     Stack,
     Radio,
-    RadioGroup
+    RadioGroup,
+    useToast
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
@@ -84,14 +85,25 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
     ]
 
 
+    const toast = useToast()
+
     const sendEmail = (e) => {
         e.preventDefault();
         emailjs.sendForm('service_6y44txc', 'template_3mrc3ml', e.target, 'user_6gxi4XejgEsVRHpYzh70z')
-            .then((result) => {
-                console.log(result.text);
-            }, (error) => {
-                console.log(error.text);
-            });
+            .then((result) =>   toast({
+                title: "Du har bestilt et opkald.",
+                description: "Vi ringer til dig på det valgte tidspunkt",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+            }), (error) =>
+                toast({
+                title: "Hmmm... Noget gik galt,",
+                description: "Prøv at udfylde formularen igen eller kontakt os direkte på telefonen",
+                status: "warning",
+                duration: 9000,
+                isClosable: true,
+            }));
 
         e.target.reset()
     }
@@ -288,7 +300,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                 </Flex>}
                             </Flex>
 
-                            <Divider/>
+                            {showForm && <Divider my={3}/> }
 
 
                             <Flex w="100%" p={5}>
@@ -301,6 +313,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                 </ButtonGroup>
                             </Flex>
                             {!showForm &&
+
                             <TableCarDetails data={specificDetails}/>}
                         </DrawerBody>
                     </DrawerContent>

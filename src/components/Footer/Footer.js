@@ -16,6 +16,7 @@ import {
 } from "react-icons/md";
 
 import {BottomLine} from "@/components/Footer/BottomLine";
+import {WorkingHours} from "@/components/WorkingHours";
 
 export const Footer = () => {
     return (
@@ -79,8 +80,12 @@ export const Footer = () => {
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}><Image maxW={{base: "60%", md: "100%"}} h="auto"
                                                                               src="/trustpilot.JPG"/></FooterItem>
 
-
+                <Divider/>
+                <WorkingHours/>
             </FooterContainer>
+
+
+
             <BottomLine/>
         </>
     );
