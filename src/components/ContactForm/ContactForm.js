@@ -22,14 +22,16 @@ import {
     Select,
     ButtonGroup,
     useBreakpointValue,
-
+    Stack,
+    Radio,
+    RadioGroup
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
 import {MdRingVolume} from "react-icons/md";
-import {ArrowForwardIcon} from '@chakra-ui/icons'
 import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 import {useState} from "react";
 import {TableCarDetails} from "@/components/TableCarDetails";
+import {event} from "next/dist/build/output/log";
 
 export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, specificDetails, listitem}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -37,15 +39,16 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
 
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [showForm, setShowForm] = useState(false)
+    const [showDatePicker, setShowDatePicker] = useState(false)
+
+
 
 
     /*
     * GET WEEK DAYS FROM A DAY TODAY
     * */
-
-
     const getDatesBetweenDates = (startDate, endDate) => {
-        let dates= []
+        let dates = []
         const theDate = new Date(startDate)
 
         const weekDaysNames = {
@@ -59,7 +62,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
         }
 
         while (theDate < endDate) {
-            const myDate = theDate.getUTCDate() + '.' + (theDate.getMonth() + 1) + ' ' +  (weekDaysNames[theDate.getDay()])
+            const myDate = theDate.getUTCDate() + '.' + (theDate.getMonth() + 1) + ' ' + (weekDaysNames[theDate.getDay()])
             dates = [...dates, myDate]
             theDate.setDate(theDate.getDate() + 1)
         }
@@ -70,7 +73,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
     const sevenDaysFromNow = new Date(today)
     sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7)
     const getDayOptions = getDatesBetweenDates(today, sevenDaysFromNow)
-
 
 
     const timeToCall = [
@@ -208,23 +210,42 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                                                size="sm"
                                                         />}
                                                 </InputMask>
-
                                             </FormControl>
                                         </Box>
-                                        <HStack spacing="24px" mb={5}>
 
 
+                                        <Flex w="100%" mb={5}>
+                                            <DateInputWrap w="100%" color="white">
+                                                <RadioGroup defaultValue="1">
+                                                    <Stack spacing={4} direction="row">
+                                                        <Box style={{cursor: "pointer"}} bg={!showDatePicker && 'gray.700'}  onClick={()=> setShowDatePicker(false)} border="1px solid white" borderRadius="8px" w="50%">
+                                                            <Radio  p="25px" border="1px solid white" w="100%" value="1">
+                                                                Som snart som muligt
+                                                            </Radio>
+                                                        </Box>
+                                                        <Box style={{cursor: "pointer"}} bg={showDatePicker && 'gray.700'} onClick={()=> setShowDatePicker(true)} border="1px solid white" borderRadius="8px" w="50%">
+                                                            <Radio  p="25px"  w="100%" value="2">Præcis
+                                                                tid</Radio>
+                                                        </Box>
+                                                    </Stack>
+                                                </RadioGroup>
+
+                                            </DateInputWrap>
+                                        </Flex>
 
 
-                                            <Flex  w="50%">
+                                        {showDatePicker &&   <HStack spacing="24px" mb={5}>
+                                            <Flex w="50%">
                                                 <DateInputWrap color="white" w="100%">
                                                     <FormControl id="dayToCall" color="white">
                                                         <Select color="white" placeholder="Dag" name="dateSelect"
                                                                 size="sm">
-                                                            {getDayOptions.map((day,index) =>
+                                                            {getDayOptions.map((day, index) =>
 
-                                                            day.includes("Lukket") ? <option className="closed" key={index + day}>{day}</option>
-                                                                : <option key={index + day}>{day}</option>
+                                                                day.includes("Lukket") ?
+                                                                    <option className="closed" disabled={true}
+                                                                            key={index }>{day}{index === 0 && " (I Dag)"}</option>
+                                                                    : <option key={index + day}>{day}{index === 0 && " (I Dag)"}</option>
                                                             )}
 
                                                         </Select>
@@ -246,24 +267,9 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
 
                                                 </DateInputWrap>
                                             </Flex>
-
-                                            {/*<Flex w={{base: "100%", md: "50%"}}>*/}
-                                            {/*    <DateInputWrap color="white">*/}
-                                            {/*        <RadioGroup defaultValue="1">*/}
-                                            {/*            <Stack spacing={4} direction="row">*/}
-                                            {/*                <Radio value="1">*/}
-
-                                            {/*                    10 - 12*/}
-                                            {/*                </Radio>*/}
-                                            {/*                <Radio value="2">12 - 14</Radio>*/}
-                                            {/*                <Radio value="3">14 - 17</Radio>*/}
-                                            {/*            </Stack>*/}
-                                            {/*        </RadioGroup>*/}
-
-                                            {/*    </DateInputWrap>*/}
-                                            {/*</Flex>*/}
-
                                         </HStack>
+
+                                        }
 
                                         <Input d='none' type="text" name="car_details" size="sm"
                                                defaultValue={carDetails.mileage + ',' + carDetails.year
@@ -285,7 +291,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                             <Divider/>
 
 
-                            <Flex w="100%" py={5}>
+                            <Flex w="100%" p={5}>
                                 <ButtonGroup variant="solid" spacing="6" w="100%">
 
                                     {!showForm &&
