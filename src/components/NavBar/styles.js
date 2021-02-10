@@ -62,6 +62,6 @@ justify-content: space-between;
 align-items: center;
 a {
   text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif!important;
+  font-family: 'Roboto', sans-serif!important;
 }
 `
