@@ -25,6 +25,7 @@ import {
     Stack,
     Radio,
     RadioGroup,
+    Spacer,
     useToast
 } from "@chakra-ui/react"
 import {DateInputWrap} from './styles'
@@ -33,6 +34,8 @@ import {CarImageContainer} from "@/components/Cars/SingleCarElement/styles";
 import {useState} from "react";
 import {TableCarDetails} from "@/components/TableCarDetails";
 import {event} from "next/dist/build/output/log";
+import {motion} from "framer-motion";
+import {CarListElementContainer} from "@/components/Cars/SingleCarListElement/styles";
 
 export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, specificDetails, listitem}) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -41,8 +44,6 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
     const isMobile = useBreakpointValue({base: true, sm: true, md: false})
     const [showForm, setShowForm] = useState(false)
     const [showDatePicker, setShowDatePicker] = useState(false)
-
-
 
 
     /*
@@ -90,7 +91,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
     const sendEmail = (e) => {
         e.preventDefault();
         emailjs.sendForm('service_6y44txc', 'template_3mrc3ml', e.target, 'user_6gxi4XejgEsVRHpYzh70z')
-            .then((result) =>   toast({
+            .then((result) => toast({
                 title: "Du har bestilt et opkald.",
                 description: "Vi ringer til dig på det valgte tidspunkt",
                 status: "success",
@@ -98,12 +99,12 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                 isClosable: true,
             }), (error) =>
                 toast({
-                title: "Hmmm... Noget gik galt,",
-                description: "Prøv at udfylde formularen igen eller kontakt os direkte på telefonen",
-                status: "warning",
-                duration: 9000,
-                isClosable: true,
-            }));
+                    title: "Hmmm... Noget gik galt,",
+                    description: "Prøv at udfylde formularen igen eller kontakt os direkte på telefonen",
+                    status: "warning",
+                    duration: 9000,
+                    isClosable: true,
+                }));
 
         e.target.reset()
     }
@@ -114,8 +115,8 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
             {singlePage ? <Button
                     leftIcon={<MdRingVolume/>}
                     aria-label="Book this car"
-                    colorScheme="white"
-                    variant="outline"
+                    colorScheme="green"
+                    variant="solid"
                     size={"md"}
                     onClick={onOpen}>{buttonTitle ? buttonTitle : 'Bestil opkald'}</Button>
                 :
@@ -136,15 +137,12 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                             h={!isMobile && '100%'}
                             borderRadius={0}
                             onClick={onOpen}>
-
                             <Flex transform="rotate(-90deg)">
                                 <Box mr={2}>
                                     <MdRingVolume/>
                                 </Box>
                                 {!isMobile && <Text>Book den bil</Text>}</Flex></Button>
                 )
-
-
             }
             <Drawer
                 isOpen={isOpen}
@@ -230,13 +228,19 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                             <DateInputWrap w="100%" color="white">
                                                 <RadioGroup defaultValue="1">
                                                     <Stack spacing={4} direction="row">
-                                                        <Box style={{cursor: "pointer"}} bg={!showDatePicker && 'gray.700'}  onClick={()=> setShowDatePicker(false)} border="1px solid white" borderRadius="8px" w="50%">
-                                                            <Radio  p="25px" border="1px solid white" w="100%" value="1">
+                                                        <Box style={{cursor: "pointer"}}
+                                                             bg={!showDatePicker && 'gray.700'}
+                                                             onClick={() => setShowDatePicker(false)}
+                                                             border="1px solid white" borderRadius="8px" w="50%">
+                                                            <Radio p="25px" border="1px solid white" w="100%" value="1">
                                                                 Som snart som muligt
                                                             </Radio>
                                                         </Box>
-                                                        <Box style={{cursor: "pointer"}} bg={showDatePicker && 'gray.700'} onClick={()=> setShowDatePicker(true)} border="1px solid white" borderRadius="8px" w="50%">
-                                                            <Radio  p="25px"  w="100%" value="2">Præcis
+                                                        <Box style={{cursor: "pointer"}}
+                                                             bg={showDatePicker && 'gray.700'}
+                                                             onClick={() => setShowDatePicker(true)}
+                                                             border="1px solid white" borderRadius="8px" w="50%">
+                                                            <Radio p="25px" w="100%" value="2">Præcis
                                                                 tid</Radio>
                                                         </Box>
                                                     </Stack>
@@ -246,8 +250,17 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                         </Flex>
 
 
-                                        {showDatePicker &&   <HStack spacing="24px" mb={5}>
+                                        {showDatePicker &&
+                                        <motion.div     initial={{
+                                            opacity: 0
+                                        }}
+                                                        animate={{
+                                                            opacity: 1
+                                                        }} style={{width: "100%"}}>
+                                        <HStack spacing="24px" mb={5}>
+
                                             <Flex w="50%">
+
                                                 <DateInputWrap color="white" w="100%">
                                                     <FormControl id="dayToCall" color="white">
                                                         <Select color="white" placeholder="Dag" name="dateSelect"
@@ -256,13 +269,13 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
 
                                                                 day.includes("Lukket") ?
                                                                     <option className="closed" disabled={true}
-                                                                            key={index }>{day}{index === 0 && " (I Dag)"}</option>
-                                                                    : <option key={index + day}>{day}{index === 0 && " (I Dag)"}</option>
+                                                                            key={index}>{day}{index === 0 && " (I Dag)"}</option>
+                                                                    : <option
+                                                                        key={index + day}>{day}{index === 0 && " (I Dag)"}</option>
                                                             )}
 
                                                         </Select>
                                                     </FormControl>
-
                                                 </DateInputWrap>
                                             </Flex>
 
@@ -279,8 +292,9 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
 
                                                 </DateInputWrap>
                                             </Flex>
-                                        </HStack>
 
+                                        </HStack>
+                                        </motion.div>
                                         }
 
                                         <Input d='none' type="text" name="car_details" size="sm"
@@ -300,7 +314,7 @@ export const ContactForm = ({carDetails, carTitle, singlePage, buttonTitle, spec
                                 </Flex>}
                             </Flex>
 
-                            {showForm && <Divider my={3}/> }
+                            {showForm && <Divider my={3}/>}
 
 
                             <Flex w="100%" p={5}>

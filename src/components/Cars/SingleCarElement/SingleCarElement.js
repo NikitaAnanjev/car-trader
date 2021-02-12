@@ -1,4 +1,6 @@
 import slugify from 'react-slugify';
+import dynamic from "next/dynamic";
+import {motion} from "framer-motion";
 import NumberFormat from 'react-number-format';
 import {
     Box,
@@ -13,8 +15,6 @@ import {
 import {CarLink, CardContainer, EuroNormBadge, ImgCarouselConteiner} from './styles'
 import {ContactForm} from "@/components/ContactForm";
 import {carPrice} from "@/helper/carPrice";
-import {MdDirectionsCar, MdPlaylistAddCheck, MdLocalGasStation} from "react-icons/md";
-import dynamic from "next/dynamic";
 
 
 const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
@@ -88,11 +88,16 @@ const SingleCarElement = ({car, size, relatedItem}) => {
     const changeImageSize = property.imageUrl.replace('l1600', 'l480')
 
     return (
-        <>
+
             <CardContainer maxW={size ? size : (relatedItem ? {base: "md", sm: "xs", md: "xs"} : {base: "100%", sm: "100%",md:"48%", lg: "31.5%"} )}
                            overflow="hidden" borderRadius="md" mb={10}
-
                            bg="gray.700">
+                <motion.div    initial={{
+                    opacity: 0
+                }}
+                               animate={{
+                                   opacity: 1
+                               }}style={{width: "100%"}}>
                 <CarLink href="/cars/[make]/[slug]/[id]" as={`/cars/${slugMake}/${slug}/${carDetails.id}`}>
                     <ImgCarouselConteiner>
 
@@ -164,9 +169,9 @@ const SingleCarElement = ({car, size, relatedItem}) => {
                         </Flex>
                     </Box>
                 </Box>
-
+                </motion.div>
             </CardContainer>
-        </>
+
     );
 };
 

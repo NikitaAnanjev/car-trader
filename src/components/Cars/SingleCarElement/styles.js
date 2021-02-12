@@ -6,7 +6,9 @@ import {Box, Flex, IconButton} from "@chakra-ui/react"
 export const SingleCarItem = styled(Flex)`
 flex-grow: 1;
 flex-direction: column;
+
 `
+
 export const SingleCarItemInner = styled('div')`
 display: flex;
 padding: 10px;

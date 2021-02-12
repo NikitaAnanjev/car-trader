@@ -21,8 +21,8 @@ const CarVideo = ({video, title, price}) => {
                 mr={{base: 0, lg:3}}   mb={{base: 3, lg:0}}
                 leftIcon={<MdPlayCircleOutline/>}
                 aria-label="Se videoklip"
-                colorScheme="orange"
-                variant="solid"
+                colorScheme="white"
+                variant="outline"
                 size={"md"}
                 onClick={onOpen}>Se Video</Button>
             <Modal isOpen={isOpen} onClose={onClose} size="full">

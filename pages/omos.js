@@ -1,6 +1,7 @@
 import {About} from "../src/pages/About";
 import {Box, Divider, Heading, Text,Flex} from "@chakra-ui/react";
 import {SubPageBanner} from "@/components/SubPageBanner";
+import {motion} from "framer-motion";
 
 const dataAboutUs = {
     entities: {
@@ -58,7 +59,12 @@ const Omos = () => {
 
 
     return (
-        <>
+        <motion.div    initial={{
+            opacity: 0
+        }}
+                       animate={{
+                           opacity: 1
+                       }} style={{width: "100%"}}>
             <SubPageBanner>
                 <Flex bg="#d01116eb" wrap="wrap" p={10}>
                     <Flex direction="column" mr={10}>
@@ -73,7 +79,7 @@ const Omos = () => {
                 <About key={item.id}{...item}/>
             )}
 
-        </>
+        </motion.div >
     );
 };
 

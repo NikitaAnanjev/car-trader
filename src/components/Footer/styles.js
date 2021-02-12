@@ -29,6 +29,6 @@ export const Overflow = styled.div`
   bottom: 0;
   right: 0;
    background: ${({theme}) => theme.colors.gray['800']};  
-  opacity: .4;
+  opacity: .8;
 `
 

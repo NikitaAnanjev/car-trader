@@ -2,6 +2,7 @@ import {
     Box, Image, Text, Heading, Divider, ListIcon,
     List, ListItem,Flex
 } from "@chakra-ui/react"
+import {FooterItem} from "@/components/Footer/styles";
 
 
 export const WorkingHours = () => {
@@ -32,11 +33,11 @@ export const WorkingHours = () => {
         const isOpenTime = todayCheck()
 
     return (
-        <Box p={3} zIndex={10} w="200px">
-            <Flex my={1}>
+        <Box zIndex={10} w="200px">
 
-                <Text  color="gray.200" w="50%">Åbent Tid</Text>
-            </Flex>
+                {/*<Heading as='h3' size="md" fontWeight='normal'> Åbne timer</Heading>*/}
+                {/*<Divider maxW="3rem" my={3} borderColor="red.500"/>*/}
+
             {Object.values(weekDaysNames).map((dayInfo)=>
                 <Flex my={1} key={dayInfo.id}>
                 <Text w="50%" fontSize='sm'  color="gray.200">{dayInfo.day} </Text>

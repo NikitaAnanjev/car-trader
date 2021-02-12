@@ -2,9 +2,8 @@ import {FooterContainer, FooterItem, Overflow} from './styles'
 
 import {
     Box, Image, Text, Heading, Divider, ListIcon,
-    List, ListItem
+    List, ListItem,Flex
 } from "@chakra-ui/react"
-
 import {
     MdPermPhoneMsg,
     MdLocationOn,
@@ -12,26 +11,33 @@ import {
     MdAccountBalance,
     MdCardMembership,
     MdCardTravel,
-    MdInfo
+    MdInfo,
+
 } from "react-icons/md";
 
 import {BottomLine} from "@/components/Footer/BottomLine";
 import {WorkingHours} from "@/components/WorkingHours";
 
 export const Footer = () => {
+
+
     return (
         <>
             <FooterContainer direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
                 <Overflow/>
 
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
-                    <Image src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
+                    <Image mt="-35px" src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
                     <Divider/>
                     <Box py={5} maxW="90%">
                         <Text>Piralux Automobiler har specialiseret sig indenfor import, salg og leasing af biler i
                             luksusklassen fra Tyskland.</Text>
                     </Box>
+
+                    <Image maxW={{base: "60%", md: "250px"}} h="auto" src="/trustpilot.JPG"/>
+
                 </FooterItem>
+
 
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                     <Heading as='h3' size="md" fontWeight='normal'> KONTAKT</Heading>
@@ -52,6 +58,11 @@ export const Footer = () => {
                         </ListItem>
                     </List>
                 </FooterItem>
+
+
+
+
+
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                     <Heading as='h3' size="md" fontWeight='normal'> ØKONOMISK INFORMATION</Heading>
                     <Divider maxW="3rem" my={3} borderColor="red.500"/>
@@ -77,11 +88,20 @@ export const Footer = () => {
                             <span>Swiftadresse: KRONDK22</span>
                         </ListItem>
                     </List></FooterItem>
-                <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}><Image maxW={{base: "60%", md: "100%"}} h="auto"
-                                                                              src="/trustpilot.JPG"/></FooterItem>
+
+                <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
+                    <Heading as='h3' size="md" fontWeight='normal'>ÅBNINGSTIDER</Heading>
+                    <Divider maxW="3rem" my={3} borderColor="red.500"/>
+                    <WorkingHours/>
+                </FooterItem>
+
 
                 <Divider/>
-                <WorkingHours/>
+
+
+
+
+
             </FooterContainer>
 
 
