@@ -9,7 +9,7 @@ import {FooterItem} from "@/components/Footer/styles";
 export const PreFooter = () => {
     return (
         <PreFooterContainer>
-            <Flex w="100%" maxW="960px" p="3rem" justifyContent="space-between">
+            <Flex w="100%" maxW="960px" p="3rem" justifyContent="space-between" wrap="wrap">
 
 
 
