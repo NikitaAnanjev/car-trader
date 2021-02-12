@@ -6,9 +6,11 @@ export const FooterContainer = styled(Flex)`
   position: relative;
   width: 100%;
   flex-wrap: wrap;
-  background: url("/bg/car-right-piraluxauto.jpg") no-repeat center right;
+  background: url("/bg/blck-pira.jpg") no-repeat center right;
   background-size: cover;
   z-index: 50;
+  
+  min-height: 80vh;
 `
 
 export const FooterItem = styled(Flex)`
@@ -28,7 +30,7 @@ export const Overflow = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
-   background: ${({theme}) => theme.colors.gray['800']};  
-  opacity: .8;
+background: rgb(23,25,35);
+background: linear-gradient(180deg, rgba(23,25,35,1) 10%, rgba(23,25,35,1) 18%, rgba(23,25,35,0.20211834733893552) 100%);
 `
 

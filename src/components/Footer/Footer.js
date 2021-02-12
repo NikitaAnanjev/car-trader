@@ -2,7 +2,7 @@ import {FooterContainer, FooterItem, Overflow} from './styles'
 
 import {
     Box, Image, Text, Heading, Divider, ListIcon,
-    List, ListItem,Flex
+    List, ListItem, Flex
 } from "@chakra-ui/react"
 import {
     MdPermPhoneMsg,
@@ -17,14 +17,18 @@ import {
 
 import {BottomLine} from "@/components/Footer/BottomLine";
 import {WorkingHours} from "@/components/WorkingHours";
+import {PreFooter} from "@/components/Footer/PreFooter";
 
 export const Footer = () => {
 
 
     return (
         <>
-            <FooterContainer direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
+
+
+            <FooterContainer w="100%" direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
                 <Overflow/>
+
 
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
                     <Image mt="-35px" src="/piralux-logo.png" alt="piralux-auto-logo" w="100%"/>
@@ -34,7 +38,6 @@ export const Footer = () => {
                             luksusklassen fra Tyskland.</Text>
                     </Box>
 
-                    <Image maxW={{base: "60%", md: "250px"}} h="auto" src="/trustpilot.JPG"/>
 
                 </FooterItem>
 
@@ -58,9 +61,6 @@ export const Footer = () => {
                         </ListItem>
                     </List>
                 </FooterItem>
-
-
-
 
 
                 <FooterItem basis={{sm: "100%", md: "50%", lg: "25%"}}>
@@ -94,19 +94,12 @@ export const Footer = () => {
                     <Divider maxW="3rem" my={3} borderColor="red.500"/>
                     <WorkingHours/>
                 </FooterItem>
-
-
                 <Divider/>
-
-
-
-
-
+                <BottomLine/>
             </FooterContainer>
 
+            <PreFooter/>
 
-
-            <BottomLine/>
         </>
     );
 };

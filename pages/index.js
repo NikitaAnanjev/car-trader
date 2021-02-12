@@ -5,7 +5,6 @@ import Head from 'next/head'
 import {encode} from "base-64";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {motion} from "framer-motion";
 //local libs
 import {SearchPanel} from '@/components/SearchPanel'
 import {getAsString} from "@/helper/getAsString";
