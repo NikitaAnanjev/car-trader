@@ -2,6 +2,8 @@ import {About} from "../src/pages/About";
 import {Box, Divider, Heading, Text, Flex} from "@chakra-ui/react";
 import {SubPageBanner} from "@/components/SubPageBanner";
 import {motion} from "framer-motion";
+import Head from "next/head";
+import {PageLayout} from "@/components/Cars/styles";
 
 const dataAboutUs = {
     entities: {
@@ -59,7 +61,11 @@ const Omos = () => {
 
 
     return (
-        <motion.div
+
+        <>
+            <Head><title>Om Os side</title></Head>
+
+            <motion.div
             initial={{
                 opacity: 0
             }}
@@ -82,6 +88,7 @@ const Omos = () => {
             )}
 
         </motion.div>
+            </>
     );
 };
 

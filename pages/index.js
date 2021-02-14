@@ -38,11 +38,11 @@ export default function Home({cars}) {
     return (
 
         <PageLayout >
-            <Head><title> Piralux Auto</title></Head>
+            <Head><title>Piralux Auto</title></Head>
 
             <TopBanner>
                 <Flex w={{sm: "90%", md: '80%', lg: "90%"}} maxW="1400px" direction="column" py={10}>
-                    <Heading fontWeight="900" maxW={{sm: "100%", md: '80%', lg: "70%"}}
+                    <Heading as="h1" fontWeight="900" maxW={{sm: "100%", md: '80%', lg: "70%"}}
                              textAlign={{base: "center", md: "left"}} mb={10}
                              fontSize={{base: "2rem", sm: "3rem", md: '3.5rem', lg: '5rem'}}
                              p='3rem 3rem 0 3rem'
@@ -50,7 +50,6 @@ export default function Home({cars}) {
                              textShadow=" 0px 15px 17px rgb(0 0 0 / 60%)"
                     > VI IMPORTERER TYSKE BILER I HØJ STANDARD</Heading>
                     <SearchPanel data={data}/>
-
                 </Flex>
             </TopBanner>
 

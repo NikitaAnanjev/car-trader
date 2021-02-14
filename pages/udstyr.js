@@ -2,10 +2,14 @@ import {Equipments} from "../src/pages/Equipments";
 import {SubPageBanner} from "@/components/SubPageBanner";
 import {Divider, Flex, Heading, Text} from "@chakra-ui/react";
 import {motion} from "framer-motion";
+import Head from "next/head";
 
 const Udstyr = () => {
     return (
-        <motion.div
+        <>
+            <Head><title>Udstyr side</title></Head>
+
+            <motion.div
             initial={{
                 opacity: 0
             }}
@@ -25,6 +29,7 @@ const Udstyr = () => {
             </SubPageBanner>
             <Equipments/>
         </motion.div>
+            </>
     );
 };
 

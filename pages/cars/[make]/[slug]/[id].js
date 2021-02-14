@@ -29,6 +29,7 @@ import slugify from "react-slugify";
 import dynamic from "next/dynamic";
 import {ContactForm} from "@/components/ContactForm";
 import {motion} from "framer-motion";
+import Head from "next/head";
 
 
 const DynamicCarImage = dynamic(() => import("@/components/Cars/SingleCarElement/CarImage/CarImage"),
@@ -133,6 +134,8 @@ export default function SingleCarPage() {
             animate={{
                 opacity: 1
             }}>
+            <Head><title>{carTitle} - {fullPrice}</title></Head>
+
             <Box w="100%" bg="gray.900" py={10}>
 
                 <Flex m="auto" maxW={{base: "100%", lg: "1400px"}}
