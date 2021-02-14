@@ -11,4 +11,5 @@ export const PreFooterContainer = styled(Flex)`
   min-height: 30vh;
   justify-content: center;
   align-items: center;
+  height: 100%;
 `

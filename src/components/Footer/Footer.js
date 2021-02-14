@@ -25,7 +25,7 @@ export const Footer = () => {
     return (
         <>
 
-
+            <Divider/>
             <FooterContainer w="100%" direction={{sm: "column", md: "row"}} p={{sm: "3rem 0", md: '4rem'}}>
                 <Overflow/>
 

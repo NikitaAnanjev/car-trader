@@ -9,7 +9,7 @@ export const FooterContainer = styled(Flex)`
   background: url("/bg/blck-pira.jpg") no-repeat center right;
   background-size: cover;
   z-index: 50;
-  
+  height: 100%;
   min-height: 80vh;
 `
 
