@@ -49,11 +49,12 @@ export const SearchPanel = ({data, children, isfixed}) => {
             pathname: '/',
             query: {make}
         }, undefined,{shallow: false})
-        window.scrollTo(0, 0)
+
     },[make]);
 
     const handleChange = (event) => {
       setValue(event.target.value);
+      window.scrollTo(0, 0)
     };
 
 
